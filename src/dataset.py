@@ -6,6 +6,8 @@ for preprocessing and loading the audio data
 and labels.
 '''
 
+import pydub
+import numpy as np
 import torch
 import torchaudio
 from torchaudio import transforms,utils
@@ -13,11 +15,21 @@ from torch.utils.data import Dataset, DataLoader
 import numpy as np
 import pyrubberband as pyrb
 import random
+import sounddevice as sd
+import time
 
 # =====================================================================
 # =========================== Preprocessing ===========================
 # =====================================================================
 
+'''Helper Function to read MP3'''
+import pydub 
+import numpy as np
+
+def read_mp3(f):
+    y = pydub.AudioSegment.from_mp3(f)
+    return np.array(y.get_array_of_samples()),y.frame_rate
+    
 
 ''' class used to augment audio by time stretching '''
 class AugRate():
@@ -29,23 +41,39 @@ class AugRate():
         self.max_rate = max_rate
 
     # function to slow down audio
-    # random factor between [min_rate, 1] by default, can also specify factor
+    # random factor between [min_rate, 0.9] by default, can also specify factor
     def slow_down(self, audio_clip, factor=None):
         if factor == None:
-            return pyrb.time_stretch(audio_clip, self.sampling_rate, random.uniform(self.min_rate,1))
-        else:
-            return pyrb.time_stretch(audio_clip, self.sampling_rate, factor)
+            factor = random.uniform(self.min_rate,0.9)
+            print(factor)
+        return pyrb.time_stretch(audio_clip, self.sampling_rate, factor)
 
     # function to speed up audio
-    # random factor between [1, max_rate] by default, can also specify factor
+    # random factor between [1.1, max_rate] by default, can also specify factor
     def speed_up(self, audio_clip, factor=None):
         if factor == None:
-            return pyrb.time_stretch(audio_clip, self.sampling_rate, random.uniform(1,self.max_rate))
-        else:
-            return pyrb.time_stretch(audio_clip, self.sampling_rate, factor)
+            factor = random.uniform(1.1,self.max_rate)
+            print(factor)
+        return pyrb.time_stretch(audio_clip, self.sampling_rate, factor)
 
 
+if __name__ == "__main__":
+    print("read file")
+    y,sr = read_mp3("../../common_voice/cv-valid-train/cv-valid-train/sample-000000.mp3")
+    
+    print("augment object")
+    ar = AugRate(sr,0.5,1.5)
 
+    y_slow = ar.slow_down(y)
+    y_fast = ar.speed_up(y)
+
+    sd.play(y,sr)
+    time.sleep(6)
+    sd.play(y_slow,sr)
+    time.sleep(6)
+    sd.play(y_fast,sr)
+    time.sleep(6)
+    sd.stop()
 
 # def download_dataset():
 #     # define the speed transformation
