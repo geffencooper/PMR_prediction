@@ -2,15 +2,11 @@
 dataset.py
 
 This file contains functions and classes
-for preprocessing and loading the audio data
+for preprocessing the audio data
 and labels.
 '''
 
 
-import torch
-import torchaudio
-from torchaudio import transforms,utils
-from torch.utils.data import Dataset, DataLoader
 import numpy as np
 import pyrubberband as pyrb
 import random
@@ -22,10 +18,6 @@ import time
 import os
 import shutil
 import glob
-
-# =====================================================================
-# =========================== Preprocessing ===========================
-# =====================================================================
     
 
 ''' class used to augment audio by time stretching '''
@@ -237,6 +229,11 @@ def get_features():
 
     for file in lst:
         os.system(f"""SMILExtract -C {config_file} -I {file} -O {file[:-4]}.csv""")
+
+# --------------------------------------------------------------------------------------------------------------
+
+
+
 
 if __name__ == "__main__":
     train_path = "../../common_voice/cv-valid-train/cv-valid-train/"
