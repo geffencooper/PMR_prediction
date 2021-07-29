@@ -27,7 +27,7 @@ def train_SpeechPaceNN():
         NUM_EPOCHS = 2
 
         # Load the data
-        root_dir = "//totoro/perception-working/Geffen/SpeechPaceData/"
+        root_dir = "/data/perception-working/Geffen/SpeechPaceData/"
         train_dataset = SpeechPaceDataset(root_dir+"training_data/",root_dir+"training_data/train_labels2.csv")
         val_dataset = SpeechPaceDataset(root_dir+"validation_data/",root_dir+"validation_data/val_labels2.csv")
         test_dataset = SpeechPaceDataset(root_dir+"test_data/",root_dir+"test_data/test_labels2.csv")
@@ -44,7 +44,7 @@ def train_SpeechPaceNN():
 
         for epoch in range(NUM_EPOCHS):
             for i, (x,lengths,labels) in enumerate(train_loader):
-                x,lengths,labels = x.to(device),lengths.to(device),labels.to(device)
+                x,labels = x.to(device),labels.to(device)
 
                 # zero the parameter gradients
                 optimizer.zero_grad()
@@ -89,7 +89,7 @@ def eval_model(model,data_loader,device):
 
     with torch.no_grad():
         for i, (x,lengths,labels) in enumerate(data_loader):
-            x,lengths,labels = x.to(device),lengths.to(device),labels.to(device)
+            x,labels = x.to(device),labels.to(device)
             
             out = model(x,lengths)
 
