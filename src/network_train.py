@@ -125,7 +125,7 @@ def gen_conf_mat(predictions,labels):
     # get the prediction from the max output
     preds = predictions.argmax(dim=1)
 
-    print(preds.eq(labels).cum().item())
+    print(preds.eq(labels).sum().item())
 
     # generate label-prediction pairs
     stacked = torch.stack((preds,labels),dim=1)
