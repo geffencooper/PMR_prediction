@@ -18,19 +18,19 @@ def train_SpeechPaceNN():
     print(device)
     try:
         # hyperparameters
-        BATCH_SIZE = 4
+        BATCH_SIZE = 64
         LEARNING_RATE = 0.001
-        HIDDEN_SIZE = 128
+        HIDDEN_SIZE = 64
         NUM_CLASSES = 3
         INPUT_SIZE = 26
         NUM_LAYERS = 1
         NUM_EPOCHS = 2
 
         # Load the data
-        root_dir = "../../common_voice/"
-        train_dataset = SpeechPaceDataset(root_dir+"aug_train/",root_dir+"aug_train/train_labels2.csv")
-        val_dataset = SpeechPaceDataset(root_dir+"aug_val/",root_dir+"aug_val/val_labels2.csv")
-        test_dataset = SpeechPaceDataset(root_dir+"aug_test/",root_dir+"aug_test/test_labels2.csv")
+        root_dir = "//totoro/perception-working/Geffen/SpeechPaceData/"
+        train_dataset = SpeechPaceDataset(root_dir+"training_data/",root_dir+"training_data/train_labels2.csv")
+        val_dataset = SpeechPaceDataset(root_dir+"validation_data/",root_dir+"validation_data/val_labels2.csv")
+        test_dataset = SpeechPaceDataset(root_dir+"test_data/",root_dir+"test_data/test_labels2.csv")
 
         train_loader = DataLoader(train_dataset,batch_size=BATCH_SIZE,collate_fn=my_collate_fn)
         val_loader = DataLoader(val_dataset,batch_size=BATCH_SIZE,collate_fn=my_collate_fn)
