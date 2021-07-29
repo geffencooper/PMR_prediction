@@ -19,7 +19,7 @@ def train_SpeechPaceNN():
     try:
         # hyperparameters
         BATCH_SIZE = 64
-        LEARNING_RATE = 0.001
+        LEARNING_RATE = 0.005
         HIDDEN_SIZE = 64
         NUM_CLASSES = 3
         INPUT_SIZE = 26
@@ -87,11 +87,17 @@ def eval_model(model,data_loader,device):
     correct = 0
     criterion = torch.nn.CrossEntropyLoss()
 
+    predictions = torch.tensor([])
     with torch.no_grad():
         for i, (x,lengths,labels) in enumerate(data_loader):
             x,labels = x.to(device),labels.to(device)
             
+            # forward pass
             out = model(x,lengths)
+
+            # look at confusion matrix
+            predictions = torch.cat((predictions,out),dim=0)
+            gen_conf_mat(predictions,labels)
 
             # sum up the batch loss
             loss = criterion(out,x)
@@ -105,6 +111,31 @@ def eval_model(model,data_loader,device):
         print("\n Average Loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)\n".format(eval_loss,correct,len(data_loader.dataset),100.*correct/len(data_loader.dataset)))
 
     # model.train()
+
+
+# --------------------------------------------------------------------------------------------------------------
+
+'''Helper function to create a confusion matrix of classification results'''
+# this gets called by eval_model with the predictions and labels
+def gen_conf_mat(predictions,labels):
+    # get the prediction from the max output
+    preds = predictions.argmax(dim=1)
+
+    # generate label-prediction pairs
+    stacked = torch.stack((labels,preds),dim=1)
+
+    # create the confusion matrix
+    conf_mat = torch.zeros(3,3,dtype=torch.int64)
+
+    # fill the confusion matrix
+    for pair in stacked:
+        x,y = pair.tolist()
+        conf_mat[x,y] = conf_mat[x,y]+1
+
+    print(conf_mat)
+
+
+
 
 # --------------------------------------------------------------------------------------------------------------
 
