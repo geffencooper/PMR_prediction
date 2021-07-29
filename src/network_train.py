@@ -128,8 +128,6 @@ def gen_conf_mat(predictions,labels):
     # get the prediction from the max output
     preds = predictions.argmax(dim=1)
 
-    print(preds.eq(labels).sum().item())
-
     # generate label-prediction pairs
     stacked = torch.stack((preds,labels),dim=1)
 
@@ -141,7 +139,9 @@ def gen_conf_mat(predictions,labels):
         x,y = pair.tolist()
         conf_mat[x,y] = conf_mat[x,y]+1
 
+    print("Confusion Matrix")
     print(conf_mat)
+    print("Correct: ",preds.eq(labels).sum().item())
 
 
 
