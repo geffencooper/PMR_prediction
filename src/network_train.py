@@ -60,8 +60,8 @@ def train_SpeechPaceNN():
                 
                 # print statistics every n batches
                 if i % 10 == 0:
-                    #eval_model(model,val_loader,device)
                     print("Train Epoch: {} [{}/{} ({:.0f}%)]\t Loss: {:.6f}".format(epoch,i*len(x),len(train_loader.dataset),100.*i/len(train_loader),loss.item()))
+                    #eval_model(model,val_loader,device)
 
             # validation at the end of each epoch, and save model
             eval_model(model,val_loader,device)
