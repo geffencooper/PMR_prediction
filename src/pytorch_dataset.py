@@ -34,6 +34,10 @@ class SpeechPaceDataset(Dataset):
         # read the audio features and convert to a tensor
         data_frame = pd.read_csv(data_path,sep=";")
         data_frame = data_frame.iloc[:,np.arange(2,28)]
+
+        # normalize the colummns
+        data_frame = (data_frame-data_frame.mean())/data_frame.std()
+
         features = torch.from_numpy(data_frame.to_numpy())
 
         # now get the label of this sample as a tensor
