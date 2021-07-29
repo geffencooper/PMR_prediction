@@ -1,0 +1,18 @@
+# hyperparameters
+BATCH_SIZE = 64
+LEARNING_RATE = 0.002
+HIDDEN_SIZE = 64
+NUM_CLASSES = 3
+INPUT_SIZE = 26
+NUM_LAYERS = 1
+NUM_EPOCHS = 2
+
+No Normalization
+
+Confusion Matrix
+tensor([[1217,   70,  102],
+        [  70, 1215,  143],
+        [  71,   73, 1115]])
+Correct:  3547
+
+ Average Loss: 0.0107, Accuracy: 3547/4076 (87%)
