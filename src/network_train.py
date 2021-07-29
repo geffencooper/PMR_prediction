@@ -15,7 +15,7 @@ import time
 import sys
 
 '''Training loop function'''
-def train_SpeechPaceNN(output_location):
+def train_SpeechPaceNN():
     # get the device, hopefully a GPU
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
@@ -35,6 +35,7 @@ def train_SpeechPaceNN(output_location):
     NORMALIZATION = True
 
     # global variables
+    output_location=""
     best_val_accuracy = 0
     train_losses = []
     val_losses = []
@@ -43,8 +44,9 @@ def train_SpeechPaceNN(output_location):
     curr_train_loss = 0
     last_train_loss = 0
 
-    print("Batch Size: {}\nLearning Rate: {}\nHidden Size: {}\nNumber of Layer: {}\n Number of Epochs: {}\n Normalization:{}".format(\
+    print("Batch Size: {}\nLearning Rate: {}\nHidden Size: {}\nNumber of Layer: {}\nNumber of Epochs: {}\nNormalization:{}".format(\
         BATCH_SIZE,LEARNING_RATE,HIDDEN_SIZE,NUM_LAYERS,NUM_EPOCHS,NORMALIZATION))
+    
     try:
         # Load the data
         root_dir = "/data/perception-working/Geffen/SpeechPaceData/"
@@ -216,4 +218,4 @@ def gen_conf_mat(predictions,labels):
 # --------------------------------------------------------------------------------------------------------------
 
 if __name__ == "__main__":
-    train_SpeechPaceNN(sys.argv[1])
+    train_SpeechPaceNN()
