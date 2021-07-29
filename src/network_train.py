@@ -112,7 +112,7 @@ def eval_model(model,data_loader,device):
         eval_loss /= len(data_loader.dataset)
         print("\n Average Loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)\n".format(eval_loss,correct,len(data_loader.dataset),100.*correct/len(data_loader.dataset)))
 
-    # model.train()
+    model.train()
 
 
 # --------------------------------------------------------------------------------------------------------------
@@ -124,7 +124,7 @@ def gen_conf_mat(predictions,labels):
     preds = predictions.argmax(dim=1)
 
     # generate label-prediction pairs
-    stacked = torch.stack((labels,preds),dim=1)
+    stacked = torch.stack((preds,labels),dim=1)
 
     # create the confusion matrix
     conf_mat = torch.zeros(3,3,dtype=torch.int64)
