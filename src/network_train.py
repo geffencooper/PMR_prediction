@@ -91,7 +91,7 @@ def eval_model(model,data_loader,device):
     criterion = torch.nn.CrossEntropyLoss()
 
     all_preds = torch.tensor([])
-    all_labels = torch.tensor([])
+    all_labels = torch.tensor([],dtype=torch.int)
     all_preds = all_preds.to(device)
     all_labels = all_labels.to(device)
     with torch.no_grad():
