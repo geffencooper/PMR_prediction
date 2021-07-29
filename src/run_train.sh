@@ -1,6 +1,6 @@
 #!/bin/bash
 
-currDate=$(date +%Y-%m-%d)
-fileName="$currDate.txt"
+currDate=$(date +%Y-%m-%d_%H:%M:%S)
+fileName="../models/$currDate.txt"
 
-python network_train.py | tee fileName
+python test.py | tee $fileName
