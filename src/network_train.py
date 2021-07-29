@@ -90,8 +90,10 @@ def eval_model(model,data_loader,device):
     correct = 0
     criterion = torch.nn.CrossEntropyLoss()
 
-    predictions = torch.tensor([])
-    predictions = predictions.to(device)
+    all_preds = torch.tensor([])
+    all_labels = torch.tensor([])
+    all_preds = all_preds.to(device)
+    all_labels = all_labels.to(device)
     with torch.no_grad():
         for i, (x,lengths,labels) in enumerate(data_loader):
             x,labels = x.to(device),labels.to(device)
@@ -99,8 +101,9 @@ def eval_model(model,data_loader,device):
             # forward pass
             out = model(x,lengths)
 
-            # look at confusion matrix
-            predictions = torch.cat((predictions,out),dim=0)
+            # accumulate predictions and labels
+            all_preds = torch.cat((all_preds,out),dim=0)
+            all_labels = torch.cat((all_labels,labels),dim=0)
 
             # sum up the batch loss
             loss = criterion(out,labels)
@@ -110,7 +113,7 @@ def eval_model(model,data_loader,device):
             pred = out.max(1,keepdim=True)[1]
             correct += pred.eq(labels.view_as(pred)).sum().item()
 
-        gen_conf_mat(predictions,data_loader.dataset.all_labels.to(device))
+        gen_conf_mat(all_preds,all_labels)
         eval_loss /= len(data_loader.dataset)
         print("\n Average Loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)\n".format(eval_loss,correct,len(data_loader.dataset),100.*correct/len(data_loader.dataset)))
 
