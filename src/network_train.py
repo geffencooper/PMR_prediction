@@ -9,25 +9,13 @@ from torch.optim import optimizer
 from pytorch_dataset import SpeechPaceDataset,my_collate_fn
 from network_def import SpeechPaceNN
 import torch
-import torchaudio
 from torchaudio import transforms,utils
 from torch.utils.data import Dataset, DataLoader
-import torch.nn as nn
-import torch.nn.utils.rnn as rnn_utils
-import numpy as np
-import pyrubberband as pyrb
-import random
-import sounddevice as sd
-import pydub
-from pydub.utils import mediainfo
-import pandas as pd
-import time
-import os
-import shutil
-import glob
 
-
+'''Training loop function'''
 def train_SpeechPaceNN():
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    print(device)
     try:
         # hyperparameters
         BATCH_SIZE = 4
@@ -49,12 +37,14 @@ def train_SpeechPaceNN():
         test_loader = DataLoader(test_dataset,batch_size=BATCH_SIZE,collate_fn=my_collate_fn)
 
         model = SpeechPaceNN(INPUT_SIZE,HIDDEN_SIZE,NUM_LAYERS,NUM_CLASSES)
+        model.to(device)
+
         criterion = torch.nn.CrossEntropyLoss()
         optimizer = torch.optim.Adam(model.parameters(),lr=LEARNING_RATE)
 
         for epoch in range(NUM_EPOCHS):
-            running_loss = 0.0
             for i, (x,lengths,labels) in enumerate(train_loader):
+                x,lengths,labels = x.to(device),lengths.to(device),labels.to(device)
 
                 # zero the parameter gradients
                 optimizer.zero_grad()
@@ -72,11 +62,11 @@ def train_SpeechPaceNN():
                 print("Train Epoch: {} [{}/{} ({:.0f}%)]\t Loss: {:.6f}".format(epoch,i*len(x),len(train_loader.dataset),100.*i/len(train_loader),loss.item()))
 
             # validation at the end of each epoch, and save model
-            eval_model(model,val_dataset)
+            eval_model(model,val_loader,device)
             torch.save(model.state_dict(),"../models/model_epoch_"+str(epoch)+".pth")
 
         print("============================== Finished Training ==============================")
-        eval_model(model,val_dataset)
+        eval_model(model,val_loader,device)
         torch.save(model.state_dict(),"../models/model_epoch_"+str(epoch)+".pth")
 
 
@@ -89,8 +79,9 @@ def train_SpeechPaceNN():
 # --------------------------------------------------------------------------------------------------------------
         
 '''Helper function to evaluate the network (used during training, validation, and testing)'''
-def eval_model(model,data_loader):
+def eval_model(model,data_loader,device):
     model.eval()
+    model.to(device)
 
     eval_loss = 0
     correct = 0
@@ -98,7 +89,9 @@ def eval_model(model,data_loader):
 
     with torch.no_grad():
         for i, (x,lengths,labels) in enumerate(data_loader):
-            out = model(x)
+            x,lengths,labels = x.to(device),lengths.to(device),labels.to(device)
+            
+            out = model(x,lengths)
 
             # sum up the batch loss
             loss = criterion(out,x)

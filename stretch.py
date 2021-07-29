@@ -1,34 +1,33 @@
-import numpy as np
-import librosa
-from numpy import lib
-from sklearn import linear_model
-import os
-import pandas as pd
-import random
-import sounddevice as sd
-import time
-import pytsmod as tsm
-import soundfile as sf
 import torch
 import torchaudio
-import torchaudio.functional as F
-import torchaudio.transforms as T
+from torchaudio import transforms,utils
+from torch.utils.data import Dataset, DataLoader
+import numpy as np
+import pyrubberband as pyrb
+import random
+import sounddevice as sd
+import pydub
+from pydub.utils import mediainfo
+import pandas as pd
+import time
+import os
+import shutil
 
+'''PyTorch Dataset class for audio pace'''
+class AudioPaceDataset(Dataset):
+    def __init__(self,data_csv_path,labels_csv_path):
+        self.data_frame = pd.read_csv(data_csv_path)
+        self.labels_frame = pd.read_csv(labels_csv_path)
 
+    def __len__(self):
+        return len(self.labels_frame)
 
-# y,sr = torchaudio.load("../avec_data/306_P/306_AUDIO.wav")
-# tsfm = torchaudio.transforms.TimeStretch(fixed_rate=0.5)
-# y=tsfm(y)
-# # y_new = y[int(435*sr):int(445*sr)]
-# # sf.write('out.wav',y_new,sr)
-# exit()
-# y_new = librosa.effects.time_stretch(y_new,1.3)
+    def __getitem__(self,idx):
+        if torch.is_tensor(idx):
+            idx=idx.to_list()
 
-# print("play")
-# sd.play(y,sr)
-# time.sleep(7)
-# sd.stop()
+        # features is a contiguous set of MFCCs and their deltas
+        features = self.data_frame
 
-# sd.play(y_new,sr)
-# time.sleep(7)
-# sd.stop()
+def get_audio_pace_dataset(train_data_path,val_data_path,test_data_path,train_labels_path,val_labels_path,test_labels_path):
+    pass
