@@ -133,6 +133,10 @@ def train_SpeechPaceNN(output_location):
         minutes,seconds = divmod(elapsed,60)
         hours,minutes = divmod(minutes,60)
         print("Total Training Time: {}h {}m {}s".format(hours,minutes,seconds))
+        print("Iterations:",iterations)
+        print("Val_Accuracies:",val_accuracies)
+        print("Val_Losses:",val_losses)
+        print("Train_Losses:",train_losses)
 
 
 
