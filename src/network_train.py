@@ -60,6 +60,7 @@ def train_SpeechPaceNN():
                 
                 # print statistics every n batches
                 if i % 10 == 0:
+                    #eval_model(model,val_loader,device)
                     print("Train Epoch: {} [{}/{} ({:.0f}%)]\t Loss: {:.6f}".format(epoch,i*len(x),len(train_loader.dataset),100.*i/len(train_loader),loss.item()))
 
             # validation at the end of each epoch, and save model
@@ -108,7 +109,7 @@ def eval_model(model,data_loader,device):
             pred = out.max(1,keepdim=True)[1]
             correct += pred.eq(labels.view_as(pred)).sum().item()
 
-        gen_conf_mat(predictions,data_loader.dataset.all_labels)
+        gen_conf_mat(predictions,data_loader.dataset.all_labels.to(device))
         eval_loss /= len(data_loader.dataset)
         print("\n Average Loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)\n".format(eval_loss,correct,len(data_loader.dataset),100.*correct/len(data_loader.dataset)))
 
