@@ -18,6 +18,7 @@ class SpeechPaceDataset(Dataset):
     def __init__(self,data_root_dir,labels_csv_path):
         self.root_dir = data_root_dir
         self.labels_frame = pd.read_csv(labels_csv_path,index_col=0)
+        self.all_labels = torch.from_numpy(self.labels_frame["label"].values)
 
     def __len__(self):
         return len(self.labels_frame)
@@ -36,7 +37,7 @@ class SpeechPaceDataset(Dataset):
         data_frame = data_frame.iloc[:,np.arange(2,28)]
 
         # normalize the colummns
-        data_frame = (data_frame-data_frame.mean())/data_frame.std()
+        #data_frame = (data_frame-data_frame.mean())/data_frame.std()
 
         features = torch.from_numpy(data_frame.to_numpy())
 

@@ -19,7 +19,7 @@ def train_SpeechPaceNN():
     try:
         # hyperparameters
         BATCH_SIZE = 64
-        LEARNING_RATE = 0.005
+        LEARNING_RATE = 0.002
         HIDDEN_SIZE = 64
         NUM_CLASSES = 3
         INPUT_SIZE = 26
@@ -89,6 +89,7 @@ def eval_model(model,data_loader,device):
     criterion = torch.nn.CrossEntropyLoss()
 
     predictions = torch.tensor([])
+    predictions = predictions.to(device)
     with torch.no_grad():
         for i, (x,lengths,labels) in enumerate(data_loader):
             x,labels = x.to(device),labels.to(device)
@@ -98,16 +99,16 @@ def eval_model(model,data_loader,device):
 
             # look at confusion matrix
             predictions = torch.cat((predictions,out),dim=0)
-            gen_conf_mat(predictions,labels)
 
             # sum up the batch loss
-            loss = criterion(out,x)
+            loss = criterion(out,labels)
             eval_loss += loss.item()
 
             # get the prediction
             pred = out.max(1,keepdim=True)[1]
             correct += pred.eq(labels.view_as(pred)).sum().item()
 
+        gen_conf_mat(predictions,data_loader.dataset.all_labels)
         eval_loss /= len(data_loader.dataset)
         print("\n Average Loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)\n".format(eval_loss,correct,len(data_loader.dataset),100.*correct/len(data_loader.dataset)))
 
