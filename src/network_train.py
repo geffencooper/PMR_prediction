@@ -12,9 +12,10 @@ import torch
 from torchaudio import transforms,utils
 from torch.utils.data import Dataset, DataLoader
 import time
+import sys
 
 '''Training loop function'''
-def train_SpeechPaceNN():
+def train_SpeechPaceNN(output_location):
     # get the device, hopefully a GPU
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
@@ -106,7 +107,7 @@ def train_SpeechPaceNN():
                     # save the most accuracte model up to date
                     if accuracy > best_val_accuracy:
                         best_val_accuracy = accuracy
-                        torch.save(model.state_dict(),"../models/best_model"+str(epoch)+".pth")
+                        torch.save(model.state_dict(),"../models/"+str(output_location)+"/BEST_model_epoch"+str(epoch)+"_iter_"+str(i)+".pth")
                     print("Best Accuracy: ",best_val_accuracy,"%")
 
                     # print the time elapsed
@@ -120,7 +121,7 @@ def train_SpeechPaceNN():
             accuracy = eval_model(model,val_loader,device)
             if accuracy > best_val_accuracy:
                 best_val_accuracy = accuracy
-            torch.save(model.state_dict(),"../models/model_epoch_"+str(epoch)+".pth")
+            torch.save(model.state_dict(),"../models/"+str(output_location)+"/END_model_epoch"+str(epoch)+"_iter_"+str(i)+".pth")
 
         print("================================ Finished Training ================================")
         print("\n----------------- Iteration {} -----------------\n".format(i))
@@ -137,7 +138,7 @@ def train_SpeechPaceNN():
 
     except KeyboardInterrupt:
         print("================================ QUIT ================================\n Saving Model ...")
-        torch.save(model.state_dict(),"../models/last_model.pth")
+        torch.save(model.state_dict(),"../models/"+str(output_location)+"/MID_model_epoch"+str(epoch)+"_iter_"+str(i)+".pth")
 
 
 # --------------------------------------------------------------------------------------------------------------
@@ -211,4 +212,4 @@ def gen_conf_mat(predictions,labels):
 # --------------------------------------------------------------------------------------------------------------
 
 if __name__ == "__main__":
-    train_SpeechPaceNN()
+    train_SpeechPaceNN(sys.argv[1])
