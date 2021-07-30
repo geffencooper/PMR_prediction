@@ -93,7 +93,7 @@ def train_SpeechPaceNN(output_location):
                     print("Train Epoch: {} Iteration: {} [{}/{} ({:.0f}%)]\t Loss: {:.6f}".format(epoch,i,i*len(x),len(train_loader.dataset),100.*i/len(train_loader),loss.item()))
                 
                 # do a validation pass every 10*n batches (lots of training data so don't wait till end of epoch)
-                if i % 300 == 0:
+                if i % 300 == 0 and i != 0:
                     print("\n\n----------------- Epoch {} Iteration {} -----------------\n".format(epoch,i))
 
                     # keep track of training and validation loss, since training forward pass takes a while do every 400 iterations instead of every epoch
@@ -118,7 +118,7 @@ def train_SpeechPaceNN(output_location):
                     minutes,seconds = divmod(elapsed,60)
                     hours,minutes = divmod(minutes,60)
                     print("Time Elapsed: {}h {}m {}s".format(int(hours),int(minutes),int(seconds)))
-                    print("\n-----------------------------------------------\n\n")
+                    print("\n--------------------------------------------------------\n\n")
 
         print("================================ Finished Training ================================")
         torch.save(model.state_dict(),output_dir+"END_model.pth")
@@ -243,7 +243,7 @@ def gen_conf_mat(predictions,labels,idxs,print_idxs=False):
             x,y = pair.tolist()
             conf_mat[x,y] = conf_mat[x,y]+1
             if x!=y:
-                incorrect.append(idxs[i])
+                incorrect.append(idxs[i].item())
         print("Incorrect Samples:",incorrect)
     else:
         # fill the confusion matrix
