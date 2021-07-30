@@ -15,7 +15,7 @@ import time
 import sys
 
 '''Training loop function'''
-def train_SpeechPaceNN():
+def train_SpeechPaceNN(output_location):
     # get the device, hopefully a GPU
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
@@ -246,4 +246,4 @@ def gen_conf_mat(predictions,labels):
 # --------------------------------------------------------------------------------------------------------------
 
 if __name__ == "__main__":
-    train_SpeechPaceNN()
+    train_SpeechPaceNN(sys.argv[1])
