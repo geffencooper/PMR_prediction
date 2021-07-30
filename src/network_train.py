@@ -88,12 +88,12 @@ def train_SpeechPaceNN():
                 optimizer.step()
                 
                 # print training statistics every n batches
-                if i % 20 == 0:
+                if i % 20 == 0 and i != 0:
                     print("Train Epoch: {} Iteration: {} [{}/{} ({:.0f}%)]\t Loss: {:.6f}".format(epoch,i,i*len(x),len(train_loader.dataset),100.*i/len(train_loader),loss.item()))
                 
                 # do a validation pass every 10*n batches (lots of training data so don't wait till end of epoch)
                 if i % 200 == 0:
-                    print("\n\n----------------- Iteration {} -----------------\n".format(i))
+                    print("\n\n----------------- Epoch {} Iteration {} -----------------\n".format(epoch,i))
 
                     # keep track of training and validation loss, since training forward pass takes a while just use accumulated loss for last 10*n batches
                     iterations.append(i)
@@ -109,7 +109,7 @@ def train_SpeechPaceNN():
                     # save the most accuracte model up to date
                     if accuracy > best_val_accuracy:
                         best_val_accuracy = accuracy
-                        torch.save(model.state_dict(),"../models/"+str(output_location)+"/BEST_model_epoch"+str(epoch)+"_iter_"+str(i)+".pth")
+                        torch.save(model.state_dict(),"../models/"+str(output_location)+"/BEST_model.pth")
                     print("Best Accuracy: ",best_val_accuracy,"%")
 
                     # print the time elapsed
@@ -120,22 +120,28 @@ def train_SpeechPaceNN():
                     print("Time Elapsed: {}h {}m {}s".format(int(hours),int(minutes),int(seconds)))
                     print("\n-----------------------------------------------\n\n")
 
-            # validation at the end of each epoch, and save model if it is the new best
-            accuracy = eval_model(model,val_loader,device)
-            if accuracy > best_val_accuracy:
-                best_val_accuracy = accuracy
-            torch.save(model.state_dict(),"../models/"+str(output_location)+"/END_model_epoch"+str(epoch)+"_iter_"+str(i)+".pth")
-
         print("================================ Finished Training ================================")
-        print("\n----------------- Iteration {} -----------------\n".format(i))
-        eval_model(model,val_loader,device)
-        torch.save(model.state_dict(),"../models/model_epoch_"+str(epoch)+".pth")
-        print("Best Model Val Accuracy:",best_val_accuracy,"%")
+        print("\n----------------- Epoch {} Iteration {} -----------------\n".format(epoch,i))
+        torch.save(model.state_dict(),"../models/END_model_epoch_"+str(epoch)+".pth")
+        
+        # validation pass
+        accuracy,val_loss = eval_model(model,val_loader,device)
+        val_accuracies.append(accuracy)
+        val_losses.append(val_loss)
+
+        # save the most accuracte model up to date
+        if accuracy > best_val_accuracy:
+            best_val_accuracy = accuracy
+            torch.save(model.state_dict(),"../models/"+str(output_location)+"/BEST_model.pth")
+        print("Best Accuracy: ",best_val_accuracy,"%")
+
+        # print the time elapsed
         end = time.time()
         elapsed = end-start
         minutes,seconds = divmod(elapsed,60)
         hours,minutes = divmod(minutes,60)
-        print("Total Training Time: {}h {}m {}s".format(hours,minutes,seconds))
+        print("Time Elapsed: {}h {}m {}s".format(int(hours),int(minutes),int(seconds)))
+
         print("Iterations:",iterations)
         print("Val_Accuracies:",val_accuracies)
         print("Val_Losses:",val_losses)
@@ -144,8 +150,31 @@ def train_SpeechPaceNN():
 
 
     except KeyboardInterrupt:
-        print("================================ QUIT ================================\n Saving Model ...")
+        print("================================ QUIT Iteration {}================================\n Saving Model ...".format(i))
         torch.save(model.state_dict(),"../models/"+str(output_location)+"/MID_model_epoch"+str(epoch)+"_iter_"+str(i)+".pth")
+        
+        # validation pass
+        accuracy,val_loss = eval_model(model,val_loader,device)
+        val_accuracies.append(accuracy)
+        val_losses.append(val_loss)
+
+        # save the most accuracte model up to date
+        if accuracy > best_val_accuracy:
+            best_val_accuracy = accuracy
+            torch.save(model.state_dict(),"../models/"+str(output_location)+"/BEST_model.pth")
+        print("Best Accuracy: ",best_val_accuracy,"%")
+
+        # print the time elapsed
+        end = time.time()
+        elapsed = end-start
+        minutes,seconds = divmod(elapsed,60)
+        hours,minutes = divmod(minutes,60)
+        print("Time Elapsed: {}h {}m {}s".format(int(hours),int(minutes),int(seconds)))
+
+        print("Iterations:",iterations)
+        print("Val_Accuracies:",val_accuracies)
+        print("Val_Losses:",val_losses)
+        print("Train_Losses:",train_losses)
 
 
 # --------------------------------------------------------------------------------------------------------------
@@ -212,8 +241,6 @@ def gen_conf_mat(predictions,labels):
     print("Confusion Matrix")
     print(conf_mat)
     #print("Correct: ",preds.eq(labels).sum().item())
-
-
 
 
 # --------------------------------------------------------------------------------------------------------------
