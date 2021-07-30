@@ -32,7 +32,7 @@ def train_SpeechPaceNN(output_location):
     INPUT_SIZE = 26
     NUM_LAYERS = 1
     NUM_EPOCHS = 2
-    NORMALIZATION = True
+    NORMALIZATION = False
 
     # global variables
     output_location=""
@@ -193,7 +193,7 @@ def eval_model(model,data_loader,device,print_idxs=False):
     all_idxs = all_idxs.to(device)
     with torch.no_grad():
         for i, (x,lengths,labels,idxs) in enumerate(data_loader):
-            x,labels = x.to(device),labels.to(device)
+            x,labels,idxs = x.to(device),labels.to(device),idxs.to(device)
             
             # forward pass
             out = model(x,lengths)
