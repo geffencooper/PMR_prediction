@@ -44,7 +44,7 @@ class SpeechPaceDataset(Dataset):
         # now get the label of this sample as a tensor
         label = torch.tensor(self.labels_frame.at[data_file,"label"])
 
-        return features,label
+        return features,label,idx
 
 # --------------------------------------------------------------------------------------------------------------
         
@@ -66,4 +66,7 @@ def my_collate_fn(batch):
     # get the label portion from the batch tuples
     labels = torch.LongTensor([x[1] for x in sorted_batch])
 
-    return sequences_padded.float(),lengths,labels
+    # get the index
+    idxs = torch.LongTensor([x[2] for x in sorted_batch])
+
+    return sequences_padded.float(),lengths,labels,idxs

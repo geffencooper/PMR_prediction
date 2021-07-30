@@ -42,7 +42,6 @@ def train_SpeechPaceNN(output_location):
     val_accuracies = []
     iterations = []
     curr_train_loss = 0
-    last_train_loss = 0
 
     print("Batch Size: {}\nLearning Rate: {}\nHidden Size: {}\nNumber of Layer: {}\nNumber of Epochs: {}\nNormalization:{}".format(\
         BATCH_SIZE,LEARNING_RATE,HIDDEN_SIZE,NUM_LAYERS,NUM_EPOCHS,NORMALIZATION))
@@ -72,7 +71,7 @@ def train_SpeechPaceNN(output_location):
         # ----------------------------------------------------- Training Loop -----------------------------------------------------
         for epoch in range(NUM_EPOCHS):
             # get the next batch
-            for i, (x,lengths,labels) in enumerate(train_loader):
+            for i, (x,lengths,labels,idxs) in enumerate(train_loader):
                 x,labels = x.to(device),labels.to(device)
 
                 # zero the parameter gradients
@@ -88,17 +87,16 @@ def train_SpeechPaceNN(output_location):
                 optimizer.step()
                 
                 # print training statistics every n batches
-                if i % 20 == 0 and i != 0:
+                if i % 40 == 0 and i != 0:
                     print("Train Epoch: {} Iteration: {} [{}/{} ({:.0f}%)]\t Loss: {:.6f}".format(epoch,i,i*len(x),len(train_loader.dataset),100.*i/len(train_loader),loss.item()))
                 
                 # do a validation pass every 10*n batches (lots of training data so don't wait till end of epoch)
-                if i % 200 == 0:
+                if i % 300 == 0:
                     print("\n\n----------------- Epoch {} Iteration {} -----------------\n".format(epoch,i))
 
-                    # keep track of training and validation loss, since training forward pass takes a while just use accumulated loss for last 10*n batches
+                    # keep track of training and validation loss, since training forward pass takes a while do every 400 iterations instead of every epoch
                     iterations.append(i)
-                    train_losses.append(curr_train_loss-last_train_loss)
-                    last_train_loss = curr_train_loss
+                    train_losses.append(curr_train_loss/(400)) # average training loss per batch
                     curr_train_loss = 0
 
                     # validation pass
@@ -121,11 +119,10 @@ def train_SpeechPaceNN(output_location):
                     print("\n-----------------------------------------------\n\n")
 
         print("================================ Finished Training ================================")
-        print("\n----------------- Epoch {} Iteration {} -----------------\n".format(epoch,i))
-        torch.save(model.state_dict(),"../models/END_model_epoch_"+str(epoch)+".pth")
+        torch.save(model.state_dict(),"../models/END_model.pth")
         
         # validation pass
-        accuracy,val_loss = eval_model(model,val_loader,device)
+        accuracy,val_loss = eval_model(model,val_loader,device,True)
         val_accuracies.append(accuracy)
         val_losses.append(val_loss)
 
@@ -150,8 +147,8 @@ def train_SpeechPaceNN(output_location):
 
 
     except KeyboardInterrupt:
-        print("================================ QUIT Iteration {}================================\n Saving Model ...".format(i))
-        torch.save(model.state_dict(),"../models/"+str(output_location)+"/MID_model_epoch"+str(epoch)+"_iter_"+str(i)+".pth")
+        print("================================ QUIT ================================\n Saving Model ...")
+        torch.save(model.state_dict(),"../models/"+str(output_location)+"/MID_model.pth")
         
         # validation pass
         accuracy,val_loss = eval_model(model,val_loader,device)
@@ -180,7 +177,7 @@ def train_SpeechPaceNN(output_location):
 # --------------------------------------------------------------------------------------------------------------
         
 '''Helper function to evaluate the network (used during training, validation, and testing)'''
-def eval_model(model,data_loader,device):
+def eval_model(model,data_loader,device,print_idxs=False):
     model.eval()
     model.to(device)
 
@@ -190,10 +187,12 @@ def eval_model(model,data_loader,device):
 
     all_preds = torch.tensor([])
     all_labels = torch.tensor([],dtype=torch.int)
+    all_idxs = torch.tensor([],dtype=torch.int)
     all_preds = all_preds.to(device)
     all_labels = all_labels.to(device)
+    all_idxs = all_idxs.to(device)
     with torch.no_grad():
-        for i, (x,lengths,labels) in enumerate(data_loader):
+        for i, (x,lengths,labels,idxs) in enumerate(data_loader):
             x,labels = x.to(device),labels.to(device)
             
             # forward pass
@@ -202,6 +201,7 @@ def eval_model(model,data_loader,device):
             # accumulate predictions and labels
             all_preds = torch.cat((all_preds,out),dim=0)
             all_labels = torch.cat((all_labels,labels),dim=0)
+            all_idxs = torch.cat((all_idxs,idxs),dim=0)
 
             # sum up the batch loss
             loss = criterion(out,labels)
@@ -211,19 +211,19 @@ def eval_model(model,data_loader,device):
             pred = out.max(1,keepdim=True)[1]
             correct += pred.eq(labels.view_as(pred)).sum().item()
 
-        gen_conf_mat(all_preds,all_labels)
+        gen_conf_mat(all_preds,all_labels,all_idxs,print_idxs)
         #eval_loss /= len(data_loader.dataset)
         print("\nValidation Loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)".format(eval_loss,correct,len(data_loader.dataset),100.*correct/len(data_loader.dataset)))
 
     model.train()
-    return 100.*correct/len(data_loader.dataset),eval_loss
+    return 100.*correct/len(data_loader.dataset),eval_loss/len(data_loader)
 
 
 # --------------------------------------------------------------------------------------------------------------
 
 '''Helper function to create a confusion matrix of classification results'''
 # this gets called by eval_model with the predictions and labels
-def gen_conf_mat(predictions,labels):
+def gen_conf_mat(predictions,labels,idxs,print_idxs=False):
     # get the prediction from the max output
     preds = predictions.argmax(dim=1)
 
@@ -233,10 +233,20 @@ def gen_conf_mat(predictions,labels):
     # create the confusion matrix
     conf_mat = torch.zeros(3,3,dtype=torch.int64)
 
-    # fill the confusion matrix
-    for pair in stacked:
-        x,y = pair.tolist()
-        conf_mat[x,y] = conf_mat[x,y]+1
+    if print_idxs == True:
+        incorrect = []
+        # fill the confusion matrix
+        for i,pair in enumerate(stacked):
+            x,y = pair.tolist()
+            conf_mat[x,y] = conf_mat[x,y]+1
+            if x!=y:
+                incorrect.append(idxs[i])
+        print("Incorrect Samples:",incorrect)
+    else:
+        # fill the confusion matrix
+        for pair in stacked:
+            x,y = pair.tolist()
+            conf_mat[x,y] = conf_mat[x,y]+1
 
     print("Confusion Matrix")
     print(conf_mat)
