@@ -16,6 +16,8 @@ import sys
 
 '''Training loop function'''
 def train_SpeechPaceNN(output_location):
+    output_dir = "../models/"+output_location+"/"
+
     # get the device, hopefully a GPU
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
@@ -107,7 +109,7 @@ def train_SpeechPaceNN(output_location):
                     # save the most accuracte model up to date
                     if accuracy > best_val_accuracy:
                         best_val_accuracy = accuracy
-                        torch.save(model.state_dict(),"../models/"+str(output_location)+"/BEST_model.pth")
+                        torch.save(model.state_dict(),output_dir+"BEST_model.pth")
                     print("Best Accuracy: ",best_val_accuracy,"%")
 
                     # print the time elapsed
@@ -119,7 +121,7 @@ def train_SpeechPaceNN(output_location):
                     print("\n-----------------------------------------------\n\n")
 
         print("================================ Finished Training ================================")
-        torch.save(model.state_dict(),"../models/END_model.pth")
+        torch.save(model.state_dict(),output_dir+"END_model.pth")
         
         # validation pass
         accuracy,val_loss = eval_model(model,val_loader,device,True)
@@ -129,7 +131,7 @@ def train_SpeechPaceNN(output_location):
         # save the most accuracte model up to date
         if accuracy > best_val_accuracy:
             best_val_accuracy = accuracy
-            torch.save(model.state_dict(),"../models/"+str(output_location)+"/BEST_model.pth")
+            torch.save(model.state_dict(),output_dir+"BEST_model.pth")
         print("Best Accuracy: ",best_val_accuracy,"%")
 
         # print the time elapsed
@@ -148,7 +150,7 @@ def train_SpeechPaceNN(output_location):
 
     except KeyboardInterrupt:
         print("================================ QUIT ================================\n Saving Model ...")
-        torch.save(model.state_dict(),"../models/"+str(output_location)+"/MID_model.pth")
+        torch.save(model.state_dict(),output_dir+"MID_model.pth")
         
         # validation pass
         accuracy,val_loss = eval_model(model,val_loader,device)
@@ -158,7 +160,7 @@ def train_SpeechPaceNN(output_location):
         # save the most accuracte model up to date
         if accuracy > best_val_accuracy:
             best_val_accuracy = accuracy
-            torch.save(model.state_dict(),"../models/"+str(output_location)+"/BEST_model.pth")
+            torch.save(model.state_dict(),output_dir+"BEST_model.pth")
         print("Best Accuracy: ",best_val_accuracy,"%")
 
         # print the time elapsed
