@@ -20,9 +20,9 @@ def train_SpeechPaceNN():
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
     # print model training info
-    print("================================ Start Training ================================")
-    print("Device:",torch.cuda.current_device()," ----> ",torch.cuda.get_device_name(torch.cuda.current_device()))
-    print("Hyperparameters:")
+    print("\n\n\n================================ Start Training ================================")
+    print("\nDevice:",torch.cuda.current_device()," ----> ",torch.cuda.get_device_name(torch.cuda.current_device()))
+    print("\nHyperparameters:")
 
     # hyperparameters
     BATCH_SIZE = 64
@@ -93,7 +93,7 @@ def train_SpeechPaceNN():
                 
                 # do a validation pass every 10*n batches (lots of training data so don't wait till end of epoch)
                 if i % 200 == 0:
-                    print("\n----------------- Iteration {} -----------------\n".format(i))
+                    print("\n\n----------------- Iteration {} -----------------\n".format(i))
 
                     # keep track of training and validation loss, since training forward pass takes a while just use accumulated loss for last 10*n batches
                     iterations.append(i)
@@ -117,7 +117,8 @@ def train_SpeechPaceNN():
                     elapsed = end-start
                     minutes,seconds = divmod(elapsed,60)
                     hours,minutes = divmod(minutes,60)
-                    print("Time Elapsed: {}h {}m {}s".format(hours,minutes,seconds))
+                    print("Time Elapsed: {}h {}m {}s".format(int(hours),int(minutes),int(seconds)))
+                    print("\n-----------------------------------------------\n\n")
 
             # validation at the end of each epoch, and save model if it is the new best
             accuracy = eval_model(model,val_loader,device)
@@ -183,7 +184,7 @@ def eval_model(model,data_loader,device):
 
         gen_conf_mat(all_preds,all_labels)
         #eval_loss /= len(data_loader.dataset)
-        print("\nValidation Loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)\n".format(eval_loss,correct,len(data_loader.dataset),100.*correct/len(data_loader.dataset)))
+        print("\nValidation Loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)".format(eval_loss,correct,len(data_loader.dataset),100.*correct/len(data_loader.dataset)))
 
     model.train()
     return 100.*correct/len(data_loader.dataset),eval_loss
@@ -208,7 +209,7 @@ def gen_conf_mat(predictions,labels):
         x,y = pair.tolist()
         conf_mat[x,y] = conf_mat[x,y]+1
 
-    print("\nConfusion Matrix")
+    print("Confusion Matrix")
     print(conf_mat)
     #print("Correct: ",preds.eq(labels).sum().item())
 
