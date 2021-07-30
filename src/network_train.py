@@ -149,8 +149,9 @@ def train_SpeechPaceNN(output_location):
 
 
     except KeyboardInterrupt:
-        print("================================ QUIT ================================\n Saving Model ...")
         torch.save(model.state_dict(),output_dir+"MID_model.pth")
+        print("================================ QUIT ================================\n Saving Model ...")
+        
         
         # validation pass
         accuracy,val_loss = eval_model(model,val_loader,device)
