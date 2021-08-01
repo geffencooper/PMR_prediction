@@ -19,7 +19,8 @@ def train_SpeechPaceNN(output_location):
     output_dir = "../models/"+output_location+"/"
 
     # get the device, hopefully a GPU
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    torch.cuda.set_device(2)
+    device = torch.device("cuda:2" if torch.cuda.is_available() else "cpu")
 
     # print model training info
     print("\n\n\n================================ Start Training ================================")
@@ -28,13 +29,13 @@ def train_SpeechPaceNN(output_location):
 
     # hyperparameters
     BATCH_SIZE = 64
-    LEARNING_RATE = 0.002
+    LEARNING_RATE = 0.001
     HIDDEN_SIZE = 64
     NUM_CLASSES = 3
     INPUT_SIZE = 26
     NUM_LAYERS = 1
     NUM_EPOCHS = 2
-    NORMALIZATION = False
+    NORMALIZATION = True
 
     # global variables
     output_location=""
