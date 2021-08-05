@@ -25,5 +25,6 @@ class TestNet():
 
 
 if __name__ =="__main__":
-    tn = TestNet("../models/2021-07-30_16-18-53/BEST_model.pth")
-    tn.forward("C:/Users/gcooper/Desktop/av_feature_extraction/common_voice/aug_val/validation_data/sample-000337.csv")
+    tn = TestNet("../models/2021-07-30_16-18-53/END_model.pth")
+    #tn.forward("C:/Users/gcooper/Desktop/av_feature_extraction/common_voice/aug_train/training_data/sample-000000.csv")
+    tn.forward("C:/Users/gcooper/Desktop/av_feature_extraction/PMR_prediction/small_test/data5.csv")
