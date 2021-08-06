@@ -24,27 +24,31 @@ class SpeechPaceDataset(Dataset):
         return len(self.labels_frame)
 
     def __getitem__(self,idx):
-        # first get the data csv by creating the file name
-        data_file = "sample-"
-        prefix = ""
-        for i in range(6-len(str(idx))):
-            prefix += "0"
-        data_file += prefix + str(idx) + ".csv"
-        data_path = self.root_dir + data_file
+        try:
+	    # first get the data csv by creating the file name
+	    data_file = "sample-"
+	    prefix = ""
+	    for i in range(6-len(str(idx))):
+	        prefix += "0"
+	    data_file += prefix + str(idx) + ".csv"
+	    data_path = self.root_dir + data_file
 
-        # read the audio features and convert to a tensor
-        data_frame = pd.read_csv(data_path,sep=";")
-        data_frame = data_frame.iloc[:,np.arange(2,28)]
+	    # read the audio features and convert to a tensor
+	    data_frame = pd.read_csv(data_path,sep=";")
+	    data_frame = data_frame.iloc[:,np.arange(2,28)]
 
-        # normalize the colummns
-        data_frame = (data_frame-data_frame.mean())/data_frame.std()
+	    # normalize the colummns
+	    #data_frame = (data_frame-data_frame.mean())/data_frame.std()
 
-        features = torch.from_numpy(data_frame.to_numpy())
+	    features = torch.from_numpy(data_frame.to_numpy())
+            except: TypeError
+                print(data_frame)
+                print(type(data_frame.to_numpy()))
 
-        # now get the label of this sample as a tensor
-        label = torch.tensor(self.labels_frame.at[data_file,"label"])
+            # now get the label of this sample as a tensor
+            label = torch.tensor(self.labels_frame.at[data_file,"label"])
 
-        return features,label,idx
+            return features,label,idx
 
 # --------------------------------------------------------------------------------------------------------------
         

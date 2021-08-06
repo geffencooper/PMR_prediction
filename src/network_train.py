@@ -19,8 +19,8 @@ def train_SpeechPaceNN(output_location):
     output_dir = "../models/"+output_location+"/"
 
     # get the device, hopefully a GPU
-    torch.cuda.set_device(2)
-    device = torch.device("cuda:2" if torch.cuda.is_available() else "cpu")
+    torch.cuda.set_device(1)
+    device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
 
     # print model training info
     print("\n\n\n================================ Start Training ================================")
@@ -29,13 +29,13 @@ def train_SpeechPaceNN(output_location):
 
     # hyperparameters
     BATCH_SIZE = 64
-    LEARNING_RATE = 0.001
+    LEARNING_RATE = 0.002
     HIDDEN_SIZE = 64
     NUM_CLASSES = 3
     INPUT_SIZE = 26
     NUM_LAYERS = 1
     NUM_EPOCHS = 2
-    NORMALIZATION = True
+    NORMALIZATION = False
 
     # global variables
     output_location=""
@@ -48,11 +48,11 @@ def train_SpeechPaceNN(output_location):
 
     print("Batch Size: {}\nLearning Rate: {}\nHidden Size: {}\nNumber of Layer: {}\nNumber of Epochs: {}\nNormalization:{}".format(\
         BATCH_SIZE,LEARNING_RATE,HIDDEN_SIZE,NUM_LAYERS,NUM_EPOCHS,NORMALIZATION))
-    
+    print("\nhidden state init with ZEROS\n")
     try:
         # Load the data
         root_dir = "/data/perception-working/Geffen/SpeechPaceData/"
-        train_dataset = SpeechPaceDataset(root_dir+"training_data/",root_dir+"training_data/train_labels2.csv")
+        train_dataset = SpeechPaceDataset(root_dir+"training_data_aug/",root_dir+"training_data/train_labels2.csv")
         val_dataset = SpeechPaceDataset(root_dir+"validation_data/",root_dir+"validation_data/val_labels2.csv")
         test_dataset = SpeechPaceDataset(root_dir+"test_data/",root_dir+"test_data/test_labels2.csv")
 

@@ -14,7 +14,7 @@ class SpeechPaceNN(torch.nn.Module):
     def __init__(self,input_size,hidden_size,num_layers,num_classes):
         super(SpeechPaceNN,self).__init__()
         
-        self.device = torch.device("cuda:2" if torch.cuda.is_available() else "cpu")
+        self.device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
 
         self.input_size = input_size # audio feature length
         self.hidden_size = hidden_size # user defined hyperparameter
@@ -28,7 +28,8 @@ class SpeechPaceNN(torch.nn.Module):
 
     # initialize the hidden state at the start of each forward pass
     def init_hidden(self,batch_size):
-        self.h0 = torch.randn(self.num_layers,batch_size,self.hidden_size)
+        #self.h0 = torch.randn(self.num_layers,batch_size,self.hidden_size)
+        self.h0 = torch.zeros(self.num_layers,batch_size,self.hidden_size)
         self.h0 = self.h0.to(self.device)
 
     def forward(self,X,lengths):
