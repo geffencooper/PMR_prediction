@@ -89,6 +89,7 @@ def train_SpeechPaceNN(output_location):
                     print("********** NAN ERROR ************")
                     print("output:",out)
                     print("labels:",labels)
+                    print("idxs:",idxs)
                     exit()
                 curr_train_loss += loss.item()
                 loss.backward()
