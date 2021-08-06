@@ -85,6 +85,11 @@ def train_SpeechPaceNN(output_location):
 
                 # backward pass
                 loss = criterion(out,labels)
+                if torch.isnan(loss):
+                    print("********** NAN ERROR ************")
+                    print("output:",out)
+                    print("labels:",labels)
+                    exit()
                 curr_train_loss += loss.item()
                 loss.backward()
                 optimizer.step()
