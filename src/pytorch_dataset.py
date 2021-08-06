@@ -41,14 +41,18 @@ class SpeechPaceDataset(Dataset):
             #data_frame = (data_frame-data_frame.mean())/data_frame.std()
 
             features = torch.from_numpy(data_frame.to_numpy())
+
+            # now get the label of this sample as a tensor
+            label = torch.tensor(self.labels_frame.at[data_file,"label"])
+
+            return features,label,idx
         except TypeError:
+            print("index:",idx)
+            print("type:",type(data_frame.to_numpy()))
             print(data_frame)
-            print(type(data_frame.to_numpy()))
+            
 
-        # now get the label of this sample as a tensor
-        label = torch.tensor(self.labels_frame.at[data_file,"label"])
-
-        return features,label,idx
+        
 
 # --------------------------------------------------------------------------------------------------------------
         
