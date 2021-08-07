@@ -38,7 +38,7 @@ class SpeechPaceDataset(Dataset):
             data_frame = data_frame.iloc[:,np.arange(2,28)]
 
             # normalize the colummns
-            #data_frame = (data_frame-data_frame.mean())/data_frame.std()
+            data_frame = (data_frame-data_frame.mean())/data_frame.std()
 
             features = torch.from_numpy(data_frame.to_numpy())
 

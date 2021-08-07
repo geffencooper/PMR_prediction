@@ -14,7 +14,7 @@ class SpeechPaceNN(torch.nn.Module):
     def __init__(self,input_size,hidden_size,num_layers,num_classes):
         super(SpeechPaceNN,self).__init__()
         
-        self.device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
+        self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
         self.input_size = input_size # audio feature length
         self.hidden_size = hidden_size # user defined hyperparameter

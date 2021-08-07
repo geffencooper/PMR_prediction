@@ -19,8 +19,8 @@ def train_SpeechPaceNN(output_location):
     output_dir = "../models/"+output_location+"/"
 
     # get the device, hopefully a GPU
-    torch.cuda.set_device(1)
-    device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
+    torch.cuda.set_device(0)
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
     # print model training info
     print("\n\n\n================================ Start Training ================================")
@@ -35,7 +35,7 @@ def train_SpeechPaceNN(output_location):
     INPUT_SIZE = 26
     NUM_LAYERS = 1
     NUM_EPOCHS = 2
-    NORMALIZATION = False
+    NORMALIZATION = True
 
     # global variables
     output_location=""
@@ -90,6 +90,7 @@ def train_SpeechPaceNN(output_location):
                     print("output:",out)
                     print("labels:",labels)
                     print("idxs:",idxs)
+                    print("inputs:",x)
                     exit()
                 curr_train_loss += loss.item()
                 loss.backward()
