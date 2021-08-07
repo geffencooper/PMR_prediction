@@ -6,8 +6,8 @@ and defines the training loop and stat helper functions
 '''
 
 from torch.optim import optimizer
-from pytorch_dataset import SpeechPaceDataset,my_collate_fn
-from network_def import SpeechPaceNN
+from pytorch_dataset import SpeechPaceDataset,my_collate_fn,FusedDataset, my_collate_fn_fused
+from network_def import SpeechPaceNN,PMRfusionNN
 import torch
 from torchaudio import transforms,utils
 from torch.utils.data import Dataset, DataLoader
@@ -38,7 +38,6 @@ def train_SpeechPaceNN(output_location):
     NORMALIZATION = True
 
     # global variables
-    output_location=""
     best_val_accuracy = 0
     train_losses = []
     val_losses = []
@@ -266,5 +265,220 @@ def gen_conf_mat(predictions,labels,idxs,print_idxs=False):
 
 # --------------------------------------------------------------------------------------------------------------
 
+'''Training loop function'''
+def train_PMRfusionNN(output_location):
+    output_dir = "../models/"+output_location+"/"
+
+    # get the device, hopefully a GPU
+    torch.cuda.set_device(0)
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+
+    # print model training info
+    print("\n\n\n================================ Start Training ================================")
+    print("\nDevice:",torch.cuda.current_device()," ----> ",torch.cuda.get_device_name(torch.cuda.current_device()))
+    print("\nHyperparameters:")
+
+    # hyperparameters
+    BATCH_SIZE = 64
+    LEARNING_RATE = 0.002
+    HIDDEN_SIZE = 64
+    NUM_CLASSES = 3
+    INPUT_SIZE = 26
+    NUM_LAYERS = 1
+    NUM_EPOCHS = 2
+    NORMALIZATION = True
+
+    # global variables
+    best_val_accuracy = 0
+    train_losses = []
+    val_losses = []
+    val_accuracies = []
+    iterations = []
+    curr_train_loss = 0
+
+    print("Batch Size: {}\nLearning Rate: {}\nHidden Size: {}\nNumber of Layer: {}\nNumber of Epochs: {}\nNormalization:{}".format(\
+        BATCH_SIZE,LEARNING_RATE,HIDDEN_SIZE,NUM_LAYERS,NUM_EPOCHS,NORMALIZATION))
+    print("\nhidden state init with ZEROS\n")
+    try:
+        # Load the data
+        root_dir = "/data/perception-working/Geffen/avec_data/"
+        train_dataset = FusedDataset(root_dir,root_dir+"train_split.csv")
+        val_dataset = FusedDataset(root_dir,root_dir+"dev_split.csv")
+        test_dataset = FusedDataset(root_dir,root_dir+"test_split.csv")
+
+        train_loader = DataLoader(train_dataset,batch_size=BATCH_SIZE,collate_fn=my_collate_fn_fused)
+        val_loader = DataLoader(val_dataset,batch_size=BATCH_SIZE,collate_fn=my_collate_fn_fused)
+        test_loader = DataLoader(test_dataset,batch_size=BATCH_SIZE,collate_fn=my_collate_fn_fused)
+
+        # build and load the model
+        model = PMRfusionNN(INPUT_SIZE,HIDDEN_SIZE,NUM_LAYERS)
+        model.to(device)
+
+        # loss and optimization criteria
+        criterion = torch.nn.MSELoss() # --> regression now on subscore
+        optimizer = torch.optim.Adam(model.parameters(),lr=LEARNING_RATE)
+
+        # track model training time
+        start = time.time()
+
+        # ----------------------------------------------------- Training Loop -----------------------------------------------------
+        for epoch in range(NUM_EPOCHS):
+            # get the next batch
+            for i, (X_audio,X_video,lengths_audio,lengths_video,labels,idxs) in enumerate(train_loader):
+                X_audio,X_video,lengths_audio,lengths_video,labels = X_audio.to(device),X_video.to(device),lengths_audio.to(device),lengths_video.to(device),labels.to(device)
+
+                # zero the parameter gradients
+                optimizer.zero_grad()
+
+                # forward pass
+                out = model(X_audio,lengths_audio,X_video,lengths_video)
+
+                # backward pass
+                loss = criterion(out,labels)
+                if torch.isnan(loss):
+                    print("********** NAN ERROR ************")
+                    print("output:",out)
+                    print("labels:",labels)
+                    print("idxs:",idxs)
+                    exit()
+                curr_train_loss += loss.item()
+                loss.backward()
+                optimizer.step()
+                
+                # print training statistics every n batches
+                if i % 40 == 0 and i != 0:
+                    print("Train Epoch: {} Iteration: {} [{}/{} ({:.0f}%)]\t Loss: {:.6f}".format(epoch,i,i*len(X_audio),len(train_loader.dataset),100.*i/len(train_loader),loss.item()))
+                
+                # do a validation pass every 10*n batches (lots of training data so don't wait till end of epoch)
+                if i % 300 == 0 and i != 0:
+                    print("\n\n----------------- Epoch {} Iteration {} -----------------\n".format(epoch,i))
+
+                    # keep track of training and validation loss, since training forward pass takes a while do every 400 iterations instead of every epoch
+                    iterations.append(i)
+                    train_losses.append(curr_train_loss/(400)) # average training loss per batch
+                    curr_train_loss = 0
+
+                    # validation pass
+                    accuracy,val_loss = eval_fusion_model(model,val_loader,device)
+                    val_accuracies.append(accuracy)
+                    val_losses.append(val_loss)
+
+                    # save the most accuracte model up to date
+                    if accuracy > best_val_accuracy:
+                        best_val_accuracy = accuracy
+                        torch.save(model.state_dict(),output_dir+"BEST_model.pth")
+                    print("Best Accuracy: ",best_val_accuracy,"%")
+
+                    # print the time elapsed
+                    end = time.time()
+                    elapsed = end-start
+                    minutes,seconds = divmod(elapsed,60)
+                    hours,minutes = divmod(minutes,60)
+                    print("Time Elapsed: {}h {}m {}s".format(int(hours),int(minutes),int(seconds)))
+                    print("\n--------------------------------------------------------\n\n")
+
+        print("================================ Finished Training ================================")
+        torch.save(model.state_dict(),output_dir+"END_model.pth")
+        
+        # validation pass
+        accuracy,val_loss = eval_fusion_model(model,val_loader,device,True)
+        val_accuracies.append(accuracy)
+        val_losses.append(val_loss)
+
+        # save the most accuracte model up to date
+        if accuracy > best_val_accuracy:
+            best_val_accuracy = accuracy
+            torch.save(model.state_dict(),output_dir+"BEST_model.pth")
+        print("Best Accuracy: ",best_val_accuracy,"%")
+
+        # print the time elapsed
+        end = time.time()
+        elapsed = end-start
+        minutes,seconds = divmod(elapsed,60)
+        hours,minutes = divmod(minutes,60)
+        print("Time Elapsed: {}h {}m {}s".format(int(hours),int(minutes),int(seconds)))
+
+        print("Iterations:",iterations)
+        print("Val_Accuracies:",val_accuracies)
+        print("Val_Losses:",val_losses)
+        print("Train_Losses:",train_losses)
+
+
+
+    except KeyboardInterrupt:
+        torch.save(model.state_dict(),output_dir+"MID_model.pth")
+        print("================================ QUIT ================================\n Saving Model ...")
+        
+        
+        # validation pass
+        accuracy,val_loss = eval_fusion_model(model,val_loader,device)
+        val_accuracies.append(accuracy)
+        val_losses.append(val_loss)
+
+        # save the most accuracte model up to date
+        if accuracy > best_val_accuracy:
+            best_val_accuracy = accuracy
+            torch.save(model.state_dict(),output_dir+"BEST_model.pth")
+        print("Best Accuracy: ",best_val_accuracy,"%")
+
+        # print the time elapsed
+        end = time.time()
+        elapsed = end-start
+        minutes,seconds = divmod(elapsed,60)
+        hours,minutes = divmod(minutes,60)
+        print("Time Elapsed: {}h {}m {}s".format(int(hours),int(minutes),int(seconds)))
+
+        print("Iterations:",iterations)
+        print("Val_Accuracies:",val_accuracies)
+        print("Val_Losses:",val_losses)
+        print("Train_Losses:",train_losses)
+
+
+# --------------------------------------------------------------------------------------------------------------
+        
+'''Helper function to evaluate the network (used during training, validation, and testing)'''
+def eval_fusion_model(model,data_loader,device,print_idxs=False):
+    model.eval()
+    model.to(device)
+
+    eval_loss = 0
+    correct = 0
+    criterion = torch.nn.MSELoss()
+
+    all_preds = torch.tensor([])
+    all_labels = torch.tensor([],dtype=torch.int)
+    all_idxs = torch.tensor([],dtype=torch.int)
+    all_preds = all_preds.to(device)
+    all_labels = all_labels.to(device)
+    all_idxs = all_idxs.to(device)
+    with torch.no_grad():
+        for i, (X_audio,X_video,lengths_audio,lengths_video,labels,idxs) in enumerate(data_loader):
+            X_audio,X_video,lengths_audio,lengths_video,labels = X_audio.to(device),X_video.to(device),lengths_audio.to(device),lengths_video.to(device),labels.to(device)
+            
+            # forward pass
+            out = model(X_audio,lengths_audio,X_video,lengths_video)
+
+            # accumulate predictions and labels
+            # all_preds = torch.cat((all_preds,out),dim=0)
+            # all_labels = torch.cat((all_labels,labels),dim=0)
+            # all_idxs = torch.cat((all_idxs,idxs),dim=0)
+
+            # sum up the batch loss
+            loss = criterion(out,labels)
+            eval_loss += loss.item()
+
+            # get the prediction
+            # pred = out.max(1,keepdim=True)[1]
+            # correct += pred.eq(labels.view_as(pred)).sum().item()
+
+        #gen_conf_mat(all_preds,all_labels,all_idxs,print_idxs)
+        #eval_loss /= len(data_loader.dataset)
+        print("\nValidation Loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)".format(eval_loss,correct,len(data_loader.dataset),100.*correct/len(data_loader.dataset)))
+
+    model.train()
+    return 100.*correct/len(data_loader.dataset),eval_loss/len(data_loader)
+
+
+# --------------------------------------------------------------------------------------------------------------
 if __name__ == "__main__":
     train_SpeechPaceNN(sys.argv[1])
