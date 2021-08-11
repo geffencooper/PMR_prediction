@@ -150,7 +150,10 @@ class PMRfusionNN(torch.nn.Module):
         fused = torch.cat((y_audio,y_visual),dim=0)
 
         print(fused)
-        print(len(y_fused))
+        print(len(fused))
         y_fused = self.fc_fusion(fused)
+
+        print(y_fused)
+        print(len(y_fused))
 
         return y_fused 
