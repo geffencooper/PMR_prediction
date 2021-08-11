@@ -325,7 +325,7 @@ def train_PMRfusionNN(output_location):
         for epoch in range(NUM_EPOCHS):
             # get the next batch
             for i, (X_audio,X_video,lengths_audio,lengths_video,labels,idxs) in enumerate(train_loader):
-                X_audio,X_video,lengths_audio,lengths_video,labels = X_audio.to(device),X_video.to(device),lengths_audio.to(device),lengths_video.to(device),labels.to(device)
+                X_audio,X_video,labels = X_audio.to(device),X_video.to(device),labels.to(device)
 
                 # zero the parameter gradients
                 optimizer.zero_grad()
