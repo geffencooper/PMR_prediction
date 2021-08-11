@@ -70,15 +70,15 @@ class FusedDataset(Dataset):
     def __getitem__(self,idx):
         try:
             # use idx to get the metadata from the labels csv
-            patient_id,start,end,label = self.labels_frame.iloc(idx)
+            patient_id,start,end,label = self.labels_frame.iloc[idx]
 
             # get the audio features
-            audio_features = pd.read_csv(os.path.join(self.data_root_dir,str(patient_id)+"_OpenSMILE2.3.0_mfcc.csv"),sep=";",skiprows=start*100,nrows=end*100)
+            audio_features = pd.read_csv(os.path.join(self.data_root_dir,str(int(patient_id))+"_OpenSMILE2.3.0_mfcc.csv"),sep=";",skiprows=start*100,nrows=end*100)
             audio_features = audio_features.iloc[:,np.arange(2,28)]
             audio_features = torch.from_numpy(audio_features.to_numpy())
 
             # get the vidual features
-            visual_features = pd.read_csv(os.path.join(self.data_root_dir,str(patient_id)+"_OpenFace2.1.0_Pose_gaze_AUs.csv"),sep=",",skiprows=start*30,nrows=end*30)
+            visual_features = pd.read_csv(os.path.join(self.data_root_dir,str(int(patient_id))+"_OpenFace2.1.0_Pose_gaze_AUs.csv"),sep=",",skiprows=start*30,nrows=end*30)
             visual_features = visual_features.iloc[:,[4,5,6,7,8,9,16,17,26,27]]
             visual_features = torch.from_numpy(visual_features.to_numpy())
 
