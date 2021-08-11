@@ -140,9 +140,9 @@ def my_collate_fn_fused(batch):
     video_lengths = torch.LongTensor([len(x) for x in video_sequences])
 
     # get the label portion from the batch tuples
-    labels = torch.LongTensor([x[1] for x in audio_sorted_batch])
+    labels = torch.LongTensor([int(x[2]) for x in audio_sorted_batch])
 
     # get the index
-    idxs = torch.LongTensor([x[2] for x in audio_sorted_batch])
+    idxs = torch.LongTensor([x[3] for x in audio_sorted_batch])
 
     return audio_sequences_padded.float(),video_sequences_padded.float(),audio_lengths,video_lengths,labels,idxs
