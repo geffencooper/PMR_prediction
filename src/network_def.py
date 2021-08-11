@@ -86,7 +86,7 @@ class PMRfusionNN(torch.nn.Module):
         self.gru_vis = torch.nn.GRU(input_size,hidden_size,num_layers,batch_first=True)
 
         # Layer 2: FC for classification/regression after fusion
-        self.fc_fusion = torch.nn.Linear(26+10,1)
+        self.fc_fusion = torch.nn.Linear(2*hidden_size,1)
 
     # initialize the hidden state at the start of each forward pass
     def init_hidden(self,batch_size):
@@ -143,7 +143,7 @@ class PMRfusionNN(torch.nn.Module):
 
         # ============== concatenate and pass through FC ==============
         
-        fused = torch.cat((y_audio,y_visual))
+        fused = torch.cat((y_audio,y_visual),dim=1)
 
         y_fused = self.fc_fusion(fused)
 
