@@ -481,4 +481,5 @@ def eval_fusion_model(model,data_loader,device,print_idxs=False):
 
 # --------------------------------------------------------------------------------------------------------------
 if __name__ == "__main__":
-    train_SpeechPaceNN(sys.argv[1])
+    #train_SpeechPaceNN(sys.argv[1])
+    train_PMRfusionNN(sys.argv[1])
