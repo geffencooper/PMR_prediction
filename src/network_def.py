@@ -142,7 +142,9 @@ class PMRfusionNN(torch.nn.Module):
             y_visual[i,:] = out[i,val-1,:]
 
         # ============== concatenate and pass through FC ==============
-        
+        print("Audio\n",y_audio)
+        print("Video\n",y_visual)
+        exit()
         fused = torch.cat((y_audio,y_visual),dim=0)
 
         print("passing through fc")
