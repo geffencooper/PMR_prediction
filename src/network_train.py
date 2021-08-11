@@ -283,7 +283,7 @@ def train_PMRfusionNN(output_location):
     LEARNING_RATE = 0.002
     HIDDEN_SIZE = 64
     NUM_CLASSES = 3
-    INPUT_SIZE = 26
+    INPUT_SIZE = 10
     NUM_LAYERS = 1
     NUM_EPOCHS = 2
     NORMALIZATION = True
