@@ -105,7 +105,7 @@ def train_SpeechPaceNN(output_location):
 
                     # keep track of training and validation loss, since training forward pass takes a while do every 400 iterations instead of every epoch
                     iterations.append(i)
-                    train_losses.append(curr_train_loss/(400)) # average training loss per batch
+                    train_losses.append(curr_train_loss/(300)) # average training loss per batch
                     curr_train_loss = 0
 
                     # validation pass
@@ -346,16 +346,16 @@ def train_PMRfusionNN(output_location):
                 optimizer.step()
                 
                 # print training statistics every n batches
-                if i % 40 == 0 and i != 0:
+                if i % 1 == 0 and i != 0:
                     print("Train Epoch: {} Iteration: {} [{}/{} ({:.0f}%)]\t Loss: {:.6f}".format(epoch,i,i*len(X_audio),len(train_loader.dataset),100.*i/len(train_loader),loss.item()))
                 
                 # do a validation pass every 10*n batches (lots of training data so don't wait till end of epoch)
-                if i % 300 == 0 and i != 0:
+                if i % 30 == 0 and i != 0:
                     print("\n\n----------------- Epoch {} Iteration {} -----------------\n".format(epoch,i))
 
                     # keep track of training and validation loss, since training forward pass takes a while do every 400 iterations instead of every epoch
                     iterations.append(i)
-                    train_losses.append(curr_train_loss/(400)) # average training loss per batch
+                    train_losses.append(curr_train_loss/(30)) # average training loss per batch
                     curr_train_loss = 0
 
                     # validation pass
