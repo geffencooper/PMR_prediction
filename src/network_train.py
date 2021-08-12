@@ -303,7 +303,7 @@ def train_PMRfusionNN(output_location):
         # Load the data
         root_dir = "/data/perception-working/Geffen/avec_data/"
         train_dataset = FusedDataset(root_dir,root_dir+"even_train_metadata.csv")
-        val_dataset = FusedDataset(root_dir,root_dir+"even_.csv")
+        val_dataset = FusedDataset(root_dir,root_dir+"even_val_metadata.csv")
         #test_dataset = FusedDataset(root_dir,root_dir+"test_split.csv")
 
         train_loader = DataLoader(train_dataset,batch_size=BATCH_SIZE,collate_fn=my_collate_fn_fused)
