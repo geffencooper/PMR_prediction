@@ -31,7 +31,7 @@ def train_SpeechPaceNN(output_location):
     BATCH_SIZE = 64
     LEARNING_RATE = 0.002
     HIDDEN_SIZE = 64
-    NUM_CLASSES = 3
+    NUM_CLASSES = 2
     INPUT_SIZE = 26
     NUM_LAYERS = 1
     NUM_EPOCHS = 2
