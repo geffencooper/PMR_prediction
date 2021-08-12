@@ -351,7 +351,7 @@ def train_PMRfusionNN(output_location):
                     print("Train Epoch: {} Iteration: {} [{}/{} ({:.0f}%)]\t Loss: {:.6f}".format(epoch,i,i*len(X_audio),len(train_loader.dataset),100.*i/len(train_loader),loss.item()))
                 
                 # do a validation pass every 10*n batches (lots of training data so don't wait till end of epoch)
-                if i % 30 == 0 and i != 0:
+                if i % 3 == 0 and i != 0:
                     print("\n\n----------------- Epoch {} Iteration {} -----------------\n".format(epoch,i))
 
                     # keep track of training and validation loss, since training forward pass takes a while do every 400 iterations instead of every epoch
@@ -458,7 +458,7 @@ def eval_fusion_model(model,data_loader,device,print_idxs=False):
     all_idxs = all_idxs.to(device)
     with torch.no_grad():
         for i, (X_audio,X_video,lengths_audio,lengths_video,labels,idxs) in enumerate(data_loader):
-            X_audio,X_video,labels = X_audio.to(device),X_video.to(device),labels.to(device)
+            X_audio,X_video,labels,idxs = X_audio.to(device),X_video.to(device),labels.to(device),idxs.to(device)
             
             # forward pass
             out = model(X_audio,lengths_audio,X_video,lengths_video)
