@@ -360,8 +360,8 @@ def train_PMRfusionNN(output_location):
                     curr_train_loss = 0
 
                     # validation pass
-                    #accuracy,val_loss = eval_fusion_model(model,val_loader,device)
-                    accuracy,val_loss = eval_model(model,val_loader,device)
+                    accuracy,val_loss = eval_fusion_model(model,val_loader,device)
+                    #accuracy,val_loss = eval_model(model,val_loader,device)
                     val_accuracies.append(accuracy)
                     val_losses.append(val_loss)
 
@@ -383,8 +383,8 @@ def train_PMRfusionNN(output_location):
         torch.save(model.state_dict(),output_dir+"END_model.pth")
         
         # validation pass
-        #accuracy,val_loss = eval_fusion_model(model,val_loader,device,True)
-        accuracy,val_loss = eval_model(model,val_loader,device,True)
+        accuracy,val_loss = eval_fusion_model(model,val_loader,device,True)
+        #accuracy,val_loss = eval_model(model,val_loader,device,True)
         val_accuracies.append(accuracy)
         val_losses.append(val_loss)
 
@@ -414,8 +414,8 @@ def train_PMRfusionNN(output_location):
         
         
         # validation pass
-        #accuracy,val_loss = eval_fusion_model(model,val_loader,device)
-        accuracy,val_loss = eval_model(model,val_loader,device)
+        accuracy,val_loss = eval_fusion_model(model,val_loader,device)
+        #accuracy,val_loss = eval_model(model,val_loader,device)
         val_accuracies.append(accuracy)
         val_losses.append(val_loss)
 
@@ -464,9 +464,9 @@ def eval_fusion_model(model,data_loader,device,print_idxs=False):
             out = model(X_audio,lengths_audio,X_video,lengths_video)
 
             # accumulate predictions and labels
-            # all_preds = torch.cat((all_preds,out),dim=0)
-            # all_labels = torch.cat((all_labels,labels),dim=0)
-            # all_idxs = torch.cat((all_idxs,idxs),dim=0)
+            all_preds = torch.cat((all_preds,out),dim=0)
+            all_labels = torch.cat((all_labels,labels),dim=0)
+            all_idxs = torch.cat((all_idxs,idxs),dim=0)
 
             # sum up the batch loss
             loss = criterion(out,labels)
@@ -476,8 +476,8 @@ def eval_fusion_model(model,data_loader,device,print_idxs=False):
             pred = out.max(1,keepdim=True)[1]
             correct += pred.eq(labels.view_as(pred)).sum().item()
 
-        #gen_conf_mat(all_preds,all_labels,all_idxs,print_idxs)
-        #eval_loss /= len(data_loader.dataset)
+        gen_conf_mat(all_preds,all_labels,all_idxs,print_idxs)
+        eval_loss /= len(data_loader.dataset)
         print("\nValidation Loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)".format(eval_loss,correct,len(data_loader.dataset),100.*correct/len(data_loader.dataset)))
 
     model.train()
