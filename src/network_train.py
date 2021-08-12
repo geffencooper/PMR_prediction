@@ -282,7 +282,7 @@ def train_PMRfusionNN(output_location):
     BATCH_SIZE = 32
     LEARNING_RATE = 0.002
     HIDDEN_SIZE = 64
-    NUM_CLASSES = 4
+    NUM_CLASSES = 2
     INPUT_SIZE = 10
     NUM_LAYERS = 1
     NUM_EPOCHS = 2
@@ -302,8 +302,8 @@ def train_PMRfusionNN(output_location):
     try:
         # Load the data
         root_dir = "/data/perception-working/Geffen/avec_data/"
-        train_dataset = FusedDataset(root_dir,root_dir+"even_train_metadata.csv")
-        val_dataset = FusedDataset(root_dir,root_dir+"even_val_metadata.csv")
+        train_dataset = FusedDataset(root_dir,root_dir+"binary_train_metadata.csv")
+        val_dataset = FusedDataset(root_dir,root_dir+"binary_val_metadata.csv")
         #test_dataset = FusedDataset(root_dir,root_dir+"test_split.csv")
 
         train_loader = DataLoader(train_dataset,batch_size=BATCH_SIZE,collate_fn=my_collate_fn_fused)
@@ -476,7 +476,7 @@ def eval_fusion_model(model,data_loader,device,print_idxs=False):
             pred = out.max(1,keepdim=True)[1]
             correct += pred.eq(labels.view_as(pred)).sum().item()
 
-        gen_conf_mat(all_preds,all_labels,all_idxs,4,print_idxs)
+        gen_conf_mat(all_preds,all_labels,all_idxs,2,print_idxs)
         eval_loss /= len(data_loader.dataset)
         print("\nValidation Loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)".format(eval_loss,correct,len(data_loader.dataset),100.*correct/len(data_loader.dataset)))
 
