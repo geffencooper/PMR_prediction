@@ -279,10 +279,10 @@ def train_PMRfusionNN(output_location):
     print("\nHyperparameters:")
 
     # hyperparameters
-    BATCH_SIZE = 64
+    BATCH_SIZE = 32
     LEARNING_RATE = 0.002
     HIDDEN_SIZE = 64
-    NUM_CLASSES = 3
+    NUM_CLASSES = 4
     INPUT_SIZE = 10
     NUM_LAYERS = 1
     NUM_EPOCHS = 2
@@ -302,8 +302,8 @@ def train_PMRfusionNN(output_location):
     try:
         # Load the data
         root_dir = "/data/perception-working/Geffen/avec_data/"
-        train_dataset = FusedDataset(root_dir,root_dir+"train_metadata.csv")
-        val_dataset = FusedDataset(root_dir,root_dir+"val_metadata.csv")
+        train_dataset = FusedDataset(root_dir,root_dir+"even_train_metadata.csv")
+        val_dataset = FusedDataset(root_dir,root_dir+"even_.csv")
         #test_dataset = FusedDataset(root_dir,root_dir+"test_split.csv")
 
         train_loader = DataLoader(train_dataset,batch_size=BATCH_SIZE,collate_fn=my_collate_fn_fused)
@@ -311,11 +311,12 @@ def train_PMRfusionNN(output_location):
         #test_loader = DataLoader(test_dataset,batch_size=BATCH_SIZE,collate_fn=my_collate_fn_fused)
 
         # build and load the model
-        model = PMRfusionNN(INPUT_SIZE,HIDDEN_SIZE,NUM_LAYERS)
+        model = PMRfusionNN(INPUT_SIZE,HIDDEN_SIZE,NUM_LAYERS,NUM_CLASSES)
         model.to(device)
 
         # loss and optimization criteria
-        criterion = torch.nn.MSELoss() # --> regression now on subscore
+        #criterion = torch.nn.MSELoss() # --> regression now on subscore
+        criterion = torch.nn.CrossEntropyLoss()
         optimizer = torch.optim.Adam(model.parameters(),lr=LEARNING_RATE)
 
         # track model training time
@@ -359,7 +360,8 @@ def train_PMRfusionNN(output_location):
                     curr_train_loss = 0
 
                     # validation pass
-                    accuracy,val_loss = eval_fusion_model(model,val_loader,device)
+                    #accuracy,val_loss = eval_fusion_model(model,val_loader,device)
+                    accuracy,val_loss = eval_model(model,val_loader,device)
                     val_accuracies.append(accuracy)
                     val_losses.append(val_loss)
 
@@ -381,7 +383,8 @@ def train_PMRfusionNN(output_location):
         torch.save(model.state_dict(),output_dir+"END_model.pth")
         
         # validation pass
-        accuracy,val_loss = eval_fusion_model(model,val_loader,device,True)
+        #accuracy,val_loss = eval_fusion_model(model,val_loader,device,True)
+        accuracy,val_loss = eval_model(model,val_loader,device,True)
         val_accuracies.append(accuracy)
         val_losses.append(val_loss)
 
@@ -411,7 +414,8 @@ def train_PMRfusionNN(output_location):
         
         
         # validation pass
-        accuracy,val_loss = eval_fusion_model(model,val_loader,device)
+        #accuracy,val_loss = eval_fusion_model(model,val_loader,device)
+        accuracy,val_loss = eval_model(model,val_loader,device)
         val_accuracies.append(accuracy)
         val_losses.append(val_loss)
 
@@ -443,7 +447,8 @@ def eval_fusion_model(model,data_loader,device,print_idxs=False):
 
     eval_loss = 0
     correct = 0
-    criterion = torch.nn.MSELoss()
+    #criterion = torch.nn.MSELoss()
+    criterion = torch.nn.CrossEntropyLoss()
 
     all_preds = torch.tensor([])
     all_labels = torch.tensor([],dtype=torch.int)
@@ -468,8 +473,8 @@ def eval_fusion_model(model,data_loader,device,print_idxs=False):
             eval_loss += loss.item()
 
             # get the prediction
-            # pred = out.max(1,keepdim=True)[1]
-            # correct += pred.eq(labels.view_as(pred)).sum().item()
+            pred = out.max(1,keepdim=True)[1]
+            correct += pred.eq(labels.view_as(pred)).sum().item()
 
         #gen_conf_mat(all_preds,all_labels,all_idxs,print_idxs)
         #eval_loss /= len(data_loader.dataset)

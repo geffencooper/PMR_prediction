@@ -66,7 +66,7 @@ class SpeechPaceNN(torch.nn.Module):
 # ==================================================================================
 
 class PMRfusionNN(torch.nn.Module):
-    def __init__(self,input_size,hidden_size,num_layers):
+    def __init__(self,input_size,hidden_size,num_layers,num_classes):
         super(PMRfusionNN,self).__init__()
         
         self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -86,7 +86,7 @@ class PMRfusionNN(torch.nn.Module):
         self.gru_vis = torch.nn.GRU(input_size,hidden_size,num_layers,batch_first=True)
 
         # Layer 2: FC for classification/regression after fusion
-        self.fc_fusion = torch.nn.Linear(2*hidden_size,1)
+        self.fc_fusion = torch.nn.Linear(2*hidden_size,num_classes)
 
     # initialize the hidden state at the start of each forward pass
     def init_hidden(self,batch_size):
@@ -147,4 +147,6 @@ class PMRfusionNN(torch.nn.Module):
 
         y_fused = self.fc_fusion(fused)
 
-        return y_fused 
+        y = torch.nn.functional.softmax(y_fused,dim=1)
+
+        return y 
