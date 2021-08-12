@@ -458,7 +458,7 @@ def eval_fusion_model(model,data_loader,device,print_idxs=False):
     all_idxs = all_idxs.to(device)
     with torch.no_grad():
         for i, (X_audio,X_video,lengths_audio,lengths_video,labels,idxs) in enumerate(data_loader):
-            X_audio,X_video,lengths_audio,lengths_video,labels = X_audio.to(device),X_video.to(device),lengths_audio.to(device),lengths_video.to(device),labels.to(device)
+            X_audio,X_video,labels = X_audio.to(device),X_video.to(device),labels.to(device)
             
             # forward pass
             out = model(X_audio,lengths_audio,X_video,lengths_video)
