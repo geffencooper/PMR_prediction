@@ -82,6 +82,8 @@ class FusedDataset(Dataset):
             visual_features = visual_features.iloc[:,[4,5,6,7,8,9,16,17,26,27]]
             visual_features = torch.from_numpy(visual_features.to_numpy())
 
+            if label > 0:
+                label = 1
             label = torch.tensor(label)
 
             return audio_features,visual_features,label,idx
