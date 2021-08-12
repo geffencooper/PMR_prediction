@@ -221,7 +221,7 @@ def eval_model(model,data_loader,device,print_idxs=False):
             pred = out.max(1,keepdim=True)[1]
             correct += pred.eq(labels.view_as(pred)).sum().item()
 
-        gen_conf_mat(all_preds,all_labels,all_idxs,print_idxs)
+        gen_conf_mat(all_preds,all_labels,all_idxs,3,print_idxs)
         #eval_loss /= len(data_loader.dataset)
         print("\nValidation Loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)".format(eval_loss,correct,len(data_loader.dataset),100.*correct/len(data_loader.dataset)))
 
@@ -233,7 +233,7 @@ def eval_model(model,data_loader,device,print_idxs=False):
 
 '''Helper function to create a confusion matrix of classification results'''
 # this gets called by eval_model with the predictions and labels
-def gen_conf_mat(predictions,labels,idxs,print_idxs=False):
+def gen_conf_mat(predictions,labels,idxs,num_classes,print_idxs=False):
     # get the prediction from the max output
     preds = predictions.argmax(dim=1)
 
@@ -241,7 +241,7 @@ def gen_conf_mat(predictions,labels,idxs,print_idxs=False):
     stacked = torch.stack((preds,labels),dim=1)
 
     # create the confusion matrix
-    conf_mat = torch.zeros(3,3,dtype=torch.int64)
+    conf_mat = torch.zeros(num_classes,num_classes,dtype=torch.int64)
 
     if print_idxs == True:
         incorrect = []
@@ -476,7 +476,7 @@ def eval_fusion_model(model,data_loader,device,print_idxs=False):
             pred = out.max(1,keepdim=True)[1]
             correct += pred.eq(labels.view_as(pred)).sum().item()
 
-        gen_conf_mat(all_preds,all_labels,all_idxs,print_idxs)
+        gen_conf_mat(all_preds,all_labels,all_idxs,4,print_idxs)
         eval_loss /= len(data_loader.dataset)
         print("\nValidation Loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)".format(eval_loss,correct,len(data_loader.dataset),100.*correct/len(data_loader.dataset)))
 
