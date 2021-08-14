@@ -95,6 +95,8 @@ class FusedDataset(Dataset):
             print("type:",type(audio_features.to_numpy()))
             print(audio_features)
         
+    def get_labels(self):
+        return self.labels_frame["PHQ_Moving_Score"].values
 
 # --------------------------------------------------------------------------------------------------------------
         
