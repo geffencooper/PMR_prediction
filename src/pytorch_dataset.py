@@ -78,10 +78,11 @@ class FusedDataset(Dataset):
             audio_features = torch.from_numpy(audio_features.to_numpy())
 
             # get the vidual features
-            visual_features = pd.read_csv(os.path.join(self.data_root_dir,str(int(patient_id))+"_OpenFace2.1.0_Pose_gaze_AUs.csv"),sep=",",skiprows=int(start*30),nrows=int(end*30))
-            visual_features = visual_features.iloc[:,[4,5,6,7,8,9,16,17,26,27]]
+            visual_features = pd.read_csv(os.path.join(self.data_root_dir,str(int(patient_id))+"_OpenFace2.1.0_Pose_gaze_AUs_deltas.csv"),sep=",",skiprows=int(start*30),nrows=int(end*30))
+            visual_features = visual_features.iloc[:,np.arange(1,24)]
             visual_features = torch.from_numpy(visual_features.to_numpy())
 
+            # merge 1,2,3 into a class
             if label > 0:
                 label = 1
             label = torch.tensor(label)
