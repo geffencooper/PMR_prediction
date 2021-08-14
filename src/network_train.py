@@ -329,9 +329,6 @@ def train_PMRfusionNN(output_location):
             for i, (X_audio,X_video,lengths_audio,lengths_video,labels,idxs) in enumerate(train_loader):
                 X_audio,X_video,labels = X_audio.to(device),X_video.to(device),labels.to(device)
 
-                print("labels:",labels)
-                print("idxs:",idxs)
-                exit()
                 # zero the parameter gradients
                 optimizer.zero_grad()
 
