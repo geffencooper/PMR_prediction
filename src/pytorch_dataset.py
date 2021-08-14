@@ -94,6 +94,10 @@ class FusedDataset(Dataset):
             print("index:",idx)
             print("type:",type(audio_features.to_numpy()))
             print(audio_features)
+
+        except pd.errors.EmptyDataError:
+            print(patient_id,start,end,label)
+            print(os.path.join(self.data_root_dir,str(int(patient_id))+"_OpenSMILE2.3.0_mfcc.csv"))
         
     def get_labels(self):
         return self.labels_frame["PHQ_Moving_Score"].values
