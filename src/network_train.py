@@ -304,12 +304,12 @@ def train_PMRfusionNN(output_location):
     try:
         # Load the data
         root_dir = "/data/perception-working/Geffen/avec_data/"
-        train_dataset = FusedDataset(root_dir,root_dir+"train_metadata2.csv")
-        val_dataset = FusedDataset(root_dir,root_dir+"val_metadata2.csv")
+        train_dataset = FusedDataset(root_dir,root_dir+"binary_train_metadata.csv")
+        val_dataset = FusedDataset(root_dir,root_dir+"binary_val_metadata.csv")
         #test_dataset = FusedDataset(root_dir,root_dir+"test_split.csv")
 
-        train_loader = DataLoader(train_dataset,batch_size=BATCH_SIZE,collate_fn=my_collate_fn_fused,sampler=ImbalancedDatasetSampler(train_dataset))
-        val_loader = DataLoader(val_dataset,batch_size=BATCH_SIZE,collate_fn=my_collate_fn_fused,sampler=ImbalancedDatasetSampler(val_dataset))
+        train_loader = DataLoader(train_dataset,batch_size=BATCH_SIZE,collate_fn=my_collate_fn_fused)
+        val_loader = DataLoader(val_dataset,batch_size=BATCH_SIZE,collate_fn=my_collate_fn_fused)
         #test_loader = DataLoader(test_dataset,batch_size=BATCH_SIZE,collate_fn=my_collate_fn_fused)
 
         # build and load the model
