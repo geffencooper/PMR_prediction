@@ -61,6 +61,8 @@ class FusedDataset(Dataset):
     def __init__(self,data_root_dir,labels_csv_path):
         self.data_root_dir = data_root_dir
         self.labels_frame = pd.read_csv(labels_csv_path) # no index column because using column 0 --> tells us which patient ids in the split
+        print(labels_csv_path)
+        print(self.labels_frame["PHQ_Moving_Score"].values[2891])
         #self.detailed_labels_frame = pd.read_csv(os.join(data_root_dir,"Detailed_PHQ8_Labels.csv")) # --> tells us the moving subscore
         #self.all_labels = torch.from_numpy(self.labels_frame["label"].values)
 
