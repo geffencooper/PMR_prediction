@@ -112,7 +112,7 @@ class FusedDataset(Dataset):
         return labels
 
     def get_dist(self):
-        labels =  self.labels_frame["PHQ_Moving_Score"].values=
+        labels =  self.labels_frame["PHQ_Moving_Score"].values
         class_hist = [0,0,0,0]
         for l in labels:
             class_hist[l]+=1
