@@ -71,13 +71,13 @@ class FusedDataset(Dataset):
         try:
             # use idx to get the metadata from the labels csv
             patient_id,start,end,label = self.labels_frame.iloc[idx]
-            #print("patient,idx,start,end,label:", patient_id,idx,start,end,label)
+            print("patient,idx,start,end,label:", patient_id,idx,start,end,label)
 
             # get the audio features
             audio_features = pd.read_csv(os.path.join(self.data_root_dir,str(int(patient_id))+"_OpenSMILE2.3.0_mfcc.csv"),sep=";",skiprows=int(start*100),nrows=int(end*100))
             audio_features = audio_features.iloc[:,np.arange(2,28)]
             audio_features = torch.from_numpy(audio_features.to_numpy())
-            #print("audio features len:",len(audio_features))
+            print("audio features len:",len(audio_features))
 
             # get the vidual features
             visual_features = pd.read_csv(os.path.join(self.data_root_dir,str(int(patient_id))+"_OpenFace2.1.0_Pose_gaze_AUs_deltas.csv"),sep=",",skiprows=int(start*30),nrows=int(end*30))
@@ -137,6 +137,10 @@ def my_collate_fn(batch):
 # the batch parameter is a list of (data,label) tuples
 def my_collate_fn_fused(batch):
     try:
+        print("batch[0]",batch[0])
+        print("batch[0][0]",batch[0][0])
+        print("batch[0][0].shape",batch[0][0].shape)
+        exit()
         # sort the tuples in the batch based on the length of the data portion (descending order)
         audio_sorted_batch = sorted(batch,key=lambda x: x[0].shape[0],reverse=True)
         video_sorted_batch = sorted(batch,key=lambda x: x[1].shape[0],reverse=True)
