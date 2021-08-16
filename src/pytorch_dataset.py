@@ -105,6 +105,7 @@ class FusedDataset(Dataset):
         
     def get_labels(self):
         labels =  self.labels_frame["PHQ_Moving_Score"].values
+        print(labels[2887])
         # labels 1,2,3 become a single class
         for i,l in enumerate(labels):
             if l > 0:
