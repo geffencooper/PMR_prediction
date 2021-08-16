@@ -104,21 +104,19 @@ class FusedDataset(Dataset):
             print(os.path.join(self.data_root_dir,str(int(patient_id))+"_OpenSMILE2.3.0_mfcc.csv"))
         
     def get_labels(self):
+        print(self.get_dist())
         labels =  self.labels_frame["PHQ_Moving_Score"].values
         
         # labels 1,2,3 become a single class
         for i,l in enumerate(labels):
             if l > 0:
                 labels[i] = 1
+        print(self.get_dist())
         return labels
 
     def get_dist(self):
         labels =  self.labels_frame["PHQ_Moving_Score"].values
-        print(labels[2887])
-        import sys
-        np.set_printoptions(threshold=sys.maxsize)
-        print(labels)
-        print(labels[2887])
+        
         class_hist = [0,0,0,0]
         for l in labels:
             class_hist[l]+=1

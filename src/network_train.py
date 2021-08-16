@@ -499,7 +499,6 @@ if __name__ == "__main__":
     # Load the data
     root_dir = "/data/perception-working/Geffen/avec_data/"
     val_dataset = FusedDataset(root_dir,root_dir+"val_metadata.csv")
-    print("label distribution:",val_dataset.get_dist())
     val_loader = DataLoader(val_dataset,batch_size=32,collate_fn=my_collate_fn_fused,sampler=ImbalancedDatasetSampler(val_dataset))
 
     print("validation set stats:")
