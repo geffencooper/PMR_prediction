@@ -276,6 +276,7 @@ def train_PMRfusionNN(output_location):
 
     # print model training info
     print("\n\n\n================================ Start Training ================================")
+    print("\nModel Name: PMR FUSION")
     print("\nDevice:",torch.cuda.current_device()," ----> ",torch.cuda.get_device_name(torch.cuda.current_device()))
     print("\nHyperparameters:")
 

@@ -132,28 +132,31 @@ def my_collate_fn(batch):
 '''Helper function to create batches'''
 # the batch parameter is a list of (data,label) tuples
 def my_collate_fn_fused(batch):
-    print("batch:",batch)
-    print("batch[0]:",batch[0])
-    # sort the tuples in the batch based on the length of the data portion (descending order)
-    audio_sorted_batch = sorted(batch,key=lambda x: x[0].shape[0],reverse=True)
-    video_sorted_batch = sorted(batch,key=lambda x: x[1].shape[0],reverse=True)
+    try:
+        # sort the tuples in the batch based on the length of the data portion (descending order)
+        audio_sorted_batch = sorted(batch,key=lambda x: x[0].shape[0],reverse=True)
+        video_sorted_batch = sorted(batch,key=lambda x: x[1].shape[0],reverse=True)
 
-    # get the data portion from the batch tuples
-    audio_sequences = [x[0] for x in audio_sorted_batch]
-    video_sequences = [x[1] for x in video_sorted_batch]
+        # get the data portion from the batch tuples
+        audio_sequences = [x[0] for x in audio_sorted_batch]
+        video_sequences = [x[1] for x in video_sorted_batch]
 
-    # pad the shorter sequences with zeros
-    audio_sequences_padded = rnn_utils.pad_sequence(audio_sequences,batch_first=True)
-    video_sequences_padded = rnn_utils.pad_sequence(video_sequences,batch_first=True)
+        # pad the shorter sequences with zeros
+        audio_sequences_padded = rnn_utils.pad_sequence(audio_sequences,batch_first=True)
+        video_sequences_padded = rnn_utils.pad_sequence(video_sequences,batch_first=True)
 
-    # store the true length of the sequences
-    audio_lengths = torch.LongTensor([len(x) for x in audio_sequences])
-    video_lengths = torch.LongTensor([len(x) for x in video_sequences])
+        # store the true length of the sequences
+        audio_lengths = torch.LongTensor([len(x) for x in audio_sequences])
+        video_lengths = torch.LongTensor([len(x) for x in video_sequences])
 
-    # get the label portion from the batch tuples
-    labels = torch.LongTensor([int(x[2]) for x in audio_sorted_batch])
+        # get the label portion from the batch tuples
+        labels = torch.LongTensor([int(x[2]) for x in audio_sorted_batch])
 
-    # get the index
-    idxs = torch.LongTensor([x[3] for x in audio_sorted_batch])
+        # get the index
+        idxs = torch.LongTensor([x[3] for x in audio_sorted_batch])
 
-    return audio_sequences_padded.float(),video_sequences_padded.float(),audio_lengths,video_lengths,labels,idxs
+        return audio_sequences_padded.float(),video_sequences_padded.float(),audio_lengths,video_lengths,labels,idxs
+
+    except TypeError:
+        print("batch:",batch)
+        print("batch[0][0]:",batch[0][0].shape[0])
