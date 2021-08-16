@@ -304,8 +304,8 @@ def train_PMRfusionNN(output_location):
     try:
         # Load the data
         root_dir = "/data/perception-working/Geffen/avec_data/"
-        train_dataset = FusedDataset(root_dir,root_dir+"train_metadata.csv")
-        val_dataset = FusedDataset(root_dir,root_dir+"val_metadata.csv")
+        train_dataset = FusedDataset(root_dir,root_dir+"train_metadata2.csv")
+        val_dataset = FusedDataset(root_dir,root_dir+"val_metadata2.csv")
         #test_dataset = FusedDataset(root_dir,root_dir+"test_split.csv")
 
         train_loader = DataLoader(train_dataset,batch_size=BATCH_SIZE,collate_fn=my_collate_fn_fused,sampler=ImbalancedDatasetSampler(train_dataset))
@@ -495,22 +495,7 @@ def eval_fusion_model(model,data_loader,device,print_idxs=False):
 # --------------------------------------------------------------------------------------------------------------
 if __name__ == "__main__":
     #train_SpeechPaceNN(sys.argv[1])
-    #train_PMRfusionNN(sys.argv[1])
-    # Load the data
-    root_dir = "/data/perception-working/Geffen/avec_data/"
-    val_dataset = FusedDataset(root_dir,root_dir+"val_metadata.csv")
-    val_loader = DataLoader(val_dataset,batch_size=32,collate_fn=my_collate_fn_fused,sampler=ImbalancedDatasetSampler(val_dataset))
+    train_PMRfusionNN(sys.argv[1])
 
-    print("validation set stats:")
-    print("length:", len(val_dataset))
-    print("label distribution:",val_dataset.get_dist())
-
-    dist = [0,0]
-    for i, (X_audio,X_video,lengths_audio,lengths_video,labels,idxs) in enumerate(val_loader):
-        for l in labels:
-            dist[l]+=1
-        print("curr dist:",dist)
-        print("idxs",idxs)
-        print("labels",labels)
 
 
