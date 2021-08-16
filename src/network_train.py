@@ -292,7 +292,7 @@ def train_PMRfusionNN(output_location,gpu_instance):
     NUM_CLASSES = 2
     INPUT_SIZE = 23
     NUM_LAYERS = 1
-    NUM_EPOCHS = 2
+    NUM_EPOCHS = 3
     NORMALIZATION = True
 
     # global variables
