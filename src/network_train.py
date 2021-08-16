@@ -481,6 +481,7 @@ def eval_fusion_model(model,data_loader,device,print_idxs=False):
             # get the prediction
             pred = out.max(1,keepdim=True)[1]
             correct += pred.eq(labels.view_as(pred)).sum().item()
+            print(i)
 
         print("validation computation time:",(time.time()-val_start)/60," minutes")
         gen_conf_mat(all_preds,all_labels,all_idxs,2,print_idxs)
