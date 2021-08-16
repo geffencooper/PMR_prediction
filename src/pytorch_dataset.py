@@ -132,6 +132,8 @@ def my_collate_fn(batch):
 '''Helper function to create batches'''
 # the batch parameter is a list of (data,label) tuples
 def my_collate_fn_fused(batch):
+    print("batch:",batch)
+    print("batch[0]:",batch[0])
     # sort the tuples in the batch based on the length of the data portion (descending order)
     audio_sorted_batch = sorted(batch,key=lambda x: x[0].shape[0],reverse=True)
     video_sorted_batch = sorted(batch,key=lambda x: x[1].shape[0],reverse=True)
