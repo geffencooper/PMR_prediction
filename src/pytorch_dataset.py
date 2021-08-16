@@ -114,6 +114,7 @@ class FusedDataset(Dataset):
 
     def get_dist(self):
         labels =  self.labels_frame["PHQ_Moving_Score"].values
+        print(labels[2887])
         import sys
         np.set_printoptions(threshold=sys.maxsize)
         print(labels)
