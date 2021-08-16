@@ -116,6 +116,8 @@ class FusedDataset(Dataset):
         print(labels)
         class_hist = [0,0,0,0]
         for l in labels:
+            if l == 2:
+                print("label 2")
             class_hist[l]+=1
         return class_hist
 
