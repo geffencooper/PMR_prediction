@@ -75,7 +75,7 @@ class PMRfusionNN(torch.nn.Module):
         self.hidden_size = hidden_size # user defined hyperparameter
         self.num_layers = num_layers # stacked layers
 
-        self.pace_net = SpeechPaceNN(26,64,1,3)
+        self.pace_net = SpeechPaceNN(26,64,1,3,gpu_instance)
         self.pace_net.load_state_dict(torch.load('../models/2021-08-06_17-21-36/BEST_model.pth'))
 
         for param in self.pace_net.parameters():
