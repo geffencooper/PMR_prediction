@@ -510,5 +510,7 @@ if __name__ == "__main__":
         for l in labels:
             dist[l]+=1
         print("curr dist:",dist,"idxs",idxs)
+        print("idxs",idxs)
+        print("labels",labels)
 
 

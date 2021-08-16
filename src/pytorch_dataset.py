@@ -104,7 +104,6 @@ class FusedDataset(Dataset):
             print(os.path.join(self.data_root_dir,str(int(patient_id))+"_OpenSMILE2.3.0_mfcc.csv"))
         
     def get_labels(self):
-        print(self.get_dist())
         labels =  np.copy(self.labels_frame["PHQ_Moving_Score"].values)
         
         # labels 1,2,3 become a single class
