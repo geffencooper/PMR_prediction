@@ -117,6 +117,7 @@ class FusedDataset(Dataset):
         import sys
         np.set_printoptions(threshold=sys.maxsize)
         print(labels)
+        print(labels[2887])
         class_hist = [0,0,0,0]
         for l in labels:
             class_hist[l]+=1
