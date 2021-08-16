@@ -509,7 +509,7 @@ if __name__ == "__main__":
     for i, (X_audio,X_video,lengths_audio,lengths_video,labels,idxs) in enumerate(val_loader):
         for l in labels:
             dist[l]+=1
-        print("curr dist:",dist,"idxs",idxs)
+        print("curr dist:",dist)
         print("idxs",idxs)
         print("labels",labels)
 
