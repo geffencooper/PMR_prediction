@@ -111,6 +111,14 @@ class FusedDataset(Dataset):
                 labels[i] = 1
         return labels
 
+    def get_dist(self):
+        labels =  self.labels_frame["PHQ_Moving_Score"].
+        class_hist = [0,0,0,0]
+        for l in labels:
+            class_hist[l]+=1
+        return class_hist
+
+
 # --------------------------------------------------------------------------------------------------------------
         
 '''Helper function to create batches'''
