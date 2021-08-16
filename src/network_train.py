@@ -390,7 +390,7 @@ def train_PMRfusionNN(output_location,gpu_instance):
                     hours,minutes = divmod(minutes,60)
                     print("Time Elapsed: {}h {}m {}s".format(int(hours),int(minutes),int(seconds)))
                     print("\n--------------------------------------------------------\n\n")
-                num_iter+=1
+                num_iter = i
 
         print("================================ Finished Training ================================")
         torch.save(model.state_dict(),output_dir+"END_model.pth")
