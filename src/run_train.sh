@@ -1,13 +1,14 @@
 #!/bin/bash
 
-if [[ $1 -eq 0 ]]; then
+if [[ $1 == "" ]]; then
     echo "ERROR: Training Session Name not provided as an argument"
     echo "USAGE: ./run_train.sh [SESSION_NAME] [GPU_INSTANCE]"
     exit 1
 fi
 
-if [[ $2 -eq 0 ]]; then
-    echo "GPU instance not provided"
+if [[ $2 == "" ]]; then
+    echo "ERRO: GPU instance not provided"
+    echo "USAGE: ./run_train.sh [SESSION_NAME] [GPU_INSTANCE]"
     exit 1
 fi
 
