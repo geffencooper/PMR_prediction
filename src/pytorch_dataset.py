@@ -104,7 +104,12 @@ class FusedDataset(Dataset):
             print(os.path.join(self.data_root_dir,str(int(patient_id))+"_OpenSMILE2.3.0_mfcc.csv"))
         
     def get_labels(self):
-        return self.labels_frame["PHQ_Moving_Score"].values
+        labels =  self.labels_frame["PHQ_Moving_Score"].values
+        # labels 1,2,3 become a single class
+        for i,l in enumerate(labels):
+            if l > 0:
+                labels[i] = 1
+        return labels
 
 # --------------------------------------------------------------------------------------------------------------
         
