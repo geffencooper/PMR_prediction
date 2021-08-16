@@ -16,12 +16,12 @@ import sys
 from torchsampler import ImbalancedDatasetSampler
 
 '''Training loop function'''
-def train_SpeechPaceNN(output_location):
+def train_SpeechPaceNN(output_location,gpu_instance):
     output_dir = "../models/"+output_location+"/"
 
     # get the device, hopefully a GPU
-    torch.cuda.set_device(0)
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    torch.cuda.set_device(int(gpu_instance))
+    device = torch.device("cuda:"+gpu_instance if torch.cuda.is_available() else "cpu")
 
     # print model training info
     print("\n\n\n================================ Start Training ================================")
@@ -61,7 +61,7 @@ def train_SpeechPaceNN(output_location):
         test_loader = DataLoader(test_dataset,batch_size=BATCH_SIZE,collate_fn=my_collate_fn)
 
         # build and load the model
-        model = SpeechPaceNN(INPUT_SIZE,HIDDEN_SIZE,NUM_LAYERS,NUM_CLASSES)
+        model = SpeechPaceNN(INPUT_SIZE,HIDDEN_SIZE,NUM_LAYERS,NUM_CLASSES,gpu_instance)
         model.to(device)
 
         # loss and optimization criteria
@@ -267,12 +267,12 @@ def gen_conf_mat(predictions,labels,idxs,num_classes,print_idxs=False):
 # --------------------------------------------------------------------------------------------------------------
 
 '''Training loop function'''
-def train_PMRfusionNN(output_location):
+def train_PMRfusionNN(output_location,gpu_instance):
     output_dir = "../models/"+output_location+"/"
 
     # get the device, hopefully a GPU
-    torch.cuda.set_device(0)
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    torch.cuda.set_device(int(gpu_instance))
+    device = torch.device("cuda:"+gpu_instance if torch.cuda.is_available() else "cpu")
 
     # print model training info
     print("\n\n\n================================ Start Training ================================")
@@ -313,7 +313,7 @@ def train_PMRfusionNN(output_location):
         #test_loader = DataLoader(test_dataset,batch_size=BATCH_SIZE,collate_fn=my_collate_fn_fused)
 
         # build and load the model
-        model = PMRfusionNN(INPUT_SIZE,HIDDEN_SIZE,NUM_LAYERS,NUM_CLASSES)
+        model = PMRfusionNN(INPUT_SIZE,HIDDEN_SIZE,NUM_LAYERS,NUM_CLASSES,gpu_instance)
         model.to(device)
 
         # loss and optimization criteria
@@ -493,8 +493,8 @@ def eval_fusion_model(model,data_loader,device,print_idxs=False):
 
 # --------------------------------------------------------------------------------------------------------------
 if __name__ == "__main__":
-    #train_SpeechPaceNN(sys.argv[1])
-    train_PMRfusionNN(sys.argv[1])
+    #train_SpeechPaceNN(sys.argv[1],sys.argv[2])
+    train_PMRfusionNN(sys.argv[1],sys.argv[2])
 
 
 

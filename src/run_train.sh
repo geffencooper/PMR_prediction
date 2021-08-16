@@ -1,5 +1,16 @@
 #!/bin/bash
 
+if [ $1 -eq 0 ]; then
+    echo "Training Session Name not provided"
+    echo "USAGE: ./run_train.sh [SESSION_NAME] [GPU_INSTANCE]"
+    exit 1
+fi
+
+if [ $2 -eq 0 ]; then
+    echo "GPU instance not provided"
+    exit 1
+fi
+
 # get the current date
 currDate=$(date +%Y-%m-%d_%H-%M-%S)
 
@@ -12,7 +23,7 @@ mkdir ../models/$dirName
 # create the log file
 fileName="../models/$1_$currDate/$1.txt"
 
-# execute the python training script with the directory passed as input
+# execute the python training script with the directory passed as input and the gpu instance
 # -u means outputs streams are unbuffered, tee sends output streams to a file as well as console,
 # -i ensures that ctrl-c will not break the pipe since we want to save the model on ctrl-c and continue logging
-python -u network_train.py $dirName | tee -i $fileName
+python -u network_train.py $dirName $2 | tee -i $fileName
