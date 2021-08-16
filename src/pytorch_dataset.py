@@ -74,13 +74,13 @@ class FusedDataset(Dataset):
             print("patient,idx,start,end,label:", patient_id,idx,start,end,label)
 
             # get the audio features
-            audio_features = pd.read_csv(os.path.join(self.data_root_dir,str(int(patient_id))+"_OpenSMILE2.3.0_mfcc.csv"),sep=";",skiprows=int(start*100),nrows=int(end*100))
+            audio_features = pd.read_csv(os.path.join(self.data_root_dir,str(int(patient_id))+"_OpenSMILE2.3.0_mfcc.csv"),sep=";",skiprows=int(start*100),nrows=int((end-start)*100))
             audio_features = audio_features.iloc[:,np.arange(2,28)]
             audio_features = torch.from_numpy(audio_features.to_numpy())
             print("audio features len:",len(audio_features))
 
             # get the vidual features
-            visual_features = pd.read_csv(os.path.join(self.data_root_dir,str(int(patient_id))+"_OpenFace2.1.0_Pose_gaze_AUs_deltas.csv"),sep=",",skiprows=int(start*30),nrows=int(end*30))
+            visual_features = pd.read_csv(os.path.join(self.data_root_dir,str(int(patient_id))+"_OpenFace2.1.0_Pose_gaze_AUs_deltas.csv"),sep=",",skiprows=int(start*30),nrows=int((end-start)*30))
             visual_features = visual_features.iloc[:,np.arange(1,24)]
             visual_features = torch.from_numpy(visual_features.to_numpy())
 
