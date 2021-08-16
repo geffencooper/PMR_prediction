@@ -49,6 +49,8 @@ def train_SpeechPaceNN(output_location,gpu_instance):
     print("Batch Size: {}\nLearning Rate: {}\nHidden Size: {}\nNumber of Layer: {}\nNumber of Epochs: {}\nNormalization:{}".format(\
         BATCH_SIZE,LEARNING_RATE,HIDDEN_SIZE,NUM_LAYERS,NUM_EPOCHS,NORMALIZATION))
     print("\nhidden state init with ZEROS\n")
+
+    num_iter = 0
     try:
         # Load the data
         root_dir = "/data/perception-working/Geffen/SpeechPaceData/"
@@ -105,7 +107,7 @@ def train_SpeechPaceNN(output_location,gpu_instance):
                     print("\n\n----------------- Epoch {} Iteration {} -----------------\n".format(epoch,i))
 
                     # keep track of training and validation loss, since training forward pass takes a while do every 400 iterations instead of every epoch
-                    iterations.append(i)
+                    iterations.append(num_iter)
                     train_losses.append(curr_train_loss/(300)) # average training loss per batch
                     curr_train_loss = 0
 
@@ -135,6 +137,9 @@ def train_SpeechPaceNN(output_location,gpu_instance):
         accuracy,val_loss = eval_model(model,val_loader,device,True)
         val_accuracies.append(accuracy)
         val_losses.append(val_loss)
+        iterations.append(num_iter)
+        train_losses.append(curr_train_loss/(num_iter%300)) # average training loss per batch
+        curr_train_loss = 0
 
         # save the most accuracte model up to date
         if accuracy > best_val_accuracy:
@@ -324,6 +329,8 @@ def train_PMRfusionNN(output_location,gpu_instance):
         # track model training time
         start = time.time()
 
+        # track total iterations
+        num_iter = 0
         # ----------------------------------------------------- Training Loop -----------------------------------------------------
         for epoch in range(NUM_EPOCHS):
             # get the next batch
@@ -356,12 +363,12 @@ def train_PMRfusionNN(output_location,gpu_instance):
                     # print(idxs)
                 
                 # do a validation pass every 10*n batches (lots of training data so don't wait till end of epoch)
-                if i % 100 == 0 and i != 0:
+                if i % 10 == 0 and i != 0:
                     print("\n\n----------------- Epoch {} Iteration {} -----------------\n".format(epoch,i))
 
                     # keep track of training and validation loss, since training forward pass takes a while do every 400 iterations instead of every epoch
-                    iterations.append(i)
-                    train_losses.append(curr_train_loss/(30)) # average training loss per batch
+                    iterations.append(num_iter)
+                    train_losses.append(curr_train_loss/(10)) # average training loss per batch
                     curr_train_loss = 0
 
                     # validation pass
@@ -383,6 +390,7 @@ def train_PMRfusionNN(output_location,gpu_instance):
                     hours,minutes = divmod(minutes,60)
                     print("Time Elapsed: {}h {}m {}s".format(int(hours),int(minutes),int(seconds)))
                     print("\n--------------------------------------------------------\n\n")
+                num_iter+=1
 
         print("================================ Finished Training ================================")
         torch.save(model.state_dict(),output_dir+"END_model.pth")
@@ -392,6 +400,9 @@ def train_PMRfusionNN(output_location,gpu_instance):
         #accuracy,val_loss = eval_model(model,val_loader,device,True)
         val_accuracies.append(accuracy)
         val_losses.append(val_loss)
+        iterations.append(num_iter)
+        train_losses.append(curr_train_loss/(num_iter%10)) # average training loss per batch
+        curr_train_loss = 0
 
         # save the most accuracte model up to date
         if accuracy > best_val_accuracy:
