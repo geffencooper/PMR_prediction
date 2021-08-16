@@ -308,8 +308,8 @@ def train_PMRfusionNN(output_location):
         val_dataset = FusedDataset(root_dir,root_dir+"val_metadata.csv")
         #test_dataset = FusedDataset(root_dir,root_dir+"test_split.csv")
 
-        train_loader = DataLoader(train_dataset,batch_size=BATCH_SIZE,collate_fn=my_collate_fn_fused,sampler=ImbalancedDatasetSampler(train_dataset))
-        val_loader = DataLoader(val_dataset,batch_size=BATCH_SIZE,collate_fn=my_collate_fn_fused,sampler=ImbalancedDatasetSampler(val_dataset))
+        train_loader = DataLoader(train_dataset,batch_size=BATCH_SIZE,collate_fn=my_collate_fn_fused,sampler=ImbalancedDatasetSampler(train_dataset),shuffle=True)
+        val_loader = DataLoader(val_dataset,batch_size=BATCH_SIZE,collate_fn=my_collate_fn_fused,sampler=ImbalancedDatasetSampler(val_dataset),shuffle=True)
         #test_loader = DataLoader(test_dataset,batch_size=BATCH_SIZE,collate_fn=my_collate_fn_fused)
 
         # build and load the model
@@ -459,6 +459,7 @@ def eval_fusion_model(model,data_loader,device,print_idxs=False):
     all_labels = all_labels.to(device)
     all_idxs = all_idxs.to(device)
     with torch.no_grad():
+        val_start=time.time()
         for i, (X_audio,X_video,lengths_audio,lengths_video,labels,idxs) in enumerate(data_loader):
             X_audio,X_video,labels,idxs = X_audio.to(device),X_video.to(device),labels.to(device),idxs.to(device)
             
@@ -477,9 +478,8 @@ def eval_fusion_model(model,data_loader,device,print_idxs=False):
             # get the prediction
             pred = out.max(1,keepdim=True)[1]
             correct += pred.eq(labels.view_as(pred)).sum().item()
-            if i == 60:
-                break
 
+        print("validation computation time:",(time.time()-val_start)/60," minutes")
         gen_conf_mat(all_preds,all_labels,all_idxs,2,print_idxs)
         eval_loss /= len(data_loader.dataset)
         print("\nValidation Loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)".format(eval_loss,correct,len(data_loader.dataset),100.*correct/len(data_loader.dataset)))
