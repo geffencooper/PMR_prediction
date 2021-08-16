@@ -308,8 +308,8 @@ def train_PMRfusionNN(output_location):
         val_dataset = FusedDataset(root_dir,root_dir+"val_metadata.csv")
         #test_dataset = FusedDataset(root_dir,root_dir+"test_split.csv")
 
-        train_loader = DataLoader(train_dataset,batch_size=BATCH_SIZE,collate_fn=my_collate_fn_fused,sampler=ImbalancedDatasetSampler(train_dataset),shuffle=True)
-        val_loader = DataLoader(val_dataset,batch_size=BATCH_SIZE,collate_fn=my_collate_fn_fused,sampler=ImbalancedDatasetSampler(val_dataset),shuffle=True)
+        train_loader = DataLoader(train_dataset,batch_size=BATCH_SIZE,collate_fn=my_collate_fn_fused,sampler=ImbalancedDatasetSampler(train_dataset))
+        val_loader = DataLoader(val_dataset,batch_size=BATCH_SIZE,collate_fn=my_collate_fn_fused,sampler=ImbalancedDatasetSampler(val_dataset))
         #test_loader = DataLoader(test_dataset,batch_size=BATCH_SIZE,collate_fn=my_collate_fn_fused)
 
         # build and load the model
