@@ -292,7 +292,7 @@ def train_PMRfusionNN(output_location,gpu_instance):
     NUM_CLASSES = 2
     INPUT_SIZE = 23
     NUM_LAYERS = 1
-    NUM_EPOCHS = 3
+    NUM_EPOCHS = 1
     NORMALIZATION = False
 
     # global variables
@@ -398,11 +398,6 @@ def train_PMRfusionNN(output_location,gpu_instance):
         # validation pass
         accuracy,val_loss = eval_fusion_model(model,val_loader,device,True)
         #accuracy,val_loss = eval_model(model,val_loader,device,True)
-        val_accuracies.append(accuracy)
-        val_losses.append(val_loss)
-        iterations.append(num_iter)
-        train_losses.append(curr_train_loss/(num_iter%10)) # average training loss per batch
-        curr_train_loss = 0
 
         # save the most accuracte model up to date
         if accuracy > best_val_accuracy:
@@ -495,11 +490,12 @@ def eval_fusion_model(model,data_loader,device,print_idxs=False):
 
         print("validation computation time:",(time.time()-val_start)/60," minutes")
         gen_conf_mat(all_preds,all_labels,all_idxs,2,print_idxs)
-        eval_loss /= len(data_loader.dataset)
+        num_batches = len(data_loader.dataset)//data_loader.batch_size
+        eval_loss /= len(num_batches)
         print("\nValidation Loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)".format(eval_loss,correct,len(data_loader.dataset),100.*correct/len(data_loader.dataset)))
 
     model.train()
-    return 100.*correct/len(data_loader.dataset),eval_loss/len(data_loader)
+    return 100.*correct/len(data_loader.dataset),eval_loss
 
 
 # --------------------------------------------------------------------------------------------------------------
