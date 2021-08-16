@@ -351,9 +351,9 @@ def train_PMRfusionNN(output_location):
                 # print training statistics every n batches
                 if i % 4 == 0 and i != 0:
                     print("Train Epoch: {} Iteration: {} [{}/{} ({:.0f}%)]\t Loss: {:.6f}".format(epoch,i,i*len(X_audio),len(train_loader.dataset),100.*i/len(train_loader),loss.item()))
-                    print(out)
-                    print(labels)
-                    print(idxs)
+                    # print(out)
+                    # print(labels)
+                    # print(idxs)
                 
                 # do a validation pass every 10*n batches (lots of training data so don't wait till end of epoch)
                 if i % 100 == 0 and i != 0:
