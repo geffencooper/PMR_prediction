@@ -71,11 +71,13 @@ class FusedDataset(Dataset):
         try:
             # use idx to get the metadata from the labels csv
             patient_id,start,end,label = self.labels_frame.iloc[idx]
+            #print("patient,idx,start,end,label:", patient_id,idx,start,end,label)
 
             # get the audio features
             audio_features = pd.read_csv(os.path.join(self.data_root_dir,str(int(patient_id))+"_OpenSMILE2.3.0_mfcc.csv"),sep=";",skiprows=int(start*100),nrows=int(end*100))
             audio_features = audio_features.iloc[:,np.arange(2,28)]
             audio_features = torch.from_numpy(audio_features.to_numpy())
+            #print("audio features len:",len(audio_features))
 
             # get the vidual features
             visual_features = pd.read_csv(os.path.join(self.data_root_dir,str(int(patient_id))+"_OpenFace2.1.0_Pose_gaze_AUs_deltas.csv"),sep=",",skiprows=int(start*30),nrows=int(end*30))
@@ -91,12 +93,14 @@ class FusedDataset(Dataset):
 
             
         except TypeError:
+            print("TYPE ERROR EXCEPTION")
             print("index:",idx)
             print("type:",type(audio_features.to_numpy()))
             print(audio_features)
 
         except pd.errors.EmptyDataError:
-            print(patient_id,start,end,label)
+            print("PANDAS EMPTY DATA ERROR")
+            print("patient id, start, end, label:",patient_id,start,end,label)
             print(os.path.join(self.data_root_dir,str(int(patient_id))+"_OpenSMILE2.3.0_mfcc.csv"))
         
     def get_labels(self):
