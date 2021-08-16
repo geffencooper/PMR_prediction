@@ -353,7 +353,7 @@ def train_PMRfusionNN(output_location):
                     print("Train Epoch: {} Iteration: {} [{}/{} ({:.0f}%)]\t Loss: {:.6f}".format(epoch,i,i*len(X_audio),len(train_loader.dataset),100.*i/len(train_loader),loss.item()))
                 
                 # do a validation pass every 10*n batches (lots of training data so don't wait till end of epoch)
-                if i % 30 == 0: #and i != 0:
+                if i % 30 == 0 and i != 0:
                     print("\n\n----------------- Epoch {} Iteration {} -----------------\n".format(epoch,i))
 
                     # keep track of training and validation loss, since training forward pass takes a while do every 400 iterations instead of every epoch
@@ -477,6 +477,7 @@ def eval_fusion_model(model,data_loader,device,print_idxs=False):
             # get the prediction
             pred = out.max(1,keepdim=True)[1]
             correct += pred.eq(labels.view_as(pred)).sum().item()
+            print(i)
 
         gen_conf_mat(all_preds,all_labels,all_idxs,2,print_idxs)
         eval_loss /= len(data_loader.dataset)
