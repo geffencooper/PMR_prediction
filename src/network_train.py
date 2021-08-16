@@ -491,7 +491,7 @@ def eval_fusion_model(model,data_loader,device,print_idxs=False):
         print("validation computation time:",(time.time()-val_start)/60," minutes")
         gen_conf_mat(all_preds,all_labels,all_idxs,2,print_idxs)
         num_batches = len(data_loader.dataset)//data_loader.batch_size
-        eval_loss /= len(num_batches)
+        eval_loss /= num_batches
         print("\nValidation Loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)".format(eval_loss,correct,len(data_loader.dataset),100.*correct/len(data_loader.dataset)))
 
     model.train()
