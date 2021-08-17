@@ -11,7 +11,7 @@ import torch.nn
 import torch.nn.utils.rnn as rnn_utils
 
 class SpeechPaceNN(torch.nn.Module):
-    def __init__(self,input_size,hidden_size,num_layers,num_classes,gpu_instance):
+    def __init__(self,input_size,hidden_size,num_layers,num_classes,gpu_instance,init_hidden_rand=False):
         super(SpeechPaceNN,self).__init__()
         
         self.device = torch.device("cuda:"+gpu_instance if torch.cuda.is_available() else "cpu")
@@ -26,10 +26,15 @@ class SpeechPaceNN(torch.nn.Module):
         # Layer 2: FC for classification/regression
         self.fc = torch.nn.Linear(hidden_size,num_classes)
 
+        self.init = init_hidden_rand
+        self.num_classes = num_classes
+
     # initialize the hidden state at the start of each forward pass
     def init_hidden(self,batch_size):
-        #self.h0 = torch.randn(self.num_layers,batch_size,self.hidden_size)
-        self.h0 = torch.zeros(self.num_layers,batch_size,self.hidden_size)
+        if self.init == True:
+            self.h0 = torch.randn(self.num_layers,batch_size,self.hidden_size)
+        else:
+            self.h0 = torch.zeros(self.num_layers,batch_size,self.hidden_size)
         self.h0 = self.h0.to(self.device)
 
     def forward(self,X,lengths):
@@ -57,16 +62,21 @@ class SpeechPaceNN(torch.nn.Module):
 
         y = self.fc(y)
 
-        y = torch.nn.functional.softmax(y,dim=1)
+        # regression
+        if self.num_classes == -1:
+            return y
 
-        return y 
+        # classification
+        else:
+            y = torch.nn.functional.softmax(y,dim=1)
+            return y 
 
 
 
 # ==================================================================================
 
 class PMRfusionNN(torch.nn.Module):
-    def __init__(self,input_size,hidden_size,num_layers,num_classes,gpu_instance):
+    def __init__(self,input_size,hidden_size,num_layers,num_classes,gpu_instance,init_hidden_rand=False):
         super(PMRfusionNN,self).__init__()
         
         self.device = torch.device("cuda:"+gpu_instance if torch.cuda.is_available() else "cpu")
@@ -88,10 +98,15 @@ class PMRfusionNN(torch.nn.Module):
         # Layer 2: FC for classification/regression after fusion
         self.fc_fusion = torch.nn.Linear(2*hidden_size,num_classes)
 
+        self.init = init_hidden_rand
+        self.num_classes = num_classes
+
     # initialize the hidden state at the start of each forward pass
     def init_hidden(self,batch_size):
-        #self.h0 = torch.randn(self.num_layers,batch_size,self.hidden_size)
-        self.h0 = torch.zeros(self.num_layers,batch_size,self.hidden_size)
+        if self.init == True:
+            self.h0 = torch.randn(self.num_layers,batch_size,self.hidden_size)
+        else:
+            self.h0 = torch.zeros(self.num_layers,batch_size,self.hidden_size)
         self.h0 = self.h0.to(self.device)
 
     def forward(self,X_audio,lengths_audio,X_visual,lengths_visual):
@@ -147,6 +162,11 @@ class PMRfusionNN(torch.nn.Module):
 
         y_fused = self.fc_fusion(fused)
 
-        y = torch.nn.functional.softmax(y_fused,dim=1)
+        # regression
+        if self.num_classes == -1:
+            return y_fused
 
-        return y 
+        # classification
+        else:
+            y = torch.nn.functional.softmax(y_fused,dim=1)
+            return y 
