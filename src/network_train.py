@@ -367,6 +367,7 @@ def train_PMRfusionNN(output_location,gpu_instance):
                     print("\n\n----------------- Epoch {} Iteration {} -----------------\n".format(epoch,i))
 
                     # keep track of training and validation loss, since training forward pass takes a while do every 400 iterations instead of every epoch
+                    num_iter +=10
                     iterations.append(num_iter)
                     train_losses.append(curr_train_loss/(10)) # average training loss per batch
                     curr_train_loss = 0
@@ -390,7 +391,6 @@ def train_PMRfusionNN(output_location,gpu_instance):
                     hours,minutes = divmod(minutes,60)
                     print("Time Elapsed: {}h {}m {}s".format(int(hours),int(minutes),int(seconds)))
                     print("\n--------------------------------------------------------\n\n")
-                num_iter = i
 
         print("================================ Finished Training ================================")
         torch.save(model.state_dict(),output_dir+"END_model.pth")
