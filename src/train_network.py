@@ -25,7 +25,7 @@ def train_nn(args):
 
     # print model training info
     print("\n\n\n================================ Start Training ================================")
-    print("\Session Name:",args.session_name)
+    print("\nSession Name:",args.session_name)
     print("\nModel Name:",args.model_name)
     print("\nDevice:",torch.cuda.current_device()," ----> ",torch.cuda.get_device_name(torch.cuda.current_device()))
     print("\nHyperparameters:")
@@ -210,14 +210,14 @@ def create_optimizer(model,args):
 # create the model and loss function based on the name specified and classification/regression options
 def create_model(args):
     if args.model_name == "SpeechPaceNN":
-        if args.classification == True:
+        if args.classification == "y":
             return SpeechPaceNN(args.input_size,args.hidden_size,args.num_layers,args.num_classes,args.gpu_i,args.init_hidden_rand),torch.nn.CrossEntropyLoss()
-        elif args.regression == True:
+        elif args.regression == "y":
             return SpeechPaceNN(args.input_size,args.hidden_size,args.num_layers,-1,args.gpu_i,args.init_hidden_rand),torch.nn.MSELoss()
     elif args.model_name == "PMRfusionModel":
-        if args.classification == True:
+        if args.classification == "y":
             return PMRfusionNN(args.input_size,args.hidden_size,args.num_layers,args.num_classes,args.gpu_i,args.init_hidden_rand),torch.nn.CrossEntropyLoss()
-        elif args.regression == True:
+        elif args.regression == "y":
             return PMRfusionNN(args.input_size,args.hidden_size,args.num_layers,-1,args.gpu_i,args.init_hidden_rand),torch.nn.MSELoss()
     else:
         print("ERROR: invalid model name")
