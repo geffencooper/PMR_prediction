@@ -1,7 +1,13 @@
 Initial task: create a base model (SpeechPaceNN) that is trained
               to detect speech pace.
+
 Dataset: common_voice from kaggle. The train, test, and validation
          were split evenly into three classes -- sped up, slowed down,
          and normal. Normal = 0, sped up = 1, slowed down = 2. These
          samples were also augmented with noise and pitch shifting. Then
-         the MFCCs and deltas were extracted.
+         the MFCCs and deltas were extracted (these are the input into the
+         network). These are located in /data/perception-working/Geffen/SpeechPaceData/.
+
+Next task: create a fusion model that uses visual features as well fused
+           with the pretrained SpeechPaceNN model. This model tries to predict
+           the PHQ_8 PMR subscore of the patient as a binary classification task.

@@ -112,7 +112,7 @@ def train_nn(args):
                     # save the most accuracte model up to date
                     if accuracy > best_val_accuracy:
                         best_val_accuracy = accuracy
-                        torch.save(model.state_dict(),args.log_dest+"BEST_model.pth")
+                        torch.save(model.state_dict(),os.path.join(args.log_dest,"BEST_model.pth"))
                     print("Best Accuracy: ",best_val_accuracy,"%")
 
                     # print the time elapsed
@@ -124,7 +124,7 @@ def train_nn(args):
                     print("\n--------------------------------------------------------\n\n")
 
         print("================================ Finished Training ================================")
-        torch.save(model.state_dict(),args.log_dest+"END_model.pth")
+        torch.save(model.state_dict(),os.path.join(args.log_dest,"END_model.pth"))
         
         # validation pass
         accuracy,val_loss = eval_model(model,val_loader,device,criterion,args,print_idxs=True)
@@ -132,7 +132,7 @@ def train_nn(args):
         # save the most accuracte model up to date
         if accuracy > best_val_accuracy:
             best_val_accuracy = accuracy
-            torch.save(model.state_dict(),args.log_dest+"BEST_model.pth")
+            torch.save(model.state_dict(),os.path.join(args.log_dest,"BEST_model.pth"))
         print("Best Accuracy: ",best_val_accuracy,"%")
 
         # print the time elapsed
@@ -150,7 +150,7 @@ def train_nn(args):
 
 
     except KeyboardInterrupt:
-        torch.save(model.state_dict(),args.log_dest+"MID_model.pth")
+        torch.save(model.state_dict(),os.path.join(args.log_dest,"MID_model.pth"))
         print("================================ QUIT ================================\n Saving Model ...") 
         
         # validation pass
@@ -159,7 +159,7 @@ def train_nn(args):
         # save the most accuracte model up to date
         if accuracy > best_val_accuracy:
             best_val_accuracy = accuracy
-            torch.save(model.state_dict(),args.log_dest+"BEST_model.pth")
+            torch.save(model.state_dict(),os.path.join(args.log_dest,"BEST_model.pth"))
         print("Best Accuracy: ",best_val_accuracy,"%")
 
         # print the time elapsed
@@ -344,7 +344,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Training and Evaluation")
     # logging details
     parser.add_argument("session_name",help="prefix the logging directory with this name",type=str)
-    #parser.add_argument("log_dest",help="name of directory with logging info (stats, train model, parameters, etc.)",type=str)
+    parser.add_argument("log_dest",help="name of directory with logging info (stats, train model, parameters, etc.)",type=str)
 
     # dataset details
     parser.add_argument("root_dir",help="full path to dataset directory",type=str)
