@@ -21,7 +21,7 @@ import os
 def train_nn(args):
     # get the device, hopefully a GPU
     torch.cuda.set_device(int(args.gpu_i))
-    device = torch.device("cuda:"+args.gpu_i if torch.cuda.is_available() else "cpu")
+    device = torch.device("cuda:"+str(args.gpu_i) if torch.cuda.is_available() else "cpu")
 
     # print model training info
     print("\n\n\n================================ Start Training ================================")
@@ -211,14 +211,14 @@ def create_optimizer(model,args):
 def create_model(args):
     if args.model_name == "SpeechPaceNN":
         if args.classification == True:
-            return SpeechPaceNN(args.input_size,args.hidden_size,args.num_layers,args.num_classes,args.gpu_instance,args.init_hidden_rand),torch.nn.CrossEntropyLoss()
+            return SpeechPaceNN(args.input_size,args.hidden_size,args.num_layers,args.num_classes,args.gpu_i,args.init_hidden_rand),torch.nn.CrossEntropyLoss()
         elif args.regression == True:
-            return SpeechPaceNN(args.input_size,args.hidden_size,args.num_layers,-1,args.gpu_instance,args.init_hidden_rand),torch.nn.MSELoss()
+            return SpeechPaceNN(args.input_size,args.hidden_size,args.num_layers,-1,args.gpu_i,args.init_hidden_rand),torch.nn.MSELoss()
     elif args.model_name == "PMRfusionModel":
         if args.classification == True:
-            return PMRfusionNN(args.input_size,args.hidden_size,args.num_layers,args.num_classes,args.gpu_instance,args.init_hidden_rand),torch.nn.CrossEntropyLoss()
+            return PMRfusionNN(args.input_size,args.hidden_size,args.num_layers,args.num_classes,args.gpu_i,args.init_hidden_rand),torch.nn.CrossEntropyLoss()
         elif args.regression == True:
-            return PMRfusionNN(args.input_size,args.hidden_size,args.num_layers,-1,args.gpu_instance,args.init_hidden_rand),torch.nn.MSELoss()
+            return PMRfusionNN(args.input_size,args.hidden_size,args.num_layers,-1,args.gpu_i,args.init_hidden_rand),torch.nn.MSELoss()
     else:
         print("ERROR: invalid model name")
         exit(1)

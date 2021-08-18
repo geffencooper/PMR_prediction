@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # include the config file variables
-source ../config_files/skeleton.conf
+source ../config_files/$1
 
 # get the current date
 currDate=$(date +%Y-%m-%d_%H-%M-%S)
