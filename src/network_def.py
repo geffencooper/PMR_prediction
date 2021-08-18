@@ -14,7 +14,7 @@ class SpeechPaceNN(torch.nn.Module):
     def __init__(self,input_size,hidden_size,num_layers,num_classes,gpu_instance,init_hidden_rand=False):
         super(SpeechPaceNN,self).__init__()
         
-        self.device = torch.device("cuda:"+gpu_instance if torch.cuda.is_available() else "cpu")
+        self.device = torch.device("cuda:"+str(gpu_instance) if torch.cuda.is_available() else "cpu")
 
         self.input_size = input_size # audio feature length
         self.hidden_size = hidden_size # user defined hyperparameter
@@ -79,7 +79,7 @@ class PMRfusionNN(torch.nn.Module):
     def __init__(self,input_size,hidden_size,num_layers,num_classes,gpu_instance,init_hidden_rand=False):
         super(PMRfusionNN,self).__init__()
         
-        self.device = torch.device("cuda:"+gpu_instance if torch.cuda.is_available() else "cpu")
+        self.device = torch.device("cuda:"+str(gpu_instance) if torch.cuda.is_available() else "cpu")
 
         self.input_size = input_size # audio feature length
         self.hidden_size = hidden_size # user defined hyperparameter
