@@ -230,7 +230,7 @@ def to_gpu(batch,device,args):
         X_audio,labels = batch[0].to(device),batch[2].to(device)
         return X_audio,labels
     elif args.model_name == "PMRfusionNN":
-        X_audio,X_video,labels = batch[0].to(device),batch[1].to(device),batch[4].device
+        X_audio,X_video,labels = batch[0].to(device),batch[1].to(device),batch[4].to(device)
         return (X_audio,X_video),labels
     else:
         print("ERROR: invalid model name")
