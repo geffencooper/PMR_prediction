@@ -8,7 +8,7 @@ if [[ $1 == "" ]]; then
 fi
 
 # include the config file variables
-source ../config_files/$1
+source $1
 
 # get the current date
 currDate=$(date +%Y-%m-%d_%H-%M-%S)
