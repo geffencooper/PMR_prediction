@@ -7,7 +7,7 @@ source ../config_files/skeleton.conf
 currDate=$(date +%Y-%m-%d_%H-%M-%S)
 
 # make this a suffix for the directory name to create a unique directory
-dirName=$session_name_$currDate
+dirName=$session_name-$currDate
 
 # create the directory
 mkdir ../models/$dirName

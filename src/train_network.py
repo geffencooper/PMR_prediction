@@ -383,5 +383,5 @@ if __name__ == "__main__":
         parser.error("chose classification but --num_classes is invalid, must specify --num_classes")
     if args.regression == "y" and args.num_classes > 0:
         parser.error("chose regression but also specified --num_classes, invalid selection")
-    print("worked")
-    #train_nn(args)
+    
+    train_nn(args)
