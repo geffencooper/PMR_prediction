@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# check if config file given as the argument
+if [[ $1 == "" ]]; then
+    echo "ERROR: no configuration file supplied"
+    echo "USAGE: ./run_train.sh [CONFIG_FILE] (place config file in 'config_files' directory, the script will append the local path)"
+
 # include the config file variables
 source ../config_files/$1
 
