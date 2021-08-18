@@ -15,6 +15,7 @@ import time
 import sys
 from torchsampler import ImbalancedDatasetSampler
 import argparse
+import os
 
 # ===================================== Training Function =====================================
 def train_nn(args):
@@ -177,11 +178,11 @@ def train_nn(args):
 # ===================================== Model Dependent Functions =====================================
 
 # create the dataset used by the corresponding model
-def create_dataset(args,labels_csv):
+def create_dataset(args,labels_csv,data_dir):
     if args.model_name == "SpeechPaceNN":
-        return SpeechPaceDataset(args.root_dir,args.root_dir+labels_csv)
+        return SpeechPaceDataset(os.path.join(args.root_dir,data_dir),os.path.join(args.root_dir,data_dir,labels_csv))
     elif args.model_name == "PMRfusionModel":
-        return FusedDataset(args.root_dir,args.root_dir+labels_csv)
+        return FusedDataset(args.root_dir,os.path.join(args.root_dir,labels_csv))
     else:
         print("ERROR: invalid model name")
         exit(1)
@@ -366,20 +367,20 @@ if __name__ == "__main__":
     parser.add_argument("lr",help="learning rate",type=float)
     parser.add_argument("hidden_size",help="dimension of hidden state (RNN)",type=int)
     parser.add_argument("classification",help="use the model for classification (y/n)",type=str)
-    parser.add_argument("--num_classes",help="number of classes for the task",type=int)
+    parser.add_argument("num_classes",help="number of classes for the task (set to -1 for regression)",type=int)
     parser.add_argument("regression",help="use the model for regression (y/n)",type=str)
     parser.add_argument("input_size",help="dimension of input features (e.g. MFCC features = 26)",type=int)
     parser.add_argument("num_layers",help="number of GRU layers",type=int)
     parser.add_argument("num_epochs",help="number of times to go through entire training set",type=int)
-    parser.add_argument("--normalize",help="normalize input features",action="store_true")
-    parser.add_argument("--hidden_init_rand",help="initialize the hidden state with random values, otherwise use zeros",action="store_true",required=True)
+    parser.add_argument("normalize",help="normalize input features (y/n)",type=str)
+    parser.add_argument("hidden_init_rand",help="initialize the hidden state with random values, otherwise use zeros (y/n)",type=str)
 
     args = parser.parse_args()
 
-    if args.classification and args.regression:
+    if args.classification == "y" and args.regression == "y":
         parser.error("can only choose either classification or regression, not both")
-    if args.classification and args.num_classes is None:
-        parser.error("chose classification but --num_classes is None, must specify --num_classes")
-    if args.regression and args.num_classes is not None:
+    if args.classification == "y" and args.num_classes <= 0:
+        parser.error("chose classification but --num_classes is invalid, must specify --num_classes")
+    if args.regression == "y" and args.num_classes > 0:
         parser.error("chose regression but also specified --num_classes, invalid selection")
     train_nn(args)
