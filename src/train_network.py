@@ -30,7 +30,7 @@ def train_nn(args):
     print("\nDevice:",torch.cuda.current_device()," ----> ",torch.cuda.get_device_name(torch.cuda.current_device()))
     print("\nHyperparameters:")
 
-    print("Batch Size: {}\nLearning Rate: {}\nHidden Size: {}\nNumber of Layer: {}\nNumber of Epochs: {}\nNormalization:{}".format(\
+    print("Batch Size: {}\nLearning Rate: {}\nHidden Size: {}\nNumber of Layer: {}\nNumber of Epochs: {}\nNormalization:{}\n".format(\
         args.batch_size,args.lr,args.hidden_size,args.num_layers,args.num_epochs,args.normalize))
 
     # global variables
