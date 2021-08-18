@@ -3,7 +3,7 @@
 # check if config file given as the argument
 if [[ $1 == "" ]]; then
     echo "ERROR: no configuration file supplied"
-    echo "USAGE: ./run_train.sh [CONFIG_FILE] (place config file in 'config_files' directory, the script will append the local path)"
+    echo "USAGE: ./run_train.sh ../config_files/[CONFIG_FILE]"
     exit 1
 fi
 
