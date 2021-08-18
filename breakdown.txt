@@ -11,3 +11,8 @@ Dataset: common_voice from kaggle. The train, test, and validation
 Next task: create a fusion model that uses visual features as well fused
            with the pretrained SpeechPaceNN model. This model tries to predict
            the PHQ_8 PMR subscore of the patient as a binary classification task.
+
+Dataset: avec2019. Each interview is long (several minutes) so the responses are
+        split into 2-5 second segments. Each segment is given the score corresponding
+        to the patient. The segment start and stop times and scores are located at 
+        /data/perception-working/Geffen/avec_data/ as well as the input features.
