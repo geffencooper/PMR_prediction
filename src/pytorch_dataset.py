@@ -33,7 +33,7 @@ class SpeechPaceDataset(Dataset):
             for i in range(6-len(str(idx))):
                 prefix += "0"
             data_file += prefix + str(idx) + ".csv"
-            data_path = self.root_dir + data_file
+            data_path = os.path.join(self.root_dir,data_file)
 
             # read the audio features and convert to a tensor
             data_frame = pd.read_csv(data_path,sep=";")
