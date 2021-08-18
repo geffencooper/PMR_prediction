@@ -105,7 +105,7 @@ def train_nn(args):
                     curr_train_loss = 0 # reset
 
                     # validation pass
-                    accuracy,val_loss = eval_model(model,val_loader,device,args)
+                    accuracy,val_loss = eval_model(model,val_loader,device,criterion,args)
                     val_accuracies.append(accuracy)
                     val_losses.append(val_loss)
 
@@ -127,7 +127,7 @@ def train_nn(args):
         torch.save(model.state_dict(),args.log_dest+"END_model.pth")
         
         # validation pass
-        accuracy,val_loss = eval_model(model,val_loader,device,args,print_idxs=True)
+        accuracy,val_loss = eval_model(model,val_loader,device,criterion,args,print_idxs=True)
         
         # save the most accuracte model up to date
         if accuracy > best_val_accuracy:
@@ -154,7 +154,7 @@ def train_nn(args):
         print("================================ QUIT ================================\n Saving Model ...") 
         
         # validation pass
-        accuracy,val_loss = eval_model(model,val_loader,device)
+        accuracy,val_loss = eval_model(model,val_loader,device,criterion,args)
 
         # save the most accuracte model up to date
         if accuracy > best_val_accuracy:
