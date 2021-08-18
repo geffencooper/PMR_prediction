@@ -203,6 +203,8 @@ def create_optimizer(model,args):
         return torch.optim.Adam(model.parameters(),lr=args.lr)
     elif args.optim == "SGD":
         return torch.optim.SGD(model.parameters(),lr=args.lr)
+    elif args.optim == "RMS":
+        return torch.optim.RMSprop(model.parameters(),lr=args.lr)
     else:
         print("ERROR: invalid optimizer name")
         exit(1)
