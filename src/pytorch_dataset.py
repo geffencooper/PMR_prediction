@@ -80,7 +80,7 @@ class FusedDataset(Dataset):
             #print("audio features len:",len(audio_features))
 
             # get the vidual features
-            visual_features = pd.read_csv(os.path.join(self.data_root_dir,str(int(patient_id))+"_OpenFace2.1.0_Pose_gaze_AUs_deltas.csv"),sep=",",skiprows=int(start*30),nrows=int((end-start)*30))
+            visual_features = pd.read_csv(os.path.join(self.data_root_dir,str(int(patient_id))+"_OpenFace2.1.0_Pose_gaze_AUs.csv"),sep=",",skiprows=int(start*30),nrows=int((end-start)*30))
             visual_features = visual_features.iloc[:,np.arange(1,24)]
             visual_features = torch.from_numpy(visual_features.to_numpy())
 
