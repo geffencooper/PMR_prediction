@@ -343,8 +343,8 @@ def gen_conf_mat(predictions,labels,idxs,num_classes,print_idxs=False):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Training and Evaluation")
     # logging details
-    parser.add_argument("session_name",help="prefix the logging directory with this name",type=str)
-    parser.add_argument("log_dest",help="name of directory with logging info (stats, train model, parameters, etc.)",type=str)
+    #parser.add_argument("session_name",help="prefix the logging directory with this name",type=str)
+    #parser.add_argument("log_dest",help="name of directory with logging info (stats, train model, parameters, etc.)",type=str)
 
     # dataset details
     parser.add_argument("root_dir",help="full path to dataset directory",type=str)
@@ -383,4 +383,5 @@ if __name__ == "__main__":
         parser.error("chose classification but --num_classes is invalid, must specify --num_classes")
     if args.regression == "y" and args.num_classes > 0:
         parser.error("chose regression but also specified --num_classes, invalid selection")
-    train_nn(args)
+    print("worked")
+    #train_nn(args)
