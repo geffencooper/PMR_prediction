@@ -181,7 +181,7 @@ def train_nn(args):
 def create_dataset(args,labels_csv,data_dir):
     if args.model_name == "SpeechPaceNN":
         return SpeechPaceDataset(os.path.join(args.root_dir,data_dir),os.path.join(args.root_dir,data_dir,labels_csv))
-    elif args.model_name == "PMRfusionModel":
+    elif args.model_name == "PMRfusionNN":
         return FusedDataset(args.root_dir,os.path.join(args.root_dir,labels_csv))
     else:
         print("ERROR: invalid model name")
@@ -191,7 +191,7 @@ def create_dataset(args,labels_csv,data_dir):
 def create_loader(dataset,args):
     if args.model_name == "SpeechPaceNN":
         return DataLoader(dataset,args.batch_size,collate_fn=my_collate_fn)
-    elif args.model_name == "PMRfusionModel":
+    elif args.model_name == "PMRfusionNN":
         return DataLoader(dataset,args.batch_size,collate_fn=my_collate_fn_fused)
     else:
         print("ERROR: invalid model name")
@@ -214,7 +214,7 @@ def create_model(args):
             return SpeechPaceNN(args.input_size,args.hidden_size,args.num_layers,args.num_classes,args.gpu_i,args.hidden_init_rand),torch.nn.CrossEntropyLoss()
         elif args.regression == "y":
             return SpeechPaceNN(args.input_size,args.hidden_size,args.num_layers,-1,args.gpu_i,args.hidden_init_rand),torch.nn.MSELoss()
-    elif args.model_name == "PMRfusionModel":
+    elif args.model_name == "PMRfusionNN":
         if args.classification == "y":
             return PMRfusionNN(args.input_size,args.hidden_size,args.num_layers,args.num_classes,args.gpu_i,args.hidden_init_rand),torch.nn.CrossEntropyLoss()
         elif args.regression == "y":
@@ -229,7 +229,7 @@ def to_gpu(batch,device,args):
     if args.model_name == "SpeechPaceNN":
         X_audio,labels = batch[0].to(device),batch[2].to(device)
         return X_audio,labels
-    elif args.model_name == "PMRfusionModel":
+    elif args.model_name == "PMRfusionNN":
         X_audio,X_video,labels = batch[0].to(device),batch[1].to(device),batch[4].device
         return (X_audio,X_video),labels
     else:
@@ -242,7 +242,7 @@ def forward_pass(data,batch,model,args):
         # X_audio = data
         # lengths_audio = batch[1]
         return model(data,batch[1])
-    elif args.model_name == "PMRfusionModel":
+    elif args.model_name == "PMRfusionNN":
         X_audio,X_video = data[0],data[1]
         # lengths_audio, lengths_video = batch[2],batch[3]
         return model(X_audio,batch[2],X_video,batch[3])
@@ -254,7 +254,7 @@ def forward_pass(data,batch,model,args):
 def get_idxs(batch,args):
     if args.model_name == "SpeechPaceNN":
         return batch[3]
-    elif args.model_name == "PMRfusionModel":
+    elif args.model_name == "PMRfusionNN":
         return batch[5]
     else:
         print("ERROR: invalid model name")
