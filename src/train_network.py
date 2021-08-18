@@ -343,7 +343,7 @@ def gen_conf_mat(predictions,labels,idxs,num_classes,print_idxs=False):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Training and Evaluation")
     # logging details
-    #parser.add_argument("session_name",help="prefix the logging directory with this name",type=str)
+    parser.add_argument("session_name",help="prefix the logging directory with this name",type=str)
     #parser.add_argument("log_dest",help="name of directory with logging info (stats, train model, parameters, etc.)",type=str)
 
     # dataset details
