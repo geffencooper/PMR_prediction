@@ -84,7 +84,7 @@ def train_nn(args):
                     print("********** NAN ERROR ************")
                     print("output:",out)
                     print("labels:",labels)
-                    print("idxs:",get_idxs(batch))
+                    print("idxs:",get_idxs(batch,args))
                     exit()
                 curr_train_loss += loss.item()
                 loss.backward()
@@ -293,6 +293,13 @@ def eval_model(model,data_loader,device,criterion,args,print_idxs=False):
 
             # sum up the batch loss
             loss = criterion(out,labels)
+            if torch.isnan(loss):
+                print("********** NAN ERROR ************")
+                print("output:",out)
+                print("labels:",labels)
+                print("idxs:",get_idxs(batch,args))
+                print("loss",loss)
+                exit()
             eval_loss += loss.item()
 
             if args.classification:
