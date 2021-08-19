@@ -140,11 +140,10 @@ def my_collate_fn(batch):
     lengths = torch.LongTensor([len(x) for x in sequences])
 
     # get the label portion from the batch tuples
-    print(sorted_batch)
-    labels = torch.LongTensor([x[1] for x in sorted_batch])
+    labels = torch.LongTensor([int(x[1]) for x in sorted_batch])
 
     # get the index
-    idxs = torch.LongTensor([x[2] for x in sorted_batch])
+    idxs = torch.LongTensor([int(x[2]) for x in sorted_batch])
 
     return sequences_padded.float(),lengths,labels,idxs
 
