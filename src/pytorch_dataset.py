@@ -60,7 +60,7 @@ class SpeechPaceDataset(Dataset):
 '''PyTorch Dataset class for audio pace'''
 class FusedDataset(Dataset):
     # pass in the root dir of the audio data and the path to the labels csv file
-    def __init__(self,data_root_dir,labels_csv_path,normalize==False):
+    def __init__(self,data_root_dir,labels_csv_path,normalize=False):
         self.data_root_dir = data_root_dir
         self.labels_frame = pd.read_csv(labels_csv_path) # no index column because using column 0 --> tells us which patient ids in the split
         #self.detailed_labels_frame = pd.read_csv(os.join(data_root_dir,"Detailed_PHQ8_Labels.csv")) # --> tells us the moving subscore
