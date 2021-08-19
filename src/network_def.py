@@ -70,7 +70,9 @@ class SpeechPaceNN(torch.nn.Module):
         # classification
         else:
             pred = torch.nn.functional.softmax(y,dim=1)
+            print(pred)
             for i in pred:
+                print(i)
                 if torch.isnan(i):
                     print("********** NAN ERROR ************")
                     print("before softmax:",y)
