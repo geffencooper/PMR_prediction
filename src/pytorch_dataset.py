@@ -149,8 +149,7 @@ def my_collate_fn(batch):
         return sequences_padded.float(),lengths,labels,idxs
 
     except ValueError:
-        for x in sorted_batch:
-            print(x[1])
+        print(sorted_batch)
 
 
 # ---------------------------------------------------------------------------
