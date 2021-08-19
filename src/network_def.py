@@ -25,7 +25,7 @@ class SpeechPaceNN(torch.nn.Module):
 
         # Layer 2: FC for classification/regression
         self.fc = torch.nn.Linear(hidden_size,num_classes)
-        #torch.nn.init.xavier_uniform_(self.fc.weight)
+        torch.nn.init.xavier_uniform_(self.fc.weight)
 
         self.init = init_hidden_rand
         self.num_classes = num_classes
@@ -69,13 +69,8 @@ class SpeechPaceNN(torch.nn.Module):
 
         # classification
         else:
-            batch_pred = torch.nn.functional.softmax(y,dim=1)
-            for preds in batch_pred:
-                for pred in preds:
-                    if torch.isnan(pred):
-                        print("********** NAN ERROR ************")
-                        print("before softmax:",y)
-            return batch_pred 
+            y = torch.nn.functional.softmax(y,dim=1)
+            return y 
 
 
 
