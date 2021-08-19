@@ -180,9 +180,9 @@ def train_nn(args):
 # create the dataset used by the corresponding model
 def create_dataset(args,labels_csv,data_dir):
     if args.model_name == "SpeechPaceNN":
-        return SpeechPaceDataset(os.path.join(args.root_dir,data_dir),os.path.join(args.root_dir,data_dir,labels_csv))
+        return SpeechPaceDataset(os.path.join(args.root_dir,data_dir),os.path.join(args.root_dir,data_dir,labels_csv),(args.normalize=="y"))
     elif args.model_name == "PMRfusionNN":
-        return FusedDataset(args.root_dir,os.path.join(args.root_dir,labels_csv))
+        return FusedDataset(args.root_dir,os.path.join(args.root_dir,labels_csv),(args.normalize=="y"))
     else:
         print("ERROR: invalid model name")
         exit(1)

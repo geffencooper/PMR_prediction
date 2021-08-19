@@ -17,10 +17,11 @@ import os
 '''PyTorch Dataset class for audio pace'''
 class SpeechPaceDataset(Dataset):
     # pass in the root dir of the audio data and the path to the labels csv file
-    def __init__(self,data_root_dir,labels_csv_path):
+    def __init__(self,data_root_dir,labels_csv_path,normalize=False):
         self.root_dir = data_root_dir
         self.labels_frame = pd.read_csv(labels_csv_path,index_col=0)
         self.all_labels = torch.from_numpy(self.labels_frame["label"].values)
+        self.normalize = normalize
 
     def __len__(self):
         return len(self.labels_frame)
@@ -40,7 +41,8 @@ class SpeechPaceDataset(Dataset):
             data_frame = data_frame.iloc[:,np.arange(2,28)]
 
             # normalize the colummns
-            #data_frame = (data_frame-data_frame.mean())/data_frame.std()
+            if self.normalize:
+                data_frame = (data_frame-data_frame.mean())/data_frame.std()
 
             features = torch.from_numpy(data_frame.to_numpy())
 
@@ -58,7 +60,7 @@ class SpeechPaceDataset(Dataset):
 '''PyTorch Dataset class for audio pace'''
 class FusedDataset(Dataset):
     # pass in the root dir of the audio data and the path to the labels csv file
-    def __init__(self,data_root_dir,labels_csv_path):
+    def __init__(self,data_root_dir,labels_csv_path,normalize==False):
         self.data_root_dir = data_root_dir
         self.labels_frame = pd.read_csv(labels_csv_path) # no index column because using column 0 --> tells us which patient ids in the split
         #self.detailed_labels_frame = pd.read_csv(os.join(data_root_dir,"Detailed_PHQ8_Labels.csv")) # --> tells us the moving subscore
