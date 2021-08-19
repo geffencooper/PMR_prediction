@@ -75,7 +75,6 @@ class SpeechPaceNN(torch.nn.Module):
                     if torch.isnan(pred):
                         print("********** NAN ERROR ************")
                         print("before softmax:",y)
-                        exit()
             return batch_pred 
 
 
