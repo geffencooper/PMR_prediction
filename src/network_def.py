@@ -25,6 +25,7 @@ class SpeechPaceNN(torch.nn.Module):
 
         # Layer 2: FC for classification/regression
         self.fc = torch.nn.Linear(hidden_size,num_classes)
+        torch.nn.init.xavier_uniform(self.fc.weight)
 
         self.init = init_hidden_rand
         self.num_classes = num_classes
