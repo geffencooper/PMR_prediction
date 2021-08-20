@@ -28,6 +28,7 @@ val_loader = DataLoader(val_dataset,32,collate_fn=my_collate_fn_fused,sampler=Im
 
 for i,(batch) in enumerate(train_loader):
     print(batch[4])
+    print(batch[5])
     exit()
 
 # indices = list(range(len(train_dataset)))
