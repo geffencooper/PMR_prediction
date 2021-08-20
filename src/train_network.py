@@ -280,7 +280,7 @@ def eval_model(model,data_loader,device,criterion,args,print_idxs=False):
     with torch.no_grad():
         val_start=time.time()
         for i, (batch) in enumerate(data_loader):
-            print("batch:",i,"out of:",num_batches)
+            #print("batch:",i,"out of:",num_batches)
             data,labels = to_gpu(batch,device,args)
             idxs = get_idxs(batch,args).to(device)
             
