@@ -190,9 +190,9 @@ def create_dataset(args,labels_csv,data_dir):
 # create the dataloader based on the collate_fn used by the corresponding model
 def create_loader(dataset,args):
     if args.model_name == "SpeechPaceNN":
-        return DataLoader(dataset,args.batch_size,collate_fn=my_collate_fn)
+        return DataLoader(dataset,args.batch_size,collate_fn=my_collate_fn,sampler=ImbalancedDatasetSampler(dataset))
     elif args.model_name == "PMRfusionNN":
-        return DataLoader(dataset,args.batch_size,collate_fn=my_collate_fn_fused)
+        return DataLoader(dataset,args.batch_size,collate_fn=my_collate_fn_fused,sampler=ImbalancedDatasetSampler(dataset))
     else:
         print("ERROR: invalid model name")
         exit(1)
