@@ -1,0 +1,1 @@
+-this model tries a larger batch size with similar results

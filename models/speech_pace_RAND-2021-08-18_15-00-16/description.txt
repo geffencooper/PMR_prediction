@@ -1,0 +1,2 @@
+-this model initializes the hidden state with random values instead of zeros
+-this seems to have poor performance so future models use zeros to initialize the hidden state

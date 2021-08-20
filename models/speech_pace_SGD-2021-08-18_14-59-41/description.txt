@@ -1,0 +1,2 @@
+-This model only differs from the base one in that it uses SGD as the optimizer
+-this model had poor performance

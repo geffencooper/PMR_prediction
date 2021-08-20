@@ -1,0 +1,2 @@
+-this model is different from the base in that it uses RMSprop rather than Adam
+-this model performed better and other models are now using RMS over Adam

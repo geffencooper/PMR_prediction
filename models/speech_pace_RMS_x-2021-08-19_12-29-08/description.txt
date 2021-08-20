@@ -1,0 +1,3 @@
+-this model has the same configuration as the other RMS model except that it uses xavier initialization for the FC layer
+-this is a manual edit and can't be specified in the config file, it seems to have improved performance
+-future models use xavier init on the FC layer

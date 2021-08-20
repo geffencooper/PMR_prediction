@@ -1,0 +1,3 @@
+-The first model trained for speech pace detection with the 'base' hyperparameters.
+-The rest of the models branch out from this one
+-This model uses a different optimizer: Adam 
