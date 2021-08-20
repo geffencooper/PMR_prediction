@@ -25,6 +25,6 @@ print(val_dataset.get_dist())
 train_loader = DataLoader(train_dataset,32,collate_fn=my_collate_fn_fused,sampler=ImbalancedDatasetSampler(train_dataset))
 val_loader = DataLoader(val_dataset,32,collate_fn=my_collate_fn_fused,sampler=ImbalancedDatasetSampler(val_dataset))
 
-for i,(batch) in train_loader:
+for i,(batch) in enumerate(train_loader):
     print(batch)
     exit()
