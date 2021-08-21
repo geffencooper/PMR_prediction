@@ -295,6 +295,9 @@ def eval_model(model,data_loader,device,criterion,args,print_idxs=False):
 
             # sum up the batch loss
             loss = criterion(out,labels)
+            print("output:",out)
+            print("labels:",labels)
+            print("idxs:",get_idxs(batch,args))
             if torch.isnan(loss):
                 print("********** NAN ERROR ************")
                 print("output:",out)
