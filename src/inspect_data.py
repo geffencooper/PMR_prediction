@@ -14,8 +14,8 @@ import os
 import pandas as pd
 
 root_dir="/data/perception-working/Geffen/avec_data/"
-train_labels_csv="binary_sampled_train_metadata2.csv"
-val_labels_csv="binary_sampled_val_metadata2.csv"
+train_labels_csv="binary_sampled_train_metadata.csv"
+val_labels_csv="binary_sampled_val_metadata.csv"
 
 train_dataset = FusedDataset(root_dir,os.path.join(root_dir,train_labels_csv))
 val_dataset = FusedDataset(root_dir,os.path.join(root_dir,val_labels_csv))
