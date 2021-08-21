@@ -93,9 +93,6 @@ def train_nn(args):
                 # print training statistics every n batches
                 if i % args.loss_freq == 0 and i != 0:
                     print("Train Epoch: {} Iteration: {} [{}/{} ({:.0f}%)]\t Loss: {:.6f}".format(epoch,i,i*args.batch_size,len(train_loader.dataset),100.*i/len(train_loader),loss.item()))
-                    print("output:",out)
-                    print("labels:",labels)
-                    print("idxs:",get_idxs(batch,args))
                 
                 # do a validation pass every m batches (may not want to wait till the end of an epoch)
                 if i % args.val_freq == 0 and i != 0:
@@ -108,7 +105,7 @@ def train_nn(args):
                     curr_train_loss = 0 # reset
 
                     # validation pass
-                    accuracy,val_loss = eval_model(model,val_loader,device,criterion,args,True)
+                    accuracy,val_loss = eval_model(model,val_loader,device,criterion,args)
                     val_accuracies.append(accuracy)
                     val_losses.append(val_loss)
 
