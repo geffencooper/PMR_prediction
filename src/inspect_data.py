@@ -23,10 +23,10 @@ val_dataset = FusedDataset(root_dir,os.path.join(root_dir,val_labels_csv))
 print(train_dataset.get_dist())
 print(val_dataset.get_dist())
 
-train_loader = DataLoader(train_dataset,32,collate_fn=my_collate_fn_fused,sampler=ImbalancedDatasetSampler(train_dataset)).batch_sampler
-val_loader = DataLoader(val_dataset,32,collate_fn=my_collate_fn_fused,sampler=ImbalancedDatasetSampler(val_dataset)).batch_sampler
+train_loader = DataLoader(train_dataset,32,collate_fn=my_collate_fn_fused,sampler=ImbalancedDatasetSampler(train_dataset))
+val_loader = DataLoader(val_dataset,32,collate_fn=my_collate_fn_fused,sampler=ImbalancedDatasetSampler(val_dataset))
 
-for i, batch_indices in enumerate(train_loader):
+for i, batch_indices in enumerate(train_loader.batch_sampler):
     print(f'Batch #{i} indices: ', batch_indices)
     labels = []
     for idx in batch_indices:
