@@ -26,12 +26,12 @@ print(val_dataset.get_dist())
 train_loader = DataLoader(train_dataset,32,collate_fn=my_collate_fn_fused,sampler=ImbalancedDatasetSampler(train_dataset))
 val_loader = DataLoader(val_dataset,32,collate_fn=my_collate_fn_fused,sampler=ImbalancedDatasetSampler(val_dataset))
 
+labels = train_dataset.get_labels()
+dist = [0,0]
 for i, batch_indices in enumerate(train_loader.batch_sampler):
-    print(f'Batch #{i} indices: ', batch_indices)
-    labels = []
     for idx in batch_indices:
-        labels.append(train_loader.dataset.__getitem__(idx)[2])
-    print("labels:",labels)
+        dist[labels[idx]]+=1
+    print(f'Batch #{i} indices dist: ', dist)
 
 # for i, batch_indices in enumerate(val_loader):
 #     print(f'Batch #{i} indices: ', batch_indices)
