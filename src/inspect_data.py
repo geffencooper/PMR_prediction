@@ -28,9 +28,13 @@ val_loader = DataLoader(val_dataset,32,collate_fn=my_collate_fn_fused,sampler=Im
 
 for i, batch_indices in enumerate(train_loader):
     print(f'Batch #{i} indices: ', batch_indices)
+    labels = []
+    for idx in batch_indices:
+        labels.append(train_loader.dataset.__getitem__(idx)[2])
+    print("labels:",labels)
 
-for i, batch_indices in enumerate(val_loader):
-    print(f'Batch #{i} indices: ', batch_indices)
+# for i, batch_indices in enumerate(val_loader):
+#     print(f'Batch #{i} indices: ', batch_indices)
 # for i,(batch) in enumerate(val_loader):
 #     print(batch[4])
 #     print(batch[5])
