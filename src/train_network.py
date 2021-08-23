@@ -17,6 +17,7 @@ from torchsampler import ImbalancedDatasetSampler
 import argparse
 import os
 
+dist = [0,0]
 # ===================================== Training Function =====================================
 def train_nn(args):
     # get the device, hopefully a GPU
@@ -40,6 +41,7 @@ def train_nn(args):
     val_accuracies = []
     iterations = []
     curr_train_loss = 0
+
 
     # Create and load the datasets
     train_dataset = create_dataset(args,args.train_labels_csv,args.train_data_dir)
@@ -68,7 +70,7 @@ def train_nn(args):
         for epoch in range(args.num_epochs):
             # get the next batch
             for i, batch in enumerate(train_loader):
-
+                get_label_dist()
                 # load the data and labels to the gpu
                 data,labels = to_gpu(batch,device,args)
 
@@ -258,6 +260,20 @@ def get_idxs(batch,args):
         return batch[3]
     elif args.model_name == "PMRfusionNN":
         return batch[5]
+    else:
+        print("ERROR: invalid model name")
+        exit(1)
+
+# get the label distribution in the batch
+def get_label_dist(batch,args):
+    if args.model_name == "SpeechPaceNN":
+        print("ERROR: invalid model name")
+        exit(1)
+    elif args.model_name == "PMRfusionNN":
+        labels = batch[5]
+        for l in labels:
+            dist[labels[l]]+=1
+        print(dist)
     else:
         print("ERROR: invalid model name")
         exit(1)
