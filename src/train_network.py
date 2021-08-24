@@ -223,6 +223,7 @@ def create_model(args):
             if args.load_trained == "y":
                 model = PMRfusionNN(args.input_size,args.hidden_size,args.num_layers,args.num_classes,args.gpu_i,args.hidden_init_rand),torch.nn.CrossEntropyLoss()
                 model.load_state_dict(torch.load(args.trained_path))
+                return model
             else:
                 return PMRfusionNN(args.input_size,args.hidden_size,args.num_layers,args.num_classes,args.gpu_i,args.hidden_init_rand),torch.nn.CrossEntropyLoss()
         elif args.regression == "y":
