@@ -5,7 +5,7 @@ This class is used to try out the network
 '''
 
 import torch
-from network_def import SpeechPaceNN
+from network_def import PMRfusionNN, SpeechPaceNN
 import pandas as pd
 import numpy as np
 
@@ -25,6 +25,8 @@ class TestNet():
 
 
 if __name__ =="__main__":
-    tn = TestNet("../models/2021-07-30_16-18-53/END_model.pth")
+    #tn = TestNet("../models/2021-07-30_16-18-53/END_model.pth")
+    tn = PMRfusionNN(23,64,1,2,2)
+    tn.load_state_dict(torch.load("../models/PMR_fusion-2021-08-20_12-19-49/BEST_model.pth",map_location=torch.device('cpu')))
     #tn.forward("C:/Users/gcooper/Desktop/av_feature_extraction/common_voice/aug_train/training_data/sample-000000.csv")
-    tn.forward("C:/Users/gcooper/Desktop/av_feature_extraction/PMR_prediction/small_test/data5.csv")
+    #tn.forward("C:/Users/gcooper/Desktop/av_feature_extraction/PMR_prediction/small_test/data5.csv")
