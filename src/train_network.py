@@ -220,7 +220,11 @@ def create_model(args):
             return SpeechPaceNN(args.input_size,args.hidden_size,args.num_layers,-1,args.gpu_i,args.hidden_init_rand),torch.nn.MSELoss()
     elif args.model_name == "PMRfusionNN":
         if args.classification == "y":
-            return PMRfusionNN(args.input_size,args.hidden_size,args.num_layers,args.num_classes,args.gpu_i,args.hidden_init_rand),torch.nn.CrossEntropyLoss()
+            if args.load_trained == "y":
+                model = PMRfusionNN(args.input_size,args.hidden_size,args.num_layers,args.num_classes,args.gpu_i,args.hidden_init_rand),torch.nn.CrossEntropyLoss()
+                model.load_state_dict(torch.load(args.trained_path))
+            else:
+                return PMRfusionNN(args.input_size,args.hidden_size,args.num_layers,args.num_classes,args.gpu_i,args.hidden_init_rand),torch.nn.CrossEntropyLoss()
         elif args.regression == "y":
             return PMRfusionNN(args.input_size,args.hidden_size,args.num_layers,-1,args.gpu_i,args.hidden_init_rand),torch.nn.MSELoss()
     else:
@@ -403,6 +407,10 @@ if __name__ == "__main__":
     parser.add_argument("num_epochs",help="number of times to go through entire training set",type=int)
     parser.add_argument("normalize",help="normalize input features (y/n)",type=str)
     parser.add_argument("hidden_init_rand",help="initialize the hidden state with random values, otherwise use zeros (y/n)",type=str)
+
+    # extra optional
+    parser.add_argument("--load_trained",help="load a pretrained model (y/n)",type=str)
+    parser.add_argument("--trained_path",help="local path to trained model",type=str)
 
     args = parser.parse_args()
 
