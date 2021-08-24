@@ -70,7 +70,7 @@ def train_nn(args):
         for epoch in range(args.num_epochs):
             # get the next batch
             for i, batch in enumerate(train_loader):
-                get_label_dist()
+                #get_label_dist(batch,args)
                 # load the data and labels to the gpu
                 data,labels = to_gpu(batch,device,args)
 
