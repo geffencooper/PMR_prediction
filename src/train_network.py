@@ -107,7 +107,7 @@ def train_nn(args):
                     curr_train_loss = 0 # reset
 
                     # validation pass
-                    accuracy,val_loss = eval_model(model,val_loader,device,criterion,args)
+                    accuracy,val_loss = eval_model(model,val_loader,device,criterion,args,print_idxs=True)
                     val_accuracies.append(accuracy)
                     val_losses.append(val_loss)
 
