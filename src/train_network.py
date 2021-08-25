@@ -107,7 +107,7 @@ def train_nn(args):
                     curr_train_loss = 0 # reset
 
                     # validation pass
-                    accuracy,val_loss = eval_model(model,val_loader,device,criterion,args,print_idxs=True)
+                    accuracy,val_loss = eval_model(model,val_loader,device,criterion,args)
                     val_accuracies.append(accuracy)
                     val_losses.append(val_loss)
 
@@ -364,7 +364,7 @@ def gen_conf_mat(predictions,labels,idxs,num_classes,print_idxs=False):
             conf_mat[x,y] = conf_mat[x,y]+1
             if x!=y:
                 incorrect.append((idxs[i].item(),"P:"+str(x)+" GT:"+str(y)))
-        #print("Incorrect Samples:",incorrect)
+        print("Incorrect Samples:",incorrect)
     else:
         # fill the confusion matrix
         for pair in stacked:
@@ -374,8 +374,7 @@ def gen_conf_mat(predictions,labels,idxs,num_classes,print_idxs=False):
     print("Confusion Matrix")
     print(conf_mat)
 
-# ===================================== Main =====================================
-if __name__ == "__main__":
+def parse_args():
     parser = argparse.ArgumentParser(description="Training and Evaluation")
     # logging details
     parser.add_argument("session_name",help="prefix the logging directory with this name",type=str)
@@ -425,4 +424,12 @@ if __name__ == "__main__":
     
     print("============================ Raw Args ============================")
     print(args)
+
+    return args
+
+
+
+# ===================================== Main =====================================
+if __name__ == "__main__":
+    args = parse_args()
     train_nn(args)
