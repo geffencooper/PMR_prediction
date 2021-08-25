@@ -92,12 +92,13 @@ def train_nn(args):
                 loss.backward()
                 optimizer.step()
                 
+                eval_model(model,val_loader,device,criterion,args,print_idxs=True)
                 # print training statistics every n batches
-                if i % args.loss_freq == 0 and i != 0:
+                if False and i % args.loss_freq == 0 and i != 0:
                     print("Train Epoch: {} Iteration: {} [{}/{} ({:.0f}%)]\t Loss: {:.6f}".format(epoch,i,i*args.batch_size,len(train_loader.dataset),100.*i/len(train_loader),loss.item()))
                 
                 # do a validation pass every m batches (may not want to wait till the end of an epoch)
-                if i % args.val_freq == 0 and i != 0:
+                if False and i % args.val_freq == 0 and i != 0:
                     print("\n\n----------------- Epoch {} Iteration {} -----------------\n".format(epoch,i))
 
                     # keep track of training and validation loss, since training forward pass takes a while do every m iterations instead of every epoch
@@ -347,20 +348,25 @@ def eval_model(model,data_loader,device,criterion,args,print_idxs=False):
 '''Helper function to create a confusion matrix of classification results'''
 # this gets called by eval_model with the predictions and labels
 def gen_conf_mat(predictions,labels,idxs,num_classes,print_idxs=False):
+    print("predictions:",predictions)
+    print("lables:",labels)
     # get the prediction from the max output
     preds = predictions.argmax(dim=1)
+    print("preds:",preds)
 
     # generate label-prediction pairs
     stacked = torch.stack((preds,labels),dim=1)
+    print("stacked:",stacked)
 
     # create the confusion matrix
     conf_mat = torch.zeros(num_classes,num_classes,dtype=torch.int64)
-
+    
     if print_idxs == True:
         incorrect = []
         # fill the confusion matrix
         for i,pair in enumerate(stacked):
             x,y = pair.tolist()
+            print(x,y)
             conf_mat[x,y] = conf_mat[x,y]+1
             if x!=y:
                 incorrect.append((idxs[i].item(),"P:"+str(x)+" GT:"+str(y)))
