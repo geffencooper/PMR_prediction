@@ -194,7 +194,7 @@ def create_loader(dataset,args):
     if args.model_name == "SpeechPaceNN":
         return DataLoader(dataset,args.batch_size,collate_fn=my_collate_fn)
     elif args.model_name == "PMRfusionNN":
-        return DataLoader(dataset,args.batch_size,collate_fn=my_collate_fn_fused)#,sampler=ImbalancedDatasetSampler(dataset))
+        return DataLoader(dataset,args.batch_size,collate_fn=my_collate_fn_fused,sampler=ImbalancedDatasetSampler(dataset))
     else:
         print("ERROR: invalid model name")
         exit(1)
