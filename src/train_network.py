@@ -364,7 +364,7 @@ def gen_conf_mat(predictions,labels,idxs,num_classes,print_idxs=False):
             conf_mat[x,y] = conf_mat[x,y]+1
             if x!=y:
                 incorrect.append((idxs[i].item(),"P:"+str(x)+" GT:"+str(y)))
-        print("Incorrect Samples:",incorrect)
+        #print("Incorrect Samples:",incorrect)
     else:
         # fill the confusion matrix
         for pair in stacked:
