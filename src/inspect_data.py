@@ -14,24 +14,36 @@ import os
 import pandas as pd
 
 root_dir="/data/perception-working/Geffen/avec_data/"
-train_labels_csv="binary_sampled_train_metadata.csv"
-val_labels_csv="binary_sampled_val_metadata.csv"
+train_labels_csv="binary_train_metadata_one_to_one.csv"
+val_labels_csv="binary_val_metadata_one_to_one.csv"
 
-train_dataset = FusedDataset(root_dir,os.path.join(root_dir,train_labels_csv))
+#train_dataset = FusedDataset(root_dir,os.path.join(root_dir,train_labels_csv))
 val_dataset = FusedDataset(root_dir,os.path.join(root_dir,val_labels_csv))
 
-print(train_dataset.get_dist())
+#print(train_dataset.get_dist())
 print(val_dataset.get_dist())
 
-train_loader = DataLoader(train_dataset,32,collate_fn=my_collate_fn_fused,sampler=ImbalancedDatasetSampler(train_dataset))
+#rain_loader = DataLoader(train_dataset,32,collate_fn=my_collate_fn_fused,sampler=ImbalancedDatasetSampler(train_dataset))
 val_loader = DataLoader(val_dataset,32,collate_fn=my_collate_fn_fused,sampler=ImbalancedDatasetSampler(val_dataset))
 
-labels = val_dataset.get_labels()
-dist = [0,0]
-for i, batch_indices in enumerate(val_loader.batch_sampler):
-    for idx in batch_indices:
-        dist[labels[idx]]+=1
-    print(f'Batch #{i} indices dist: ', dist)
+all_preds = torch.tensor([])
+for i, (batch) in enumerate(val_loader):
+    # accumulate predictions and labels
+    all_labels = torch.cat((all_labels,batch[4]),dim=0)
+print(len(all_labels))
+    
+all_preds = torch.tensor([])
+for i, (batch) in enumerate(val_loader):
+    # accumulate predictions and labels
+    all_labels = torch.cat((all_labels,batch[4]),dim=0)
+print(len(all_labels))
+
+# labels = val_dataset.get_labels()
+# dist = [0,0]
+# for i, batch_indices in enumerate(val_loader.batch_sampler):
+#     for idx in batch_indices:
+#         dist[labels[idx]]+=1
+#     print(f'Batch #{i} indices dist: ', dist)
 
 # for i, batch_indices in enumerate(val_loader):
 #     print(f'Batch #{i} indices: ', batch_indices)
