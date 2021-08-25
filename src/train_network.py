@@ -92,7 +92,6 @@ def train_nn(args):
                 loss.backward()
                 optimizer.step()
                 
-                #eval_model(model,val_loader,device,criterion,args,print_idxs=True)
                 # print training statistics every n batches
                 if i % args.loss_freq == 0 and i != 0:
                     print("Train Epoch: {} Iteration: {} [{}/{} ({:.0f}%)]\t Loss: {:.6f}".format(epoch,i,i*args.batch_size,len(train_loader.dataset),100.*i/len(train_loader),loss.item()))
@@ -348,16 +347,8 @@ def eval_model(model,data_loader,device,criterion,args,print_idxs=False):
 '''Helper function to create a confusion matrix of classification results'''
 # this gets called by eval_model with the predictions and labels
 def gen_conf_mat(predictions,labels,idxs,num_classes,print_idxs=False):
-    # l_dist = [0,0]
-    # for l in labels:
-    #     l_dist[l]+=1
-    # print("label_dist:",l_dist)
     # get the prediction from the max output
     preds = predictions.argmax(dim=1)
-    # p_dist = [0,0]
-    # for p in preds:
-    #     p_dist[p]+=1
-    # print("pred_dist:",p_dist)
 
     # generate label-prediction pairs
     stacked = torch.stack((preds,labels),dim=1)
