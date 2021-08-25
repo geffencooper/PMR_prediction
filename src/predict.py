@@ -21,7 +21,7 @@ if __name__ =="__main__":
     device = torch.device("cuda:"+str(args.gpu_i) if torch.cuda.is_available() else "cpu")
 
     root_dir = "/data/perception-working/Geffen/avec_data/"
-    val_dataset = FusedDataset(root_dir,root_dir+"binary_val_metadata.csv")
+    val_dataset = FusedDataset(root_dir,root_dir+"binary_val_metadata_one_to_one.csv")
     val_loader = DataLoader(val_dataset,32,collate_fn=my_collate_fn_fused)#,sampler=ImbalancedDatasetSampler(val_dataset))
 
     pmr = PMRfusionNN(23,64,1,2,2)
