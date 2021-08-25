@@ -26,13 +26,13 @@ print(val_dataset.get_dist())
 #rain_loader = DataLoader(train_dataset,32,collate_fn=my_collate_fn_fused,sampler=ImbalancedDatasetSampler(train_dataset))
 val_loader = DataLoader(val_dataset,32,collate_fn=my_collate_fn_fused,sampler=ImbalancedDatasetSampler(val_dataset))
 
-all_preds = torch.tensor([])
+all_labels = torch.tensor([])
 for i, (batch) in enumerate(val_loader):
     # accumulate predictions and labels
     all_labels = torch.cat((all_labels,batch[4]),dim=0)
 print(len(all_labels))
     
-all_preds = torch.tensor([])
+all_labels = torch.tensor([])
 for i, (batch) in enumerate(val_loader):
     # accumulate predictions and labels
     all_labels = torch.cat((all_labels,batch[4]),dim=0)
