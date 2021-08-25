@@ -92,13 +92,13 @@ def train_nn(args):
                 loss.backward()
                 optimizer.step()
                 
-                eval_model(model,val_loader,device,criterion,args,print_idxs=True)
+                #eval_model(model,val_loader,device,criterion,args,print_idxs=True)
                 # print training statistics every n batches
-                if False and i % args.loss_freq == 0 and i != 0:
+                if i % args.loss_freq == 0 and i != 0:
                     print("Train Epoch: {} Iteration: {} [{}/{} ({:.0f}%)]\t Loss: {:.6f}".format(epoch,i,i*args.batch_size,len(train_loader.dataset),100.*i/len(train_loader),loss.item()))
                 
                 # do a validation pass every m batches (may not want to wait till the end of an epoch)
-                if False and i % args.val_freq == 0 and i != 0:
+                if i % args.val_freq == 0 and i != 0:
                     print("\n\n----------------- Epoch {} Iteration {} -----------------\n".format(epoch,i))
 
                     # keep track of training and validation loss, since training forward pass takes a while do every m iterations instead of every epoch
@@ -348,16 +348,16 @@ def eval_model(model,data_loader,device,criterion,args,print_idxs=False):
 '''Helper function to create a confusion matrix of classification results'''
 # this gets called by eval_model with the predictions and labels
 def gen_conf_mat(predictions,labels,idxs,num_classes,print_idxs=False):
-    l_dist = [0,0]
-    for l in labels:
-        l_dist[l]+=1
-    print("label_dist:",l_dist)
+    # l_dist = [0,0]
+    # for l in labels:
+    #     l_dist[l]+=1
+    # print("label_dist:",l_dist)
     # get the prediction from the max output
     preds = predictions.argmax(dim=1)
-    p_dist = [0,0]
-    for p in preds:
-        p_dist[p]+=1
-    print("pred_dist:",p_dist)
+    # p_dist = [0,0]
+    # for p in preds:
+    #     p_dist[p]+=1
+    # print("pred_dist:",p_dist)
 
     # generate label-prediction pairs
     stacked = torch.stack((preds,labels),dim=1)
