@@ -169,5 +169,5 @@ class PMRfusionNN(torch.nn.Module):
 
         # classification
         else:
-            y = torch.nn.functional.softmax(y_fused,dim=1)
-            return y 
+            #y = torch.nn.functional.softmax(y_fused,dim=1)
+            return y_fused 
