@@ -348,25 +348,28 @@ def eval_model(model,data_loader,device,criterion,args,print_idxs=False):
 '''Helper function to create a confusion matrix of classification results'''
 # this gets called by eval_model with the predictions and labels
 def gen_conf_mat(predictions,labels,idxs,num_classes,print_idxs=False):
-    print("predictions:",predictions)
-    print("lables:",labels)
+    l_dist = [0,0]
+    for l in labels:
+        l_dist[l]+=1
+    print("label_dist:",l_dist)
     # get the prediction from the max output
     preds = predictions.argmax(dim=1)
-    print("preds:",preds)
+    p_dist = [0,0]
+    for p in preds:
+        p_dist[p]+=1
+    print("pred_dist:",p_dist)
 
     # generate label-prediction pairs
     stacked = torch.stack((preds,labels),dim=1)
-    print("stacked:",stacked)
 
     # create the confusion matrix
     conf_mat = torch.zeros(num_classes,num_classes,dtype=torch.int64)
-    
+
     if print_idxs == True:
         incorrect = []
         # fill the confusion matrix
         for i,pair in enumerate(stacked):
             x,y = pair.tolist()
-            print(x,y)
             conf_mat[x,y] = conf_mat[x,y]+1
             if x!=y:
                 incorrect.append((idxs[i].item(),"P:"+str(x)+" GT:"+str(y)))
