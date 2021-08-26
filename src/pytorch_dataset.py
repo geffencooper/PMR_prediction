@@ -101,6 +101,7 @@ class FusedDataset(Dataset):
             print(visual_features)
             if torch.isnan(visual_features).any():
                 print("nan error")
+                print("patient:",patient_id)
                 exit()
             exit()
             # merge 1,2,3 into a class
