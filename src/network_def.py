@@ -89,8 +89,8 @@ class PMRfusionNN(torch.nn.Module):
         self.pace_net = SpeechPaceNN(26,64,1,3,gpu_instance)
         self.pace_net.load_state_dict(torch.load('../models/speech_pace_RMS_x-2021-08-19_12-29-08/BEST_model.pth',map_location=self.device))
 
-        for param in self.pace_net.parameters():
-            param.requires_grad = False
+        # for param in self.pace_net.parameters():
+        #     param.requires_grad = False
         
 
         # Layer 1: GRU for visual features
