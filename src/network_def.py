@@ -99,6 +99,8 @@ class PMRfusionNN(torch.nn.Module):
         # Layer 2: FC for classification/regression after fusion
         self.fc_fusion = torch.nn.Linear(2*hidden_size,num_classes)
 
+        self.dropout = torch.nn.Dropout(0.25)
+
         self.init = init_hidden_rand
         self.num_classes = num_classes
 
@@ -160,6 +162,8 @@ class PMRfusionNN(torch.nn.Module):
         # ============== concatenate and pass through FC ==============
         
         fused = torch.cat((y_audio,y_visual),dim=1)
+
+        fused = self.dropout(fused)
 
         y_fused = self.fc_fusion(fused)
 
