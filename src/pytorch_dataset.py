@@ -65,6 +65,7 @@ class FusedDataset(Dataset):
         self.labels_frame = pd.read_csv(labels_csv_path) # no index column because using column 0 --> tells us which patient ids in the split
         #self.detailed_labels_frame = pd.read_csv(os.join(data_root_dir,"Detailed_PHQ8_Labels.csv")) # --> tells us the moving subscore
         #self.all_labels = torch.from_numpy(self.labels_frame["label"].values)
+        self.normalize = normalize
 
     def __len__(self):
         return len(self.labels_frame)
@@ -78,12 +79,20 @@ class FusedDataset(Dataset):
             # get the audio features
             audio_features = pd.read_csv(os.path.join(self.data_root_dir,str(int(patient_id))+"_OpenSMILE2.3.0_mfcc.csv"),sep=";",skiprows=int(start*100),nrows=int((end-start)*100))
             audio_features = audio_features.iloc[:,np.arange(2,28)]
+
+            if self.normalize:
+                audio_features = (audio_features-audio_features.mean())/audio_features.std()
+
             audio_features = torch.from_numpy(audio_features.to_numpy())
             #print("audio features len:",len(audio_features))
 
             # get the vidual features
             visual_features = pd.read_csv(os.path.join(self.data_root_dir,str(int(patient_id))+"_OpenFace2.1.0_Pose_gaze_AUs.csv"),sep=",",skiprows=int(start*30),nrows=int((end-start)*30))
             visual_features = visual_features.iloc[:,np.arange(1,24)]
+
+            if self.normalize:
+                visual_features = (visual_features-visual_features.mean())/visual_features.std()
+
             visual_features = torch.from_numpy(visual_features.to_numpy())
 
             # merge 1,2,3 into a class
