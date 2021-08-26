@@ -103,7 +103,7 @@ class FusedDataset(Dataset):
                 print("visual: nan error")
                 print("patient:",patient_id)
                 for i,row in enumerate(visual_features):
-                    if torch.isnan(row):
+                    if torch.isnan(row).any():
                         print(row)
                         print(i)
                 exit()
