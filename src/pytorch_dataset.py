@@ -92,7 +92,7 @@ class FusedDataset(Dataset):
 
             # get the vidual features
             visual_features = pd.read_csv(os.path.join(self.data_root_dir,str(int(patient_id))+"_OpenFace2.1.0_Pose_gaze_AUs.csv"),sep=",",skiprows=int(start*30),nrows=int((end-start)*30))
-            visual_features = visual_features.iloc[:,np.arange(1,24)]
+            visual_features = visual_features.iloc[:,np.concatenate((np.arange(4,10),np.arange(18,35)))]
 
             if self.normalize:
                 visual_features = (visual_features-visual_features.mean())/visual_features.std()
@@ -103,7 +103,7 @@ class FusedDataset(Dataset):
                 print("nan error")
                 print("patient:",patient_id)
                 exit()
-            exit()
+                
             # merge 1,2,3 into a class
             if label > 0:
                 label = 1
