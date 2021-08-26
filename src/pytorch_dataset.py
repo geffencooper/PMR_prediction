@@ -84,6 +84,10 @@ class FusedDataset(Dataset):
                 audio_features = (audio_features-audio_features.mean())/audio_features.std()
 
             audio_features = torch.from_numpy(audio_features.to_numpy())
+            print(audio_features)
+            if torch.isnan(audio_features):
+                print("nan error")
+                exit()
             #print("audio features len:",len(audio_features))
 
             # get the vidual features
@@ -94,7 +98,11 @@ class FusedDataset(Dataset):
                 visual_features = (visual_features-visual_features.mean())/visual_features.std()
 
             visual_features = torch.from_numpy(visual_features.to_numpy())
-
+            print(visual_features)
+            if torch.isnan(visual_features):
+                print("nan error")
+                exit()
+            exit()
             # merge 1,2,3 into a class
             if label > 0:
                 label = 1
