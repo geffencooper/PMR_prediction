@@ -1,0 +1,2 @@
+-this model normalizes the input features
+-it was trained for more epochs and seems to get the best performance

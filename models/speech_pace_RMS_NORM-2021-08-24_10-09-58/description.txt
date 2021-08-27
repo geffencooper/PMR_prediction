@@ -1,0 +1,2 @@
+-this model normalizes the input features
+-there is a slight increase in performance but normalization will be important for fusion
