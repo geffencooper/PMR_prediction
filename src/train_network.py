@@ -231,7 +231,7 @@ def create_optimizer(model,args):
 def create_model(args):
     if args.model_name == "SpeechPaceNN":
         if args.classification == "y":
-            return SpeechPaceNN(args.input_size,args.hidden_size,args.num_layers,args.num_classes,args.gpu_i,args.hidden_init_rand),torch.nn.CrossEntropyLoss()
+            return SpeechPaceNN(args),torch.nn.CrossEntropyLoss()
         elif args.regression == "y":
             return SpeechPaceNN(args.input_size,args.hidden_size,args.num_layers,-1,args.gpu_i,args.hidden_init_rand),torch.nn.MSELoss()
     elif args.model_name == "PMRfusionNN":
@@ -248,12 +248,12 @@ def create_model(args):
             else:
                 criterion = torch.nn.CrossEntropyLoss()
             if args.load_trained == "y":
-                model = PMRfusionNN(args.input_size,args.hidden_size,args.num_layers,args.num_classes,args.gpu_i,args.hidden_init_rand)
+                model = PMRfusionNN(args)
                 model.load_state_dict(torch.load(args.trained_path))
                 model.train()
                 return model,criterion
             else:
-                return PMRfusionNN(args.input_size,args.hidden_size,args.num_layers,args.num_classes,args.gpu_i,args.hidden_init_rand),criterion
+                return PMRfusionNN(args),criterion
         elif args.regression == "y":
             return PMRfusionNN(args.input_size,args.hidden_size,args.num_layers,-1,args.gpu_i,args.hidden_init_rand),torch.nn.MSELoss()
     else:
