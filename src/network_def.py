@@ -10,6 +10,7 @@ import torch
 from torch.cuda import set_device
 import torch.nn
 import torch.nn.utils.rnn as rnn_utils
+import copy 
 
 class SpeechPaceNN(torch.nn.Module):
     def __init__(self,args):
@@ -94,7 +95,10 @@ class PMRfusionNN(torch.nn.Module):
         self.hidden_size = args.hidden_size # user defined hyperparameter
         self.num_layers = args.num_layers # stacked layers
 
-        self.pace_net = SpeechPaceNN(args)
+        args_copy = copy.deepcopy(args)
+        args_copy.input_size = 26
+        args_copy.num_classes = 3
+        self.pace_net = SpeechPaceNN(args_copy)
         if args.normalize == "n":
             self.pace_net.load_state_dict(torch.load('../models/speech_pace_RMS_x-2021-08-19_12-29-08/BEST_model.pth',map_location=self.device))
         else:
