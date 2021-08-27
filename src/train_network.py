@@ -201,7 +201,7 @@ def create_loader(dataset,args):
         if args.imbalanced_sampler == "y":
             return DataLoader(dataset,args.batch_size,collate_fn=my_collate_fn_fused,sampler=ImbalancedDatasetSampler(dataset))
         else:
-            return DataLoader(dataset,args.batch_size,collate_fn=my_collate_fn_fused)
+            return DataLoader(dataset,args.batch_size,collate_fn=my_collate_fn_fused,shuffle=True)
     else:
         print("ERROR: invalid model name")
         exit(1)
