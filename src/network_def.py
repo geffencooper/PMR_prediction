@@ -31,7 +31,7 @@ class SpeechPaceNN(torch.nn.Module):
 
         self.dropout = torch.nn.Dropout(args.droput_prob)
 
-        self.init = args.init_hidden_rand
+        self.init = args.hidden_init_rand
         self.num_classes = args.num_classes
 
     # initialize the hidden state at the start of each forward pass
@@ -113,7 +113,7 @@ class PMRfusionNN(torch.nn.Module):
 
         self.dropout = torch.nn.Dropout(args.droput_prob)
 
-        self.init = args.init_hidden_rand
+        self.init = args.hidden_init_rand
         self.num_classes = args.num_classes
 
     # initialize the hidden state at the start of each forward pass
