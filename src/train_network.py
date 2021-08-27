@@ -242,6 +242,7 @@ def create_model(args):
                 df = pd.read_csv(labels_csv)
                 labels = df["PHQ_Moving_Score"].values
                 class_weights = sku.class_weight.compute_class_weight('balanced',classes=np.unique(labels),y=labels)
+                class_weights = torch.tensor(class_weights,dtype=torch.float)
                 print("class weights: ",class_weights)
                 criterion = torch.nn.CrossEntropyLoss(weight=class_weights)
             else:
