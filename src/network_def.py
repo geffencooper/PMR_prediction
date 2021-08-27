@@ -94,7 +94,7 @@ class PMRfusionNN(torch.nn.Module):
         self.hidden_size = args.hidden_size # user defined hyperparameter
         self.num_layers = args.num_layers # stacked layers
 
-        self.pace_net = SpeechPaceNN(26,64,1,3,args.gpu_i)
+        self.pace_net = SpeechPaceNN(args)
         if args.normalize == "n":
             self.pace_net.load_state_dict(torch.load('../models/speech_pace_RMS_x-2021-08-19_12-29-08/BEST_model.pth',map_location=self.device))
         else:
