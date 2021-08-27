@@ -209,17 +209,17 @@ def create_loader(dataset,args):
 # create the optimizer specified
 def create_optimizer(model,args):
     if args.optim == "Adam":
-        if args.l2_reg:
+        if args.l2_reg == "y":
             return torch.optim.Adam(model.parameters(),lr=args.lr,weight_decay=args.weight_decay_amnt)
         else:
             return torch.optim.Adam(model.parameters(),lr=args.lr)
     elif args.optim == "SGD":
-        if args.l2_reg:
+        if args.l2_reg == "y":
             return torch.optim.SGD(model.parameters(),lr=args.lr,weight_decay=args.weight_decay_amnt)
         else:
             return torch.optim.SGD(model.parameters(),lr=args.lr)
     elif args.optim == "RMS":
-        if args.l2_reg:
+        if args.l2_reg == "y":
             return torch.optim.RMSprop(model.parameters(),lr=args.lr,weight_decay=args.weight_decay_amnt)
         else:
             return torch.optim.RMSprop(model.parameters(),lr=args.lr)
@@ -237,7 +237,7 @@ def create_model(args,device):
     elif args.model_name == "PMRfusionNN":
         if args.classification == "y":
             criterion = torch.nn.CrossEntropyLoss()
-            if args.weighted_loss:
+            if args.weighted_loss == "y":
                 labels_csv = os.path.join(args.root_dir,args.train_labels_csv)
                 df = pd.read_csv(labels_csv)
                 labels = df["PHQ_Moving_Score"].values
@@ -337,7 +337,7 @@ def eval_model(model,data_loader,device,criterion,args,print_idxs=False):
             # forward pass
             out = forward_pass(data,batch,model,args)
 
-            if args.classification:
+            if args.classification == "y":
                 # accumulate predictions and labels
                 all_preds = torch.cat((all_preds,out),dim=0)
                 all_labels = torch.cat((all_labels,labels),dim=0)
@@ -357,13 +357,13 @@ def eval_model(model,data_loader,device,criterion,args,print_idxs=False):
                 exit()
             eval_loss += loss.item()
 
-            if args.classification:
+            if args.classification == "y":
                 # get the prediction
                 pred = out.max(1,keepdim=True)[1]
                 correct += pred.eq(labels.view_as(pred)).sum().item()
 
         print("validation computation time:",(time.time()-val_start)//60," minutes")
-        if args.classification:
+        if args.classification == "y":
             gen_conf_mat(all_preds,all_labels,all_idxs,args.num_classes,print_idxs)
         eval_loss /= num_batches
         print("\nValidation Loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)".format(eval_loss,correct,len(data_loader.dataset),100.*correct/len(data_loader.dataset)))
