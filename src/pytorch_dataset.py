@@ -99,7 +99,7 @@ class FusedDataset(Dataset):
 
             visual_features_sub = torch.from_numpy(visual_features.to_numpy())
             
-            if torch.isnan(visual_features).any():
+            if torch.isnan(visual_features_sub).any():
                 print("visual: nan error")
                 print("patient:",patient_id)
                 cols = np.concatenate((np.arange(4,10),np.arange(18,35)))
