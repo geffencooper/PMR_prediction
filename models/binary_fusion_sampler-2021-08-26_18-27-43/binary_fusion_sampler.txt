@@ -1,0 +1,39 @@
+============================ Raw Args ============================
+Namespace(batch_size=32, classification='y', gpu_i=3, hidden_init_rand='n', hidden_size=64, input_size=23, load_trained='n', log_dest='../models/binary_fusion_sampler-2021-08-26_18-27-43', loss_freq=4, lr=0.002, model_name='PMRfusionNN', normalize='n', num_classes=2, num_epochs=2, num_layers=1, optim='RMS', regression='n', root_dir='/data/perception-working/Geffen/avec_data/', session_name='binary_fusion_sampler', train_data_dir='none', train_labels_csv='binary_sampled_train_metadata.csv', trained_path='none', val_data_dir='none', val_freq=10, val_labels_csv='binary_sampled_val_metadata.csv')
+
+
+
+================================ Start Training ================================
+
+Session Name: binary_fusion_sampler
+
+Model Name: PMRfusionNN
+
+Device: 3  ---->  GeForce GTX 1080 Ti
+
+Hyperparameters:
+Batch Size: 32
+Learning Rate: 0.002
+Hidden Size: 64
+Number of Layer: 1
+Number of Epochs: 2
+Normalization:n
+
+Train Epoch: 0 Iteration: 4 [128/13084 (1%)]	 Loss: 0.924342
+Train Epoch: 0 Iteration: 8 [256/13084 (2%)]	 Loss: 0.595992
+
+
+----------------- Epoch 0 Iteration 10 -----------------
+
+validation computation time: 9.0  minutes
+Confusion Matrix
+tensor([[  15,   12],
+        [1697, 1693]])
+
+Validation Loss: 0.8299, Accuracy: 1708/3417 (50%)
+Best Accuracy:  49.985367281240855 %
+Time Elapsed: 0h 12m 5s
+
+--------------------------------------------------------
+
+
