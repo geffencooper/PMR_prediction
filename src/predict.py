@@ -13,7 +13,7 @@ from torch.utils.data.dataloader import DataLoader
 from torchsampler import ImbalancedDatasetSampler
 from train_network import train_nn
 from train_network import parse_args,eval_model
-
+import copy
 
 if __name__ =="__main__":
     args = parse_args()
@@ -24,7 +24,7 @@ if __name__ =="__main__":
     val_dataset = FusedDataset(root_dir,root_dir+"binary_val_metadata_eight_to_one.csv")
     val_loader = DataLoader(val_dataset,32,collate_fn=my_collate_fn_fused,sampler=ImbalancedDatasetSampler(val_dataset))
 
-    pmr = PMRfusionNN(23,64,1,2,2)
+    pmr = PMRfusionNN(args)
     pmr.load_state_dict(torch.load("../models/PMR_fusion-2021-08-20_12-19-49/BEST_model.pth"))
 
     pmr.eval()
