@@ -198,7 +198,7 @@ def create_loader(dataset,args):
     if args.model_name == "SpeechPaceNN":
         return DataLoader(dataset,args.batch_size,collate_fn=my_collate_fn)
     elif args.model_name == "PMRfusionNN":
-        if args.imbalanced_sampler:
+        if args.imbalanced_sampler == "y":
             return DataLoader(dataset,args.batch_size,collate_fn=my_collate_fn_fused,sampler=ImbalancedDatasetSampler(dataset))
         else:
             return DataLoader(dataset,args.batch_size,collate_fn=my_collate_fn_fused)
