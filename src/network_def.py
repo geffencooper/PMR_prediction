@@ -163,7 +163,7 @@ class PMRfusionNN(torch.nn.Module):
         
         fused = torch.cat((y_audio,y_visual),dim=1)
 
-        #fused = self.dropout(fused)
+        fused = self.dropout(fused)
 
         y_fused = self.fc_fusion(fused)
 
