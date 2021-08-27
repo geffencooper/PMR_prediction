@@ -90,22 +90,27 @@ class FusedDataset(Dataset):
                 exit()
             #print("audio features len:",len(audio_features))
 
-            # get the vidual features
+            # get the visual features
             visual_features = pd.read_csv(os.path.join(self.data_root_dir,str(int(patient_id))+"_OpenFace2.1.0_Pose_gaze_AUs.csv"),sep=",",skiprows=int(start*30),nrows=int((end-start)*30))
-            visual_features = visual_features.iloc[:,np.concatenate((np.arange(4,10),np.arange(18,35)))]
+            visual_features_sub = visual_features.iloc[:,np.concatenate((np.arange(4,10),np.arange(18,35)))]
 
             if self.normalize:
-                visual_features = (visual_features-visual_features.mean())/visual_features.std()
+                visual_features_sub = (visual_features-visual_features.mean())/visual_features.std()
 
-            visual_features = torch.from_numpy(visual_features.to_numpy())
+            visual_features_sub = torch.from_numpy(visual_features.to_numpy())
             
             if torch.isnan(visual_features).any():
                 print("visual: nan error")
                 print("patient:",patient_id)
-                for i,row in enumerate(visual_features):
-                    if torch.isnan(row).any():
-                        print(row)
-                        print(i)
+                cols = np.concatenate((np.arange(4,10),np.arange(18,35)))
+                for i,row in enumerate(visual_features_sub):
+                    for j,col in enumerate(row):
+                        if torch.isnan(col):
+                            print(j)
+                            col_vals = visual_features.loc[cols[j]].values
+                            print(col_vals)
+                            print(np.std(col_vals))
+                            exit()
                 exit()
 
             # merge 1,2,3 into a class
