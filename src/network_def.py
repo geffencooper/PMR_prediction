@@ -101,8 +101,8 @@ class PMRfusionNN(torch.nn.Module):
         self.pace_net = SpeechPaceNN(args_copy)
         if args.normalize == "n":
             self.pace_net.load_state_dict(torch.load('../models/speech_pace_RMS_x-2021-08-19_12-29-08/BEST_model.pth',map_location=self.device))
-        # else:
-        #     self.pace_net.load_state_dict(torch.load('../models/speech_pace_RMS_NORM2-2021-08-24_13-35-00/BEST_model.pth',map_location=self.device))
+        else:
+            self.pace_net.load_state_dict(torch.load('../models/speech_pace_RMS_NORM2-2021-08-24_13-35-00/BEST_model.pth',map_location=self.device))
         
         # fine tune or freeze weights
         # for param in self.pace_net.parameters():
