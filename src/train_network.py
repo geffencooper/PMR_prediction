@@ -5,6 +5,7 @@ This file builds the dataset, dataloader, NN,
 and defines the training loop and stat helper functions
 '''
 
+from sklearn.utils import class_weight
 from torch.optim import optimizer
 from pytorch_dataset import SpeechPaceDataset,my_collate_fn,FusedDataset, my_collate_fn_fused
 from network_def import SpeechPaceNN,PMRfusionNN
@@ -16,6 +17,9 @@ import sys
 from torchsampler import ImbalancedDatasetSampler
 import argparse
 import os
+import pandas as pd
+import numpy as np
+import sklearn.utils as sku
 
 dist = [0,0]
 # ===================================== Training Function =====================================
@@ -194,7 +198,10 @@ def create_loader(dataset,args):
     if args.model_name == "SpeechPaceNN":
         return DataLoader(dataset,args.batch_size,collate_fn=my_collate_fn)
     elif args.model_name == "PMRfusionNN":
-        return DataLoader(dataset,args.batch_size,collate_fn=my_collate_fn_fused,sampler=ImbalancedDatasetSampler(dataset))
+        if args.imbalanced_sampler:
+            return DataLoader(dataset,args.batch_size,collate_fn=my_collate_fn_fused,sampler=ImbalancedDatasetSampler(dataset))
+        else:
+            return DataLoader(dataset,args.batch_size,collate_fn=my_collate_fn_fused)
     else:
         print("ERROR: invalid model name")
         exit(1)
@@ -202,11 +209,20 @@ def create_loader(dataset,args):
 # create the optimizer specified
 def create_optimizer(model,args):
     if args.optim == "Adam":
-        return torch.optim.Adam(model.parameters(),lr=args.lr)
+        if args.l2_reg:
+            return torch.optim.Adam(model.parameters(),lr=args.lr,weight_decay=args.weight_decay_amnt)
+        else:
+            return torch.optim.Adam(model.parameters(),lr=args.lr)
     elif args.optim == "SGD":
-        return torch.optim.SGD(model.parameters(),lr=args.lr)
+        if args.l2_reg:
+            return torch.optim.SGD(model.parameters(),lr=args.lr,weight_decay=args.weight_decay_amnt)
+        else:
+            return torch.optim.SGD(model.parameters(),lr=args.lr)
     elif args.optim == "RMS":
-        return torch.optim.RMSprop(model.parameters(),lr=args.lr,weight_decay=1e-1)
+        if args.l2_reg:
+            return torch.optim.RMSprop(model.parameters(),lr=args.lr,weight_decay=args.weight_decay_amnt)
+        else:
+            return torch.optim.RMSprop(model.parameters(),lr=args.lr)
     else:
         print("ERROR: invalid optimizer name")
         exit(1)
@@ -220,13 +236,23 @@ def create_model(args):
             return SpeechPaceNN(args.input_size,args.hidden_size,args.num_layers,-1,args.gpu_i,args.hidden_init_rand),torch.nn.MSELoss()
     elif args.model_name == "PMRfusionNN":
         if args.classification == "y":
+            criterion = torch.nn.CrossEntropyLoss()
+            if args.weighted_loss:
+                labels_csv = os.path.join(args.root_dir,args.train_labels_csv)
+                df = pd.read_csv(labels_csv)
+                labels = df["PHQ_Moving_Score"].values
+                class_weights = sku.class_weight.compute_class_weight('balanced',classes=np.unique(labels),y=labels)
+                print("class weights: ",class_weights)
+                criterion = torch.nn.CrossEntropyLoss(weight=class_weights)
+            else:
+                criterion = torch.nn.CrossEntropyLoss()
             if args.load_trained == "y":
                 model = PMRfusionNN(args.input_size,args.hidden_size,args.num_layers,args.num_classes,args.gpu_i,args.hidden_init_rand)
                 model.load_state_dict(torch.load(args.trained_path))
                 model.train()
-                return model,torch.nn.CrossEntropyLoss()
+                return model,criterion
             else:
-                return PMRfusionNN(args.input_size,args.hidden_size,args.num_layers,args.num_classes,args.gpu_i,args.hidden_init_rand),torch.nn.CrossEntropyLoss()
+                return PMRfusionNN(args.input_size,args.hidden_size,args.num_layers,args.num_classes,args.gpu_i,args.hidden_init_rand),criterion
         elif args.regression == "y":
             return PMRfusionNN(args.input_size,args.hidden_size,args.num_layers,-1,args.gpu_i,args.hidden_init_rand),torch.nn.MSELoss()
     else:
@@ -408,6 +434,12 @@ def parse_args():
     parser.add_argument("num_epochs",help="number of times to go through entire training set",type=int)
     parser.add_argument("normalize",help="normalize input features (y/n)",type=str)
     parser.add_argument("hidden_init_rand",help="initialize the hidden state with random values, otherwise use zeros (y/n)",type=str)
+    parser.add_argument("weighted_loss",help="weight loss function based on imbalanced classes (y/n), weights calculated from dataset",type=str)
+    parser.add_argument("imbalanced_sampler",help="use an imbalanced sampler to rebalance class distribution per batch (y/n)",type=str)
+    parser.add_argument("l2_reg",help="do l2 regularization (y/n)",type=str)
+    parser.add_argument("weight_decay_amnt",help="weight decay constant for l2 regularization (float)",type=float)
+    parser.add_argument("dropout",help="use dropout before fully connected layer (y/n)",type=str)
+    parser.add_argument("droput_prob",help="droput probability (float)",type=float)
 
     # extra optional
     parser.add_argument("--load_trained",help="load a pretrained model (y/n)",type=str)

@@ -7,28 +7,32 @@ an speech pace detector
 
 
 import torch
+from torch.cuda import set_device
 import torch.nn
 import torch.nn.utils.rnn as rnn_utils
 
 class SpeechPaceNN(torch.nn.Module):
-    def __init__(self,input_size,hidden_size,num_layers,num_classes,gpu_instance,init_hidden_rand=False):
+    def __init__(self,args):
         super(SpeechPaceNN,self).__init__()
-        
-        self.device = torch.device("cuda:"+str(gpu_instance) if torch.cuda.is_available() else "cpu")
+        self.args = args
 
-        self.input_size = input_size # audio feature length
-        self.hidden_size = hidden_size # user defined hyperparameter
-        self.num_layers = num_layers # stacked layers
+        self.device = torch.device("cuda:"+str(args.gpu_instance) if torch.cuda.is_available() else "cpu")
+
+        self.input_size = args.input_size # audio feature length
+        self.hidden_size = args.hidden_size # user defined hyperparameter
+        self.num_layers = args.num_layers # stacked layers
 
         # Layer 1: GRU
-        self.gru = torch.nn.GRU(input_size,hidden_size,num_layers,batch_first=True)
+        self.gru = torch.nn.GRU(args.input_size,args.hidden_size,args.num_layers,batch_first=True)
 
         # Layer 2: FC for classification/regression
-        self.fc = torch.nn.Linear(hidden_size,num_classes)
+        self.fc = torch.nn.Linear(args.hidden_size,args.num_classes)
         torch.nn.init.xavier_uniform_(self.fc.weight)
 
-        self.init = init_hidden_rand
-        self.num_classes = num_classes
+        self.dropout = torch.nn.Dropout(args.droput_prob)
+
+        self.init = args.init_hidden_rand
+        self.num_classes = args.num_classes
 
     # initialize the hidden state at the start of each forward pass
     def init_hidden(self,batch_size):
@@ -61,6 +65,9 @@ class SpeechPaceNN(torch.nn.Module):
         for i,val in enumerate(lengths):
             y[i,:] = out[i,val-1,:]
 
+        if self.args.droput == "y":
+            y = self.dropout(y)
+
         y = self.fc(y)
 
         # regression
@@ -69,7 +76,7 @@ class SpeechPaceNN(torch.nn.Module):
 
         # classification
         else:
-            y = torch.nn.functional.softmax(y,dim=1)
+            # y = torch.nn.functional.softmax(y,dim=1)
             return y 
 
 
@@ -77,32 +84,37 @@ class SpeechPaceNN(torch.nn.Module):
 # ==================================================================================
 
 class PMRfusionNN(torch.nn.Module):
-    def __init__(self,input_size,hidden_size,num_layers,num_classes,gpu_instance,init_hidden_rand=False):
+    def __init__(self,args):
         super(PMRfusionNN,self).__init__()
+        self.args = args
+
+        self.device = torch.device("cuda:"+str(args.gpu_instance) if torch.cuda.is_available() else "cpu")
+
+        self.input_size = args.input_size # audio feature length
+        self.hidden_size = args.hidden_size # user defined hyperparameter
+        self.num_layers = args.num_layers # stacked layers
+
+        self.pace_net = SpeechPaceNN(26,64,1,3,args.gpu_instance)
+        if args.normalize == "n":
+            self.pace_net.load_state_dict(torch.load('../models/speech_pace_RMS_x-2021-08-19_12-29-08/BEST_model.pth',map_location=self.device))
+        else:
+            self.pace_net.load_state_dict(torch.load('../models/speech_pace_RMS_NORM2-2021-08-24_13-35-00/BEST_model.pth',map_location=self.device))
         
-        self.device = torch.device("cuda:"+str(gpu_instance) if torch.cuda.is_available() else "cpu")
-
-        self.input_size = input_size # audio feature length
-        self.hidden_size = hidden_size # user defined hyperparameter
-        self.num_layers = num_layers # stacked layers
-
-        self.pace_net = SpeechPaceNN(26,64,1,3,gpu_instance)
-        #self.pace_net.load_state_dict(torch.load('../models/speech_pace_RMS_x-2021-08-19_12-29-08/BEST_model.pth',map_location=self.device))
-        self.pace_net.load_state_dict(torch.load('../models/speech_pace_RMS_NORM2-2021-08-24_13-35-00/BEST_model.pth',map_location=self.device))
+        # fine tune or freeze weights
         # for param in self.pace_net.parameters():
         #     param.requires_grad = False
         
 
         # Layer 1: GRU for visual features
-        self.gru_vis = torch.nn.GRU(input_size,hidden_size,num_layers,batch_first=True)
+        self.gru_vis = torch.nn.GRU(args.input_size,args.hidden_size,args.num_layers,batch_first=True)
 
         # Layer 2: FC for classification/regression after fusion
-        self.fc_fusion = torch.nn.Linear(2*hidden_size,num_classes)
+        self.fc_fusion = torch.nn.Linear(2*args.hidden_size,args.num_classes)
 
-        self.dropout = torch.nn.Dropout(0.25)
+        self.dropout = torch.nn.Dropout(args.droput_prob)
 
-        self.init = init_hidden_rand
-        self.num_classes = num_classes
+        self.init = args.init_hidden_rand
+        self.num_classes = args.num_classes
 
     # initialize the hidden state at the start of each forward pass
     def init_hidden(self,batch_size):
@@ -163,7 +175,8 @@ class PMRfusionNN(torch.nn.Module):
         
         fused = torch.cat((y_audio,y_visual),dim=1)
 
-        fused = self.dropout(fused)
+        if self.args.dropout:
+            fused = self.dropout(fused)
 
         y_fused = self.fc_fusion(fused)
 
