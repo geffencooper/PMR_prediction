@@ -30,4 +30,5 @@ python -u train_network.py $session_name $log_dest $root_dir --train_data_dir $t
                            $val_labels_csv $gpu_i $model_name $optim $loss_freq $val_freq \
                            $batch_size $lr $hidden_size $classification $num_classes $regression \
                            $input_size $num_layers $num_epochs $normalize $hidden_init_rand \
+                           $weighted_loss $imbalanced_sampler $l2_reg $weight_decay_amnt $dropout $dropout_prob \
                            --load_trained $load_trained --trained_path $trained_path | tee -i $fileName
