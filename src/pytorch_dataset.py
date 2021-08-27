@@ -95,22 +95,22 @@ class FusedDataset(Dataset):
             visual_features_sub = visual_features.iloc[:,np.concatenate((np.arange(4,10),np.arange(18,35)))]
 
             if self.normalize:
-                visual_features_sub = (visual_features-visual_features.mean())/visual_features.std()
+                visual_features_sub = (visual_features-visual_features.mean())/(visual_features.std() + 0.01)
 
             visual_features_sub = torch.from_numpy(visual_features.to_numpy())
             
             if torch.isnan(visual_features_sub).any():
                 print("visual: nan error")
                 print("patient:",patient_id)
-                cols = np.concatenate((np.arange(4,10),np.arange(18,35)))
-                for i,row in enumerate(visual_features_sub):
-                    for j,col in enumerate(row):
-                        if torch.isnan(col):
-                            print(j)
-                            col_vals = visual_features.loc[cols[j]].values
-                            print(col_vals)
-                            print(np.std(col_vals))
-                            exit()
+                # cols = np.concatenate((np.arange(4,10),np.arange(18,35)))
+                # for i,row in enumerate(visual_features_sub):
+                #     for j,col in enumerate(row):
+                #         if torch.isnan(col):
+                #             print(j)
+                #             col_vals = visual_features.loc[cols[j]].values
+                #             print(col_vals)
+                #             print(np.std(col_vals))
+                #             exit()
                 exit()
 
             # merge 1,2,3 into a class
