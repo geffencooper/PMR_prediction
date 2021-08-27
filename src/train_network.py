@@ -57,7 +57,7 @@ def train_nn(args):
     #test_loader = create_loader(test_dataset,args)
     
     # build and load the model
-    model,criterion = create_model(args)
+    model,criterion = create_model(args,device)
     model.to(device)
 
     # optimization criteria
@@ -228,7 +228,7 @@ def create_optimizer(model,args):
         exit(1)
 
 # create the model and loss function based on the name specified and classification/regression options
-def create_model(args):
+def create_model(args,device):
     if args.model_name == "SpeechPaceNN":
         if args.classification == "y":
             return SpeechPaceNN(args),torch.nn.CrossEntropyLoss()
@@ -244,6 +244,7 @@ def create_model(args):
                 class_weights = sku.class_weight.compute_class_weight('balanced',classes=np.unique(labels),y=labels)
                 class_weights = torch.tensor(class_weights,dtype=torch.float)
                 print("class weights: ",class_weights)
+                class_weights = class_weights.to(device)
                 criterion = torch.nn.CrossEntropyLoss(weight=class_weights)
             else:
                 criterion = torch.nn.CrossEntropyLoss()
