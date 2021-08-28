@@ -93,7 +93,8 @@ class FusedDataset(Dataset):
 
             # get the visual features
             visual_features = pd.read_csv(os.path.join(self.data_root_dir,str(int(patient_id))+"_OpenFace2.1.0_Pose_gaze_AUs_deltas.csv"),sep=",",skiprows=int(start*30),nrows=int((end-start)*30))
-            visual_features = visual_features.iloc[:,np.concatenate((np.arange(4,10),np.arange(18,35)))]
+            #visual_features = visual_features.iloc[:,np.concatenate((np.arange(4,10),np.arange(18,35)))]
+            visual_features = visual_features.iloc[:,np.arange(1,24)]
 
             if self.normalize:
                 visual_features = (visual_features-visual_features.mean())/(visual_features.std() + 0.01)
