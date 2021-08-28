@@ -92,7 +92,7 @@ class FusedDataset(Dataset):
             #print("audio features len:",len(audio_features))
 
             # get the visual features
-            visual_features = pd.read_csv(os.path.join(self.data_root_dir,str(int(patient_id))+"_OpenFace2.1.0_Pose_gaze_AUs.csv"),sep=",",skiprows=int(start*30),nrows=int((end-start)*30))
+            visual_features = pd.read_csv(os.path.join(self.data_root_dir,str(int(patient_id))+"_OpenFace2.1.0_Pose_gaze_AUs_deltas.csv"),sep=",",skiprows=int(start*30),nrows=int((end-start)*30))
             visual_features = visual_features.iloc[:,np.concatenate((np.arange(4,10),np.arange(18,35)))]
 
             if self.normalize:
