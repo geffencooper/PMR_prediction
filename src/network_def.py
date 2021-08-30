@@ -176,13 +176,13 @@ class PMRfusionNN(torch.nn.Module):
         for i,val in enumerate(lengths_visual):
             y_visual[i,:] = out[i,val-1,:]
 
-        print("y_audio:", y_audio)
-        print("y_visual:", y_visual)
+        print("y_audio:", y_audio,y_audio.size())
+        print("y_visual:", y_visual,y_visual.size())
 
         # ============== concatenate and pass through FC ==============
         
         fused = torch.cat((y_audio,y_visual),dim=1)
-        print("fused",fused)
+        print("fused",fused,fused.size())
 
         if self.args.dropout:
             fused = self.dropout(fused)
