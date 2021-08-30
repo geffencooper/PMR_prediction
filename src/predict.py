@@ -12,7 +12,7 @@ import numpy as np
 from torch.utils.data.dataloader import DataLoader
 from torchsampler import ImbalancedDatasetSampler
 from train_network import train_nn
-from train_network import parse_args,eval_model
+from train_network import parse_args,eval_model,create_dataset,create_loader,create_model
 import copy
 
 if __name__ =="__main__":
@@ -21,8 +21,8 @@ if __name__ =="__main__":
     device = torch.device("cuda:"+str(args.gpu_i) if torch.cuda.is_available() else "cpu")
 
     root_dir = "/data/perception-working/Geffen/avec_data/"
-    val_dataset = FusedDataset(root_dir,root_dir+"binary_val_metadata_one_to_one.csv")
-    val_loader = DataLoader(val_dataset,32,collate_fn=my_collate_fn_fused,shuffle=True)#,sampler=ImbalancedDatasetSampler(val_dataset))
+    val_dataset = create_dataset(args,args.val_labels_csv,args.val_data_dir)
+    val_loader = create_loader(val_dataset,args)
 
     pmr = PMRfusionNN(args)
     pmr.load_state_dict(torch.load("../models/binary_fusion_one_to_one_NORM-2021-08-30_09-22-15/BEST_model.pth"))
