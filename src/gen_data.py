@@ -9,6 +9,7 @@ import pandas as pd
 import numpy as np
 import os
 
+# fix the random state so samples are aligned (for audio and visual, the same two samples will be used to generate the new sample)
 sm = SMOTE(random_state=42)
 
 root_dir = "/data/perception-working/Geffen/avec_data/"
@@ -52,6 +53,7 @@ visual_df = pd.read_csv(os.path.join(root_dir,str(int(patient_id))+"_OpenFace2.1
 
 print("save")
 for idx in range(len(y_train)):
+    print(idx)
     audio = pd.DataFrame(x_audio_train[idx].reshape(500,39),columns=audio_df.columns[2:])
     visual = pd.DataFrame(x_video_train[idx].reshape(150,49),columns=visual_df.columns[4:])
     
@@ -62,5 +64,7 @@ for idx in range(len(y_train)):
     visual.insert(2,'confidence',0)
     visual.insert(3,'success',0)
     
-    audio.to_csv(root_dir+"SMOTE/"+str(idx)+"_OpenSMILE2.3.0_mfcc.csv",index=False)
-    visual.to_csv(root_dir+"SMOTE/"+str(idx)+"_OpenFace2.1.0_Pose_gaze_AUs.csv",index=False)
+    audio.to_csv(root_dir+"SMOTE/"+str(idx)+"_OpenSMILE2.3.0_mfcc",index=False,sep=';')
+    visual.to_csv(root_dir+"SMOTE/"+str(idx)+"_OpenFace2.1.0_Pose_gaze_AUs",index=False,sep=',')
+    labels = pd.DataFrame(y_train_sm)
+    labels.to_csv(root_dir+"SMOTE/"+"labels")
