@@ -22,7 +22,7 @@ if __name__ =="__main__":
 
     root_dir = "/data/perception-working/Geffen/avec_data/"
     val_dataset = FusedDataset(root_dir,root_dir+"binary_val_metadata_one_to_one.csv")
-    val_loader = DataLoader(val_dataset,32,collate_fn=my_collate_fn_fused)#,sampler=ImbalancedDatasetSampler(val_dataset))
+    val_loader = DataLoader(val_dataset,32,collate_fn=my_collate_fn_fused,shuffle=True)#,sampler=ImbalancedDatasetSampler(val_dataset))
 
     pmr = PMRfusionNN(args)
     pmr.load_state_dict(torch.load("../models/binary_fusion_one_to_one_NORM-2021-08-30_09-22-15/BEST_model.pth"))
