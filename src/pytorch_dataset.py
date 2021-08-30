@@ -97,7 +97,7 @@ class FusedDataset(Dataset):
             #visual_features = visual_features.iloc[:,np.arange(1,24)]
 
             if self.normalize:
-                visual_features = (visual_features-visual_features.mean())/(visual_features.std() + 1e-5)
+                visual_features = (visual_features-visual_features.mean())/(visual_features.std() + 0.001)
 
             visual_features = torch.from_numpy(visual_features.to_numpy())
             
