@@ -40,6 +40,8 @@ for idx in range(num_samples):
         print(idx)
 
 print("resample")
+print(y_train)
+print(x_audio_train[0].shape)
 x_audio_sm,y_train_sm = sm.fit_resample(x_audio_train,y_train)
 x_video_sm,y_train_sm = sm.fit_resample(x_video_train,y_train)
 
