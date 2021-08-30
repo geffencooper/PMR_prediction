@@ -147,12 +147,10 @@ class PMRfusionNN(torch.nn.Module):
         # out is [batch_size, seq_len, hidden_size]
         # We need to flatten the input for the FC layer
         # We also only want the last time step of the output since we are doing a many-to-1 RNN
-        print("audio out:", out)
+        
         y_audio = torch.clone(out[:,-1,:])
-        print("y_audio:", y_audio)
         for i,val in enumerate(lengths_audio):
             y_audio[i,:] = out[i,val-1,:]
-        print("y_audio:", y_audio)
 
         # ==================== then pass through visual portion ====================
         batch_size,sequence_len,feature_len = X_visual.size()
@@ -172,13 +170,14 @@ class PMRfusionNN(torch.nn.Module):
         # out is [batch_size, seq_len, hidden_size]
         # We need to flatten the input for the FC layer
         # We also only want the last time step of the output since we are doing a many-to-1 RNN
-        print("visual out:", out)
+        
         y_visual = torch.clone(out[:,-1,:])
-        print("y vis:", y_visual)
 
         for i,val in enumerate(lengths_visual):
             y_visual[i,:] = out[i,val-1,:]
-        print("y vis:", y_visual)
+
+        print("y_audio:", y_audio)
+        print("y_visual:", y_visual)
 
         # ============== concatenate and pass through FC ==============
         
