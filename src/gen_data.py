@@ -64,7 +64,7 @@ for idx in range(len(y_train)):
     visual.insert(2,'confidence',0)
     visual.insert(3,'success',0)
     
-    audio.to_csv(root_dir+"SMOTE/"+str(idx)+"_OpenSMILE2.3.0_mfcc",index=False,sep=';')
-    visual.to_csv(root_dir+"SMOTE/"+str(idx)+"_OpenFace2.1.0_Pose_gaze_AUs",index=False,sep=',')
+    audio.to_csv(root_dir+"SMOTE/"+str(idx)+"_OpenSMILE2.3.0_mfcc.csv",index=False,sep=';')
+    visual.to_csv(root_dir+"SMOTE/"+str(idx)+"_OpenFace2.1.0_Pose_gaze_AUs.csv",index=False,sep=',')
 labels = pd.DataFrame(y_train_sm)
 labels.to_csv(root_dir+"SMOTE/"+"labels")
