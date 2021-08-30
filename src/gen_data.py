@@ -22,6 +22,10 @@ x_video_train = []
 y_train = []
 for idx in range(num_samples):
     patient_id,start,end,label = labels_df.iloc[idx]
+    if label > 0:
+        label = 1
+    else:
+        label = 0
 
     audio_features = pd.read_csv(os.path.join(root_dir,str(int(patient_id))+"_OpenSMILE2.3.0_mfcc.csv"),sep=";",skiprows=int(start*100),nrows=int((end-start)*100))
     audio_features = audio_features.iloc[:,np.arange(2,41)]
@@ -32,7 +36,7 @@ for idx in range(num_samples):
     if len(audio_features) == 500 and len(visual_features) == 150:
         x_audio_train.append(audio_features.to_numpy())
         x_video_train.append(visual_features.to_numpy())
-        y_train.append(int(label))
+        y_train.append(label)
         print(idx)
 
 print("resample")
