@@ -62,6 +62,5 @@ for idx in range(len(y_train)):
     visual.insert(2,'confidence',0)
     visual.insert(3,'success',0)
     
-    audio.to_csv(root_dir+"000test.csv")
-    visual.to_csv(root_dir+"001test.csv")
-    exit()
+    audio.to_csv(root_dir+"SMOTE/"+str(idx)+"_OpenSMILE2.3.0_mfcc.csv",index=False)
+    visual.to_csv(root_dir+"SMOTE/"+str(idx)+"_OpenFace2.1.0_Pose_gaze_AUs.csv",index=False)
