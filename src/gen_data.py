@@ -34,8 +34,8 @@ for idx in range(num_samples):
     visual_features = visual_features.iloc[:,(np.arange(4,53))]
     
     if len(audio_features) == 500 and len(visual_features) == 150:
-        x_audio_train.append(audio_features.to_numpy())
-        x_video_train.append(visual_features.to_numpy())
+        x_audio_train.append(audio_features.to_numpy().flatten())
+        x_video_train.append(visual_features.to_numpy().flatten())
         y_train.append(label)
         print(idx)
 
@@ -52,8 +52,8 @@ visual_df = pd.read_csv(os.path.join(root_dir,str(int(patient_id))+"_OpenFace2.1
 
 print("save")
 for idx in range(len(y_train)):
-    audio = pd.DataFrame(x_audio_train[idx],columns=audio_df.columns[2:])
-    visual = pd.DataFrame(x_video_train[idx],columns=visual_df.columns[4:])
+    audio = pd.DataFrame(x_audio_train[idx].reshape(500,39),columns=audio_df.columns[2:])
+    visual = pd.DataFrame(x_video_train[idx].reshape(150,49),columns=visual_df.columns[4:])
     
     audio.insert(0,'name',0)
     audio.insert(1,'frameTime',0)
