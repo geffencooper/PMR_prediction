@@ -20,12 +20,11 @@ if __name__ =="__main__":
 
     device = torch.device("cuda:"+str(args.gpu_i) if torch.cuda.is_available() else "cpu")
 
-    root_dir = "/data/perception-working/Geffen/avec_data/"
     val_dataset = create_dataset(args,args.val_labels_csv,args.val_data_dir)
     val_loader = create_loader(val_dataset,args)
 
     pmr = PMRfusionNN(args)
-    pmr.load_state_dict(torch.load("../models/binary_fusion_one_to_one_NORM-2021-08-30_09-22-15/BEST_model.pth"))
+    pmr.load_state_dict(torch.load("../models/binary_fusion_one_to_one_NORM-2021-08-27_13-15-21/BEST_model.pth"))
 
     pmr.eval()
     pmr.to(device)
