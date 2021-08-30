@@ -113,8 +113,8 @@ class PMRfusionNN(torch.nn.Module):
         self.gru_vis = torch.nn.GRU(args.input_size,args.hidden_size,args.num_layers,batch_first=True)
 
         # Layer 2: FC for classification/regression after fusion
-        #self.fc_fusion = torch.nn.Linear(2*args.hidden_size,args.num_classes)
-        self.fc_fusion = torch.nn.Linear(args.hidden_size,args.num_classes)
+        self.fc_fusion = torch.nn.Linear(2*args.hidden_size,args.num_classes)
+        #self.fc_fusion = torch.nn.Linear(args.hidden_size,args.num_classes)
 
         self.dropout = torch.nn.Dropout(args.droput_prob)
 
@@ -179,8 +179,8 @@ class PMRfusionNN(torch.nn.Module):
 
         # ============== concatenate and pass through FC ==============
         
-        #fused = torch.cat((y_audio,y_visual),dim=1)
-        fused = y_audio*y_visual
+        fused = torch.cat((y_audio,y_visual),dim=1)
+        #fused = y_audio*y_visual
 
         if self.args.dropout:
             fused = self.dropout(fused)
