@@ -105,8 +105,8 @@ class PMRfusionNN(torch.nn.Module):
             self.pace_net.load_state_dict(torch.load('../models/speech_pace_RMS_NORM2-2021-08-24_13-35-00/BEST_model.pth',map_location=self.device))
         
         # fine tune or freeze weights
-        for param in self.pace_net.parameters():
-            param.requires_grad = False
+        # for param in self.pace_net.parameters():
+        #     param.requires_grad = False
         
 
         # Layer 1: GRU for visual features
