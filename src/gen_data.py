@@ -23,19 +23,36 @@ y_train = []
 for idx in range(num_samples):
     patient_id,start,end,label = labels_df.iloc[idx]
 
-    #print("read audio ",idx)
     audio_features = pd.read_csv(os.path.join(root_dir,str(int(patient_id))+"_OpenSMILE2.3.0_mfcc.csv"),sep=";",skiprows=int(start*100),nrows=int((end-start)*100))
-    audio_features = audio_features.iloc[:,np.arange(2,28)]
-    audio_features = (audio_features-audio_features.mean())/audio_features.std()
-    print(len(audio_features))
-    #print("read video ",idx)
+    audio_features = audio_features.iloc[:,np.arange(2,41)]
+    
     visual_features = pd.read_csv(os.path.join(root_dir,str(int(patient_id))+"_OpenFace2.1.0_Pose_gaze_AUs.csv"),sep=",",skiprows=int(start*30),nrows=int((end-start)*30))
-    visual_features = visual_features.iloc[:,np.concatenate((np.arange(4,10),np.arange(18,35)))]
-    visual_features = (visual_features-visual_features.mean())/(visual_features.std() + 0.01)
-    print(len(visual_features))
-    x_audio_train.append(audio_features.to_numpy())
-    x_video_train.append(visual_features.to_numpy())
-    y_train.append(int(label))
+    visual_features = visual_features.iloc[:,(np.arange(4,53))]
+    
+    if len(audio_features) == 500 and len(visual_features) == 150:
+        x_audio_train.append(audio_features.to_numpy())
+        x_video_train.append(visual_features.to_numpy())
+        y_train.append(int(label))
 
-# x_audio_sm,y_train_sm = sm.fit_resample(x_audio_train,y_train)
-# x_video_sm,y_train_sm = sm.fit_resample(x_video_train,y_train)
+x_audio_sm,y_train_sm = sm.fit_resample(x_audio_train,y_train)
+x_video_sm,y_train_sm = sm.fit_resample(x_video_train,y_train)
+
+# copy the structure
+patient_id,start,end,label = labels_df.iloc[0]
+audio_df = pd.read_csv(os.path.join(root_dir,str(int(patient_id))+"_OpenSMILE2.3.0_mfcc.csv"),sep=";")
+visual_df = pd.read_csv(os.path.join(root_dir,str(int(patient_id))+"_OpenFace2.1.0_Pose_gaze_AUs.csv"),sep=",")
+
+for idx in range(len(y_train)):
+    audio = pd.DataFrame(x_audio_train[idx],columns=audio_df.columns[2:])
+    visual = pd.DataFrame(x_video_train[idx],columns=visual_df.columns[4:])
+    
+    audio.insert(0,'name',0)
+    audio.insert(1,'frameTime',0)
+    visual.insert(0,'frame',0)
+    visual.insert(1,'timestamp',0)
+    visual.insert(2,'confidence',0)
+    visual.insert(3,'success',0)
+    
+    audio.to_csv(root_dir+"000test.csv")
+    visual.to_csv(root_dir+"001test.csv")
+    exit()
