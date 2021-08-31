@@ -38,7 +38,7 @@ for idx in range(num_samples):
         x_audio_train.append(audio_features.to_numpy().flatten())
         x_video_train.append(visual_features.to_numpy().flatten())
         y_train.append(label)
-        print(idx,"\r")
+        print("\r",idx,end="")
 
 print("num samples:",num_samples)
 print("y_train:",len(y_train))
