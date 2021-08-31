@@ -13,7 +13,7 @@ import os
 sm = SMOTE(random_state=42)
 
 root_dir = "/data/perception-working/Geffen/avec_data/"
-train_data_csv = "binary_train_metadata_two_to_one.csv"
+train_data_csv = "train_metadata.csv"
 
 labels_df = pd.read_csv(os.path.join(root_dir,train_data_csv))
 num_samples = len(labels_df)
@@ -23,10 +23,10 @@ x_video_train = []
 y_train = []
 for idx in range(num_samples):
     patient_id,start,end,label = labels_df.iloc[idx]
-    if label > 0:
-        label = 1
-    else:
-        label = 0
+    # if label > 0:
+    #     label = 1
+    # else:
+    #     label = 0
 
     audio_features = pd.read_csv(os.path.join(root_dir,str(int(patient_id))+"_OpenSMILE2.3.0_mfcc.csv"),sep=";",skiprows=int(start*100),nrows=int((end-start)*100))
     audio_features = audio_features.iloc[:,np.arange(2,41)]
@@ -57,9 +57,9 @@ audio_cols = audio_df.columns[2:]
 video_cols = visual_df.columns[4:]
 for idx in range(len(y_train_sm)):
     print(idx)
-    if idx == 0:
-        print(x_audio_sm[0])
-        print(x_video_sm[0])
+    # if idx == 0:
+    #     print(x_audio_sm[0])
+    #     print(x_video_sm[0])
     x_aud = np.array([x_audio_sm[idx]])
     x_vid = np.array([x_video_sm[idx]])
     audio = pd.DataFrame(x_aud.reshape((500,39)),columns=audio_cols)
