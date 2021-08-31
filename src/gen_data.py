@@ -45,6 +45,8 @@ print("y_train:",len(y_train))
 #exit()
 x_audio_sm,y_train_sm = sm.fit_resample(x_audio_train,y_train)
 x_video_sm,y_train_sm = sm.fit_resample(x_video_train,y_train)
+x_audio_sm = np.array(x_audio_sm)
+x_video_sm = np.array(x_video_sm)
 
 print("len of sm:", len(x_audio_sm),len(x_video_sm),len(y_train_sm))
 # copy the structure
