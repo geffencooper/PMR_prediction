@@ -488,6 +488,8 @@ def gen_conf_mat(predictions,labels,idxs,num_classes,print_idxs=False):
 
     print("Confusion Matrix")
     print(conf_mat)
+    for i in range(num_classes):
+        print("class {} accuracy: {:.4f}%".format(i,conf_mat[i,i]*100/torch.sum(conf_mat,dim=0)[i]))
 
 # def get_model_stats(args, model,best_val_accuracy,lowest_val_loss,train_losses,val_losses,val_accuracies,iterations,epochs,curr_train_loss)
 
