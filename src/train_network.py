@@ -11,7 +11,7 @@ from pytorch_dataset import SpeechPaceDataset,my_collate_fn,FusedDataset, my_col
 from network_def import SpeechPaceNN,PMRfusionNN
 import torch
 from torchaudio import transforms,utils
-from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import Dataset, DataLoader, dataloader
 import time
 import sys
 from torchsampler import ImbalancedDatasetSampler
@@ -44,6 +44,7 @@ def train_nn(args):
     val_losses = []
     val_accuracies = []
     iterations = []
+    epochs = []
     curr_train_loss = 0
 
 
@@ -99,35 +100,65 @@ def train_nn(args):
                 # print training statistics every n batches
                 if i % args.loss_freq == 0 and i != 0:
                     print("Train Epoch: {} Iteration: {} [{}/{} ({:.0f}%)]\t Loss: {:.6f}".format(epoch,i,i*args.batch_size,len(train_loader.dataset),100.*i/len(train_loader),loss.item()))
-                
-                # do a validation pass every m batches (may not want to wait till the end of an epoch)
-                if i % args.val_freq == 0 and i != 0:
-                    print("\n\n----------------- Epoch {} Iteration {} -----------------\n".format(epoch,i))
 
-                    # keep track of training and validation loss, since training forward pass takes a while do every m iterations instead of every epoch
-                    num_iter += args.val_freq
-                    iterations.append(num_iter)
-                    train_losses.append(curr_train_loss/(args.val_freq)) # average batch training loss over m iterations instead of over the entire dataset
-                    curr_train_loss = 0 # reset
+                if args.val_freq != 0:    
+                    # do a validation pass every m batches (may not want to wait till the end of an epoch)
+                    if i % args.val_freq == 0 and i != 0:
+                        print("\n\n----------------- Epoch {} Iteration {} -----------------\n".format(epoch,i))
 
-                    # validation pass
-                    accuracy,val_loss = eval_model(model,val_loader,device,criterion,args)
-                    val_accuracies.append(accuracy)
-                    val_losses.append(val_loss)
+                        # keep track of training and validation loss, since training forward pass takes a while do every m iterations instead of every epoch
+                        num_iter += args.val_freq
+                        iterations.append(num_iter)
+                        train_losses.append(curr_train_loss/(args.val_freq)) # average batch training loss over m iterations instead of over the entire dataset
+                        curr_train_loss = 0 # reset
 
-                    # save the most accuracte model up to date
-                    if accuracy > best_val_accuracy:
-                        best_val_accuracy = accuracy
-                        torch.save(model.state_dict(),os.path.join(args.log_dest,"BEST_model.pth"))
-                    print("Best Accuracy: ",best_val_accuracy,"%")
+                        # validation pass
+                        accuracy,val_loss = eval_model(model,val_loader,device,criterion,args)
+                        val_accuracies.append(accuracy)
+                        val_losses.append(val_loss)
 
-                    # print the time elapsed
-                    end = time.time()
-                    elapsed = end-start
-                    minutes,seconds = divmod(elapsed,60)
-                    hours,minutes = divmod(minutes,60)
-                    print("Time Elapsed: {}h {}m {}s".format(int(hours),int(minutes),int(seconds)))
-                    print("\n--------------------------------------------------------\n\n")
+                        # save the most accuracte model up to date
+                        if accuracy > best_val_accuracy:
+                            best_val_accuracy = accuracy
+                            torch.save(model.state_dict(),os.path.join(args.log_dest,"BEST_model.pth"))
+                        print("Best Accuracy: ",best_val_accuracy,"%")
+
+                        # print the time elapsed
+                        end = time.time()
+                        elapsed = end-start
+                        minutes,seconds = divmod(elapsed,60)
+                        hours,minutes = divmod(minutes,60)
+                        print("Time Elapsed: {}h {}m {}s".format(int(hours),int(minutes),int(seconds)))
+                        print("\n--------------------------------------------------------\n\n")
+            
+            # validation pass at end of the epoch
+            if args.val_freq == 0:
+                print("\n\n----------------- Epoch {} Iteration {} -----------------\n".format(epoch,i))
+
+                # keep track of training and validation loss
+                epochs.append(epoch)
+                num_batches = len(train_loader.dataset)//args.batch_size
+                train_losses.append(curr_train_loss/num_batches) # average batch loss
+                curr_train_loss = 0 # reset
+
+                # validation pass
+                accuracy,val_loss = eval_model(model,val_loader,device,criterion,args)
+                val_accuracies.append(accuracy)
+                val_losses.append(val_loss)
+
+                # save the most accuracte model up to date
+                if accuracy > best_val_accuracy:
+                    best_val_accuracy = accuracy
+                    torch.save(model.state_dict(),os.path.join(args.log_dest,"BEST_model.pth"))
+                print("Best Accuracy: ",best_val_accuracy,"%")
+
+                # print the time elapsed
+                end = time.time()
+                elapsed = end-start
+                minutes,seconds = divmod(elapsed,60)
+                hours,minutes = divmod(minutes,60)
+                print("Time Elapsed: {}h {}m {}s".format(int(hours),int(minutes),int(seconds)))
+                print("\n--------------------------------------------------------\n\n")
 
         print("================================ Finished Training ================================")
         torch.save(model.state_dict(),os.path.join(args.log_dest,"END_model.pth"))
@@ -428,7 +459,7 @@ def parse_args():
     parser.add_argument("model_name",help="name of the model class (torch.nn.Module)",type=str)
     parser.add_argument("optim",help="name of PyTorch optimizer to use",type=str)
     parser.add_argument("loss_freq",help="print the loss every nth batch",type=int)
-    parser.add_argument("val_freq",help="do a validation pass every nth batch",type=int)
+    parser.add_argument("val_freq",help="do a validation pass every nth batch (if set to 0, do every epoch)",type=int)
 
     # hyperparameters
     parser.add_argument("batch_size",help="what size batch to use (32, 64, 128, etc.)",type=int)
