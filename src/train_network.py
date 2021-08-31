@@ -87,8 +87,8 @@ def train_nn(args):
                 out = forward_pass(data,batch,model,args)
 
                 # backward pass
-                print(out.size)
-                print(labels.size)
+                print(out.size())
+                print(labels.size())
                 loss = criterion(out,labels)
                 if torch.isnan(loss):
                     print("********** NAN ERROR ************")
