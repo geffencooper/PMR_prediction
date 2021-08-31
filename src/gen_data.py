@@ -75,5 +75,6 @@ for idx in range(len(y_train_sm)):
     audio.to_csv(root_dir+"SMOTE/"+str(idx)+"_OpenSMILE2.3.0_mfcc.csv",index=False,sep=';')
     visual.to_csv(root_dir+"SMOTE/"+str(idx)+"_OpenFace2.1.0_Pose_gaze_AUs.csv",index=False,sep=',')
 
+print("scores:",y_train_sm)
 scores = pd.DataFrame(y_train_sm)
 scores.to_csv(root_dir+"SMOTE/"+"labels.csv",index=False)
