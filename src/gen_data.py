@@ -57,8 +57,8 @@ audio_cols = audio_df.columns[2:]
 video_cols = visual_df.columns[4:]
 for idx in range(len(y_train_sm)):
     print(idx)
-    audio = pd.DataFrame(x_audio_train[idx].reshape(500,39),columns=audio_cols)
-    visual = pd.DataFrame(x_video_train[idx].reshape(150,49),columns=video_cols)
+    audio = pd.DataFrame(x_audio_sm[idx].reshape(500,39),columns=audio_cols)
+    visual = pd.DataFrame(x_video_sm[idx].reshape(150,49),columns=video_cols)
     
     audio.insert(0,'name',0)
     audio.insert(1,'frameTime',0)
