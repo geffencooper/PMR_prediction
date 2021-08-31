@@ -213,7 +213,10 @@ def train_nn(args):
         hours,minutes = divmod(minutes,60)
         print("Time Elapsed: {}h {}m {}s".format(int(hours),int(minutes),int(seconds)))
 
-        print("Iterations:",iterations)
+        if args.val_freq != 0:
+            print("Iterations:",iterations)
+        else:
+            print("Epochs:",epochs)
         if args.classification == "y":
             print("Val_Accuracies:",val_accuracies)
         print("Val_Losses:",val_losses)
