@@ -134,7 +134,7 @@ def train_nn(args):
                             elif val_loss < lowest_val_loss:
                                 lowest_val_loss = val_loss
                                 torch.save(model.state_dict(),os.path.join(args.log_dest,"BEST_model.pth"))
-                            print("Lowest Validation Loss: {.6f}".format(lowest_val_loss))
+                            print("Lowest Validation Loss: {:.6f}".format(lowest_val_loss))
 
 
                         # print the time elapsed
