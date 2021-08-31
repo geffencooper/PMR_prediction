@@ -53,10 +53,12 @@ audio_df = pd.read_csv(os.path.join(root_dir,str(int(patient_id))+"_OpenSMILE2.3
 visual_df = pd.read_csv(os.path.join(root_dir,str(int(patient_id))+"_OpenFace2.1.0_Pose_gaze_AUs.csv"),sep=",")
 
 print("save")
+audio_cols = audio_df.columns[2:]
+video_cols = visual_df.columns[4:]
 for idx in range(len(y_train_sm)):
     print(idx)
-    audio = pd.DataFrame(x_audio_train[idx].reshape(500,39),columns=audio_df.columns[2:])
-    visual = pd.DataFrame(x_video_train[idx].reshape(150,49),columns=visual_df.columns[4:])
+    audio = pd.DataFrame(x_audio_train[idx].reshape(500,39),columns=audio_cols)
+    visual = pd.DataFrame(x_video_train[idx].reshape(150,49),columns=video_cols)
     
     audio.insert(0,'name',0)
     audio.insert(1,'frameTime',0)
