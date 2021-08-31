@@ -45,8 +45,6 @@ print("y_train:",len(y_train))
 #exit()
 x_audio_sm,y_train_sm = sm.fit_resample(x_audio_train,y_train)
 x_video_sm,y_train_sm = sm.fit_resample(x_video_train,y_train)
-x_audio_sm = np.array(x_audio_sm)
-x_video_sm = np.array(x_video_sm)
 
 print("len of sm:", len(x_audio_sm),len(x_video_sm),len(y_train_sm))
 # copy the structure
@@ -59,8 +57,13 @@ audio_cols = audio_df.columns[2:]
 video_cols = visual_df.columns[4:]
 for idx in range(len(y_train_sm)):
     print(idx)
-    audio = pd.DataFrame(x_audio_sm[idx].reshape(500,39),columns=audio_cols)
-    visual = pd.DataFrame(x_video_sm[idx].reshape(150,49),columns=video_cols)
+    if idx == 0:
+        print(x_audio_sm[0])
+        print(x_video_sm[0])
+    x_aud = np.array(x_audio_sm[idx])
+    x_vid = np.array(x_video_sm[idx])
+    audio = pd.DataFrame(x_aud[idx].reshape(500,39),columns=audio_cols)
+    visual = pd.DataFrame(x_vid.reshape(150,49),columns=video_cols)
     
     audio.insert(0,'name',0)
     audio.insert(1,'frameTime',0)
