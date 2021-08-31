@@ -47,14 +47,13 @@ x_audio_sm,y_train_sm = sm.fit_resample(x_audio_train,y_train)
 x_video_sm,y_train_sm = sm.fit_resample(x_video_train,y_train)
 
 print("len of sm:", len(x_audio_sm),len(x_video_sm),len(y_train_sm))
-print("y_train_sm:",y_train_sm)
 # copy the structure
 patient_id,start,end,label = labels_df.iloc[0]
 audio_df = pd.read_csv(os.path.join(root_dir,str(int(patient_id))+"_OpenSMILE2.3.0_mfcc.csv"),sep=";")
 visual_df = pd.read_csv(os.path.join(root_dir,str(int(patient_id))+"_OpenFace2.1.0_Pose_gaze_AUs.csv"),sep=",")
 
 print("save")
-for idx in range(len(y_train)):
+for idx in range(len(y_train_sm)):
     print(idx)
     audio = pd.DataFrame(x_audio_train[idx].reshape(500,39),columns=audio_df.columns[2:])
     visual = pd.DataFrame(x_video_train[idx].reshape(150,49),columns=visual_df.columns[4:])
