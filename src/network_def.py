@@ -113,6 +113,8 @@ class PMRfusionNN(torch.nn.Module):
         self.gru_vis = torch.nn.GRU(args.input_size,args.hidden_size,args.num_layers,batch_first=True)
 
         # Layer 2: FC for classification/regression after fusion
+        if args.regression == "y":
+            args.num_classes = 1
         self.fc_fusion = torch.nn.Linear(2*args.hidden_size,args.num_classes)
         #self.fc_fusion = torch.nn.Linear(args.hidden_size,args.num_classes)
 
