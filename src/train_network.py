@@ -236,7 +236,7 @@ def create_model(args,device):
         if args.classification == "y":
             return SpeechPaceNN(args),torch.nn.CrossEntropyLoss()
         elif args.regression == "y":
-            return SpeechPaceNN(args.input_size,args.hidden_size,args.num_layers,-1,args.gpu_i,args.hidden_init_rand),torch.nn.MSELoss()
+            return SpeechPaceNN(args),torch.nn.MSELoss()
     elif args.model_name == "PMRfusionNN":
         if args.classification == "y":
             criterion = torch.nn.CrossEntropyLoss()
@@ -259,7 +259,7 @@ def create_model(args,device):
             else:
                 return PMRfusionNN(args),criterion
         elif args.regression == "y":
-            return PMRfusionNN(args.input_size,args.hidden_size,args.num_layers,-1,args.gpu_i,args.hidden_init_rand),torch.nn.MSELoss()
+            return PMRfusionNN(args),torch.nn.MSELoss()
     else:
         print("ERROR: invalid model name")
         exit(1)
@@ -345,6 +345,9 @@ def eval_model(model,data_loader,device,criterion,args,print_idxs=False):
                 all_preds = torch.cat((all_preds,out),dim=0)
                 all_labels = torch.cat((all_labels,labels),dim=0)
                 all_idxs = torch.cat((all_idxs,idxs),dim=0)
+
+            elif args.regression == "y":
+                pass
 
             # sum up the batch loss
             loss = criterion(out,labels)
