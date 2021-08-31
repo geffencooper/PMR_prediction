@@ -87,8 +87,6 @@ def train_nn(args):
                 out = forward_pass(data,batch,model,args)
 
                 # backward pass
-                print(out.size())
-                print(labels.size())
                 loss = criterion(out,labels)
                 if torch.isnan(loss):
                     print("********** NAN ERROR ************")
@@ -353,7 +351,8 @@ def to_gpu(batch,device,args):
         return X_audio,labels
     elif args.model_name == "PMRfusionNN":
         if args.regression == "y":
-            X_audio,X_video,labels = batch[0].to(device),batch[1].to(device),batch[4].float().to(device)
+            labels = torch.unsqueeze(batch[4].float(),1)
+            X_audio,X_video,labels = batch[0].to(device),batch[1].to(device),labels.to(device)
             return (X_audio,X_video),labels
         else:
             X_audio,X_video,labels = batch[0].to(device),batch[1].to(device),batch[4].to(device)
