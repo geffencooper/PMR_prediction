@@ -56,7 +56,7 @@ print("save")
 audio_cols = audio_df.columns[2:]
 video_cols = visual_df.columns[4:]
 for idx in range(len(y_train_sm)):
-    print(idx,"\r")
+    print("\r",idx,end="")
     # if idx == 0:
     #     print(x_audio_sm[0])
     #     print(x_video_sm[0])
