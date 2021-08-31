@@ -40,9 +40,9 @@ for idx in range(num_samples):
         y_train.append(label)
         print(idx)
 
-print("resample")
-print(y_train)
-print(x_audio_train[0].shape)
+print("num samples:",num_samples)
+print("valid samples:",len(y_train))
+exit()
 x_audio_sm,y_train_sm = sm.fit_resample(x_audio_train,y_train)
 x_video_sm,y_train_sm = sm.fit_resample(x_video_train,y_train)
 
@@ -67,4 +67,4 @@ for idx in range(len(y_train)):
     audio.to_csv(root_dir+"SMOTE/"+str(idx)+"_OpenSMILE2.3.0_mfcc.csv",index=False,sep=';')
     visual.to_csv(root_dir+"SMOTE/"+str(idx)+"_OpenFace2.1.0_Pose_gaze_AUs.csv",index=False,sep=',')
 labels = pd.DataFrame(y_train_sm)
-labels.to_csv(root_dir+"SMOTE/"+"labels")
+labels.to_csv(root_dir+"SMOTE/"+"labels.csv")
