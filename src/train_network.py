@@ -40,6 +40,7 @@ def train_nn(args):
 
     # global variables
     best_val_accuracy = 0
+    lowest_val_loss = 1e+5
     train_losses = []
     val_losses = []
     val_accuracies = []
@@ -99,7 +100,7 @@ def train_nn(args):
                 
                 # print training statistics every n batches
                 if i % args.loss_freq == 0 and i != 0:
-                    print("Train Epoch: {} Iteration: {} [{}/{} ({:.0f}%)]\t Loss: {:.6f}".format(epoch,i,i*args.batch_size,len(train_loader.dataset),100.*i/len(train_loader),loss.item()))
+                    print("Train Epoch: {} Iteration: {} [{}/{} ({:.0f}%)]\t Batch {} Loss: {:.6f}".format(epoch,i,i*args.batch_size,len(train_loader.dataset),100.*i/len(train_loader),i,loss.item()))
 
                 if args.val_freq != 0:    
                     # do a validation pass every m batches (may not want to wait till the end of an epoch)
@@ -109,19 +110,32 @@ def train_nn(args):
                         # keep track of training and validation loss, since training forward pass takes a while do every m iterations instead of every epoch
                         num_iter += args.val_freq
                         iterations.append(num_iter)
-                        train_losses.append(curr_train_loss/(args.val_freq)) # average batch training loss over m iterations instead of over the entire dataset
+                        train_loss = curr_train_loss/(args.val_freq) # average batch training loss over m iterations instead of over the entire dataset
                         curr_train_loss = 0 # reset
+                        train_losses.append(train_loss) 
 
                         # validation pass
                         accuracy,val_loss = eval_model(model,val_loader,device,criterion,args)
                         val_accuracies.append(accuracy)
                         val_losses.append(val_loss)
+                        print("Training Loss:{:.4f}".format(train_loss))
+
 
                         # save the most accuracte model up to date
-                        if accuracy > best_val_accuracy:
-                            best_val_accuracy = accuracy
-                            torch.save(model.state_dict(),os.path.join(args.log_dest,"BEST_model.pth"))
-                        print("Best Accuracy: ",best_val_accuracy,"%")
+                        if args.classification == "y":
+                            if accuracy > best_val_accuracy:
+                                best_val_accuracy = accuracy
+                                torch.save(model.state_dict(),os.path.join(args.log_dest,"BEST_model.pth"))
+                            print("Best Accuracy: {:.6f}%".format(best_val_accuracy))
+                        elif args.regression == "y":
+                            # first time so init lowest val loss to first value
+                            if args.val_freq == i and epoch == 0:
+                                lowest_val_loss = val_loss
+                            elif val_loss < lowest_val_loss:
+                                lowest_val_loss = val_loss
+                                torch.save(model.state_dict(),os.path.join(args.log_dest,"BEST_model.pth"))
+                            print("Lowest Validation Loss: {.6f}".format(lowest_val_loss))
+
 
                         # print the time elapsed
                         end = time.time()
@@ -133,24 +147,35 @@ def train_nn(args):
             
             # validation pass at end of the epoch
             if args.val_freq == 0:
-                print("\n\n----------------- Epoch {} Iteration {} -----------------\n".format(epoch,i))
+                print("\n\n----------------- Epoch {} -----------------\n".format(epoch))
 
                 # keep track of training and validation loss
                 epochs.append(epoch)
                 num_batches = len(train_loader.dataset)//args.batch_size
-                train_losses.append(curr_train_loss/num_batches) # average batch loss
+                train_loss = curr_train_loss/num_batches
+                train_losses.append(train_loss) # average batch loss
                 curr_train_loss = 0 # reset
 
                 # validation pass
                 accuracy,val_loss = eval_model(model,val_loader,device,criterion,args)
                 val_accuracies.append(accuracy)
                 val_losses.append(val_loss)
+                print("Training Loss:{:.4f}".format(train_loss))
 
                 # save the most accuracte model up to date
-                if accuracy > best_val_accuracy:
-                    best_val_accuracy = accuracy
-                    torch.save(model.state_dict(),os.path.join(args.log_dest,"BEST_model.pth"))
-                print("Best Accuracy: ",best_val_accuracy,"%")
+                if args.classification == "y":
+                    if accuracy > best_val_accuracy:
+                        best_val_accuracy = accuracy
+                        torch.save(model.state_dict(),os.path.join(args.log_dest,"BEST_model.pth"))
+                    print("Best Accuracy: {:.6f}%".format(best_val_accuracy))
+                elif args.regression == "y":
+                    # first time so init lowest val loss to first value
+                    if args.val_freq == i and epoch == 0:
+                        lowest_val_loss = val_loss
+                    elif val_loss < lowest_val_loss:
+                        lowest_val_loss = val_loss
+                        torch.save(model.state_dict(),os.path.join(args.log_dest,"BEST_model.pth"))
+                    print("Lowest Validation Loss: {.6f}".format(lowest_val_loss))
 
                 # print the time elapsed
                 end = time.time()
@@ -167,10 +192,19 @@ def train_nn(args):
         accuracy,val_loss = eval_model(model,val_loader,device,criterion,args,print_idxs=True)
         
         # save the most accuracte model up to date
-        if accuracy > best_val_accuracy:
-            best_val_accuracy = accuracy
-            torch.save(model.state_dict(),os.path.join(args.log_dest,"BEST_model.pth"))
-        print("Best Accuracy: ",best_val_accuracy,"%")
+        if args.classification == "y":
+            if accuracy > best_val_accuracy:
+                best_val_accuracy = accuracy
+                torch.save(model.state_dict(),os.path.join(args.log_dest,"BEST_model.pth"))
+            print("Best Accuracy: {:.6f}%".format(best_val_accuracy))
+        elif args.regression == "y":
+            # first time so init lowest val loss to first value
+            if args.val_freq == i and epoch == 0:
+                lowest_val_loss = val_loss
+            elif val_loss < lowest_val_loss:
+                lowest_val_loss = val_loss
+                torch.save(model.state_dict(),os.path.join(args.log_dest,"BEST_model.pth"))
+            print("Lowest Validation Loss: {.6f}".format(lowest_val_loss))
 
         # print the time elapsed
         end = time.time()
@@ -180,7 +214,8 @@ def train_nn(args):
         print("Time Elapsed: {}h {}m {}s".format(int(hours),int(minutes),int(seconds)))
 
         print("Iterations:",iterations)
-        print("Val_Accuracies:",val_accuracies)
+        if args.classification == "y":
+            print("Val_Accuracies:",val_accuracies)
         print("Val_Losses:",val_losses)
         print("Train_Losses:",train_losses)
 
@@ -194,10 +229,19 @@ def train_nn(args):
         accuracy,val_loss = eval_model(model,val_loader,device,criterion,args)
 
         # save the most accuracte model up to date
-        if accuracy > best_val_accuracy:
-            best_val_accuracy = accuracy
-            torch.save(model.state_dict(),os.path.join(args.log_dest,"BEST_model.pth"))
-        print("Best Accuracy: ",best_val_accuracy,"%")
+        if args.classification == "y":
+            if accuracy > best_val_accuracy:
+                best_val_accuracy = accuracy
+                torch.save(model.state_dict(),os.path.join(args.log_dest,"BEST_model.pth"))
+            print("Best Accuracy: {:.6f}%".format(best_val_accuracy))
+        elif args.regression == "y":
+            # first time so init lowest val loss to first value
+            if args.val_freq == i and epoch == 0:
+                lowest_val_loss = val_loss
+            elif val_loss < lowest_val_loss:
+                lowest_val_loss = val_loss
+                torch.save(model.state_dict(),os.path.join(args.log_dest,"BEST_model.pth"))
+            print("Lowest Validation Loss: {.6f}".format(lowest_val_loss))
 
         # print the time elapsed
         end = time.time()
@@ -207,7 +251,8 @@ def train_nn(args):
         print("Time Elapsed: {}h {}m {}s".format(int(hours),int(minutes),int(seconds)))
 
         print("Iterations:",iterations)
-        print("Val_Accuracies:",val_accuracies)
+        if args.classification == "y":
+            print("Val_Accuracies:",val_accuracies)
         print("Val_Losses:",val_losses)
         print("Train_Losses:",train_losses)
 
@@ -377,9 +422,6 @@ def eval_model(model,data_loader,device,criterion,args,print_idxs=False):
                 all_labels = torch.cat((all_labels,labels),dim=0)
                 all_idxs = torch.cat((all_idxs,idxs),dim=0)
 
-            elif args.regression == "y":
-                pass
-
             # sum up the batch loss
             loss = criterion(out,labels)
             # print("output:",out)
@@ -438,6 +480,8 @@ def gen_conf_mat(predictions,labels,idxs,num_classes,print_idxs=False):
 
     print("Confusion Matrix")
     print(conf_mat)
+
+# def get_model_stats(args, model,best_val_accuracy,lowest_val_loss,train_losses,val_losses,val_accuracies,iterations,epochs,curr_train_loss)
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Training and Evaluation")
