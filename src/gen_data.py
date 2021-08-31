@@ -60,10 +60,10 @@ for idx in range(len(y_train_sm)):
     if idx == 0:
         print(x_audio_sm[0])
         print(x_video_sm[0])
-    x_aud = np.array(x_audio_sm[idx])
-    x_vid = np.array(x_video_sm[idx])
-    audio = pd.DataFrame(x_aud[idx].reshape(500,39),columns=audio_cols)
-    visual = pd.DataFrame(x_vid.reshape(150,49),columns=video_cols)
+    x_aud = np.array([x_audio_sm[idx]])
+    x_vid = np.array([x_video_sm[idx]])
+    audio = pd.DataFrame(x_aud[idx].reshape((500,39)),columns=audio_cols)
+    visual = pd.DataFrame(x_vid.reshape((150,49)),columns=video_cols)
     
     audio.insert(0,'name',0)
     audio.insert(1,'frameTime',0)
