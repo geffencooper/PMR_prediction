@@ -41,11 +41,13 @@ for idx in range(num_samples):
         print(idx)
 
 print("num samples:",num_samples)
-print("valid samples:",len(y_train))
-exit()
+print("y_train:",len(y_train))
+#exit()
 x_audio_sm,y_train_sm = sm.fit_resample(x_audio_train,y_train)
 x_video_sm,y_train_sm = sm.fit_resample(x_video_train,y_train)
 
+print("len of sm:", len(x_audio_sm),len(x_video_sm),len(y_train_sm))
+print("y_train_sm:",y_train_sm)
 # copy the structure
 patient_id,start,end,label = labels_df.iloc[0]
 audio_df = pd.read_csv(os.path.join(root_dir,str(int(patient_id))+"_OpenSMILE2.3.0_mfcc.csv"),sep=";")
@@ -66,5 +68,6 @@ for idx in range(len(y_train)):
     
     audio.to_csv(root_dir+"SMOTE/"+str(idx)+"_OpenSMILE2.3.0_mfcc.csv",index=False,sep=';')
     visual.to_csv(root_dir+"SMOTE/"+str(idx)+"_OpenFace2.1.0_Pose_gaze_AUs.csv",index=False,sep=',')
-labels = pd.DataFrame(y_train_sm)
-labels.to_csv(root_dir+"SMOTE/"+"labels.csv")
+
+scores = pd.DataFrame(y_train_sm)
+scores.to_csv(root_dir+"SMOTE/"+"labels.csv",index=False)
