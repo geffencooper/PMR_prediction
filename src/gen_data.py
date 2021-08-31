@@ -38,7 +38,7 @@ for idx in range(num_samples):
         x_audio_train.append(audio_features.to_numpy().flatten())
         x_video_train.append(visual_features.to_numpy().flatten())
         y_train.append(label)
-        print(idx)
+        print(idx,"\r")
 
 print("num samples:",num_samples)
 print("y_train:",len(y_train))
@@ -56,7 +56,7 @@ print("save")
 audio_cols = audio_df.columns[2:]
 video_cols = visual_df.columns[4:]
 for idx in range(len(y_train_sm)):
-    print(idx)
+    print(idx,"\r")
     # if idx == 0:
     #     print(x_audio_sm[0])
     #     print(x_video_sm[0])
