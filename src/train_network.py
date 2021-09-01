@@ -460,7 +460,7 @@ def eval_model(model,data_loader,device,criterion,args,print_idxs=False):
             if print_idxs == True:
                 print("validation results")
                 for i,p in enumerate(all_preds):
-                    print("idx: {}, P:{:.4f} GT:{}".format(all_idxs[i],all_preds[i],all_labels[i]))
+                    print("idx: {}, P:{:.4f} GT:{}".format(all_idxs[i].item(),all_preds[i].item(),all_labels[i].item()))
 
 
     model.train()
