@@ -24,9 +24,9 @@ if __name__ =="__main__":
     val_loader = create_loader(val_dataset,args)
 
     pmr = PMRfusionNN(args)
-    pmr.load_state_dict(torch.load("../models/binary_fusion_one_to_one_NORM-2021-08-27_13-15-21/BEST_model.pth"))
+    pmr.load_state_dict(torch.load("../models/fusion_NORM_smote_regression-2021-08-31_17-35-31/BEST_model.pth"))
 
     pmr.eval()
     pmr.to(device)
 
-    eval_model(pmr,val_loader,device,torch.nn.CrossEntropyLoss(),args)
+    eval_model(pmr,val_loader,device,torch.nn.CrossEntropyLoss(),args,print_idxs=True)
