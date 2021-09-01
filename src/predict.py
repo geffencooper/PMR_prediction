@@ -29,4 +29,4 @@ if __name__ =="__main__":
     pmr.eval()
     pmr.to(device)
 
-    eval_model(pmr,val_loader,device,torch.nn.MSELoss(),args,print_idxs=True)
+    eval_model(pmr,val_loader,device,torch.nn.CrossEntropyLoss(),args,print_idxs=True)
