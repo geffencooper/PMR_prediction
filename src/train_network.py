@@ -424,11 +424,10 @@ def eval_model(model,data_loader,device,criterion,args,print_idxs=False):
             # forward pass
             out = forward_pass(data,batch,model,args)
 
-            if args.classification == "y":
-                # accumulate predictions and labels
-                all_preds = torch.cat((all_preds,out),dim=0)
-                all_labels = torch.cat((all_labels,labels),dim=0)
-                all_idxs = torch.cat((all_idxs,idxs),dim=0)
+            # accumulate predictions and labels
+            all_preds = torch.cat((all_preds,out),dim=0)
+            all_labels = torch.cat((all_labels,labels),dim=0)
+            all_idxs = torch.cat((all_idxs,idxs),dim=0)
 
             # sum up the batch loss
             loss = criterion(out,labels)
@@ -458,6 +457,11 @@ def eval_model(model,data_loader,device,criterion,args,print_idxs=False):
             print("\nValidation Loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)".format(eval_loss,correct,len(data_loader.dataset),100.*correct/len(data_loader.dataset)))
         else:
             print("\nValidation Loss: {:.4f}".format(eval_loss))
+            if print_idxs == True:
+                print("validation results")
+                for i,p in enumerate(all_preds):
+                    print("idx: {}, P:{:.4f} GT:{}".format(all_idxs[i],all_preds[i],all_labels[i]))
+
 
     model.train()
     return 100.*correct/len(data_loader.dataset),eval_loss
