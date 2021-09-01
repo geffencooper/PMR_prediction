@@ -1,0 +1,838 @@
+============================ Raw Args ============================
+Namespace(batch_size=32, classification='y', dropout='n', droput_prob=0.0, gpu_i=1, hidden_init_rand='n', hidden_size=64, imbalanced_sampler='n', input_size=23, l2_reg='n', load_trained='n', log_dest='../models/fusion_NORM_smote_classification-2021-08-31_15-53-26', loss_freq=5, lr=0.002, model_name='PMRfusionNN', normalize='y', num_classes=4, num_epochs=20, num_layers=1, optim='RMS', regression='n', root_dir='/data/perception-working/Geffen/avec_data/', session_name='fusion_NORM_smote_classification', train_data_dir='SMOTE/', train_labels_csv='labels2.csv', trained_path='none', val_data_dir='none', val_freq=0, val_labels_csv='val_metadata.csv', weight_decay_amnt=0.0, weighted_loss='n')
+
+
+
+================================ Start Training ================================
+
+Session Name: fusion_NORM_smote_classification
+
+Model Name: PMRfusionNN
+
+Device: 1  ---->  GeForce GTX 1080 Ti
+
+Hyperparameters:
+Batch Size: 32
+Learning Rate: 0.002
+Hidden Size: 64
+Number of Layer: 1
+Number of Epochs: 20
+Normalization:y
+
+Train Epoch: 0 Iteration: 5 [160/34075 (0%)]	 Batch 5 Loss: 1.299148
+Train Epoch: 0 Iteration: 10 [320/34075 (1%)]	 Batch 10 Loss: 1.323598
+Train Epoch: 0 Iteration: 15 [480/34075 (1%)]	 Batch 15 Loss: 1.260647
+Train Epoch: 0 Iteration: 20 [640/34075 (2%)]	 Batch 20 Loss: 1.321777
+Train Epoch: 0 Iteration: 25 [800/34075 (2%)]	 Batch 25 Loss: 1.431465
+Train Epoch: 0 Iteration: 30 [960/34075 (3%)]	 Batch 30 Loss: 1.333045
+Train Epoch: 0 Iteration: 35 [1120/34075 (3%)]	 Batch 35 Loss: 1.197627
+Train Epoch: 0 Iteration: 40 [1280/34075 (4%)]	 Batch 40 Loss: 1.330380
+Train Epoch: 0 Iteration: 45 [1440/34075 (4%)]	 Batch 45 Loss: 1.248713
+Train Epoch: 0 Iteration: 50 [1600/34075 (5%)]	 Batch 50 Loss: 1.438749
+Train Epoch: 0 Iteration: 55 [1760/34075 (5%)]	 Batch 55 Loss: 1.177186
+Train Epoch: 0 Iteration: 60 [1920/34075 (6%)]	 Batch 60 Loss: 1.271956
+Train Epoch: 0 Iteration: 65 [2080/34075 (6%)]	 Batch 65 Loss: 1.052381
+Train Epoch: 0 Iteration: 70 [2240/34075 (7%)]	 Batch 70 Loss: 1.007619
+Train Epoch: 0 Iteration: 75 [2400/34075 (7%)]	 Batch 75 Loss: 1.161876
+Train Epoch: 0 Iteration: 80 [2560/34075 (8%)]	 Batch 80 Loss: 1.093353
+Train Epoch: 0 Iteration: 85 [2720/34075 (8%)]	 Batch 85 Loss: 1.098932
+Train Epoch: 0 Iteration: 90 [2880/34075 (8%)]	 Batch 90 Loss: 1.044267
+Train Epoch: 0 Iteration: 95 [3040/34075 (9%)]	 Batch 95 Loss: 1.006755
+Train Epoch: 0 Iteration: 100 [3200/34075 (9%)]	 Batch 100 Loss: 0.970553
+Train Epoch: 0 Iteration: 105 [3360/34075 (10%)]	 Batch 105 Loss: 0.986423
+Train Epoch: 0 Iteration: 110 [3520/34075 (10%)]	 Batch 110 Loss: 0.919678
+Train Epoch: 0 Iteration: 115 [3680/34075 (11%)]	 Batch 115 Loss: 1.122231
+Train Epoch: 0 Iteration: 120 [3840/34075 (11%)]	 Batch 120 Loss: 0.915349
+Train Epoch: 0 Iteration: 125 [4000/34075 (12%)]	 Batch 125 Loss: 0.942532
+Train Epoch: 0 Iteration: 130 [4160/34075 (12%)]	 Batch 130 Loss: 0.764748
+Train Epoch: 0 Iteration: 135 [4320/34075 (13%)]	 Batch 135 Loss: 1.141059
+Train Epoch: 0 Iteration: 140 [4480/34075 (13%)]	 Batch 140 Loss: 0.830720
+Train Epoch: 0 Iteration: 145 [4640/34075 (14%)]	 Batch 145 Loss: 0.961513
+Train Epoch: 0 Iteration: 150 [4800/34075 (14%)]	 Batch 150 Loss: 0.921105
+Train Epoch: 0 Iteration: 155 [4960/34075 (15%)]	 Batch 155 Loss: 0.807370
+Train Epoch: 0 Iteration: 160 [5120/34075 (15%)]	 Batch 160 Loss: 0.821612
+Train Epoch: 0 Iteration: 165 [5280/34075 (15%)]	 Batch 165 Loss: 0.884846
+Train Epoch: 0 Iteration: 170 [5440/34075 (16%)]	 Batch 170 Loss: 0.696964
+Train Epoch: 0 Iteration: 175 [5600/34075 (16%)]	 Batch 175 Loss: 0.803436
+Train Epoch: 0 Iteration: 180 [5760/34075 (17%)]	 Batch 180 Loss: 0.829175
+Train Epoch: 0 Iteration: 185 [5920/34075 (17%)]	 Batch 185 Loss: 0.934273
+Train Epoch: 0 Iteration: 190 [6080/34075 (18%)]	 Batch 190 Loss: 0.734586
+Train Epoch: 0 Iteration: 195 [6240/34075 (18%)]	 Batch 195 Loss: 0.753164
+Train Epoch: 0 Iteration: 200 [6400/34075 (19%)]	 Batch 200 Loss: 0.819593
+Train Epoch: 0 Iteration: 205 [6560/34075 (19%)]	 Batch 205 Loss: 0.725844
+Train Epoch: 0 Iteration: 210 [6720/34075 (20%)]	 Batch 210 Loss: 0.696061
+Train Epoch: 0 Iteration: 215 [6880/34075 (20%)]	 Batch 215 Loss: 0.737562
+Train Epoch: 0 Iteration: 220 [7040/34075 (21%)]	 Batch 220 Loss: 0.791771
+Train Epoch: 0 Iteration: 225 [7200/34075 (21%)]	 Batch 225 Loss: 0.641718
+Train Epoch: 0 Iteration: 230 [7360/34075 (22%)]	 Batch 230 Loss: 0.744543
+Train Epoch: 0 Iteration: 235 [7520/34075 (22%)]	 Batch 235 Loss: 0.633382
+Train Epoch: 0 Iteration: 240 [7680/34075 (23%)]	 Batch 240 Loss: 0.433739
+Train Epoch: 0 Iteration: 245 [7840/34075 (23%)]	 Batch 245 Loss: 0.878739
+Train Epoch: 0 Iteration: 250 [8000/34075 (23%)]	 Batch 250 Loss: 0.697430
+Train Epoch: 0 Iteration: 255 [8160/34075 (24%)]	 Batch 255 Loss: 0.908479
+Train Epoch: 0 Iteration: 260 [8320/34075 (24%)]	 Batch 260 Loss: 0.619826
+Train Epoch: 0 Iteration: 265 [8480/34075 (25%)]	 Batch 265 Loss: 0.764117
+Train Epoch: 0 Iteration: 270 [8640/34075 (25%)]	 Batch 270 Loss: 0.571258
+Train Epoch: 0 Iteration: 275 [8800/34075 (26%)]	 Batch 275 Loss: 0.594337
+Train Epoch: 0 Iteration: 280 [8960/34075 (26%)]	 Batch 280 Loss: 0.618614
+Train Epoch: 0 Iteration: 285 [9120/34075 (27%)]	 Batch 285 Loss: 0.659773
+Train Epoch: 0 Iteration: 290 [9280/34075 (27%)]	 Batch 290 Loss: 0.989997
+Train Epoch: 0 Iteration: 295 [9440/34075 (28%)]	 Batch 295 Loss: 0.578725
+Train Epoch: 0 Iteration: 300 [9600/34075 (28%)]	 Batch 300 Loss: 0.758188
+Train Epoch: 0 Iteration: 305 [9760/34075 (29%)]	 Batch 305 Loss: 0.663575
+Train Epoch: 0 Iteration: 310 [9920/34075 (29%)]	 Batch 310 Loss: 0.809915
+Train Epoch: 0 Iteration: 315 [10080/34075 (30%)]	 Batch 315 Loss: 0.681721
+Train Epoch: 0 Iteration: 320 [10240/34075 (30%)]	 Batch 320 Loss: 1.326851
+Train Epoch: 0 Iteration: 325 [10400/34075 (31%)]	 Batch 325 Loss: 0.692519
+Train Epoch: 0 Iteration: 330 [10560/34075 (31%)]	 Batch 330 Loss: 0.496919
+Train Epoch: 0 Iteration: 335 [10720/34075 (31%)]	 Batch 335 Loss: 0.692755
+Train Epoch: 0 Iteration: 340 [10880/34075 (32%)]	 Batch 340 Loss: 0.599657
+Train Epoch: 0 Iteration: 345 [11040/34075 (32%)]	 Batch 345 Loss: 0.690402
+Train Epoch: 0 Iteration: 350 [11200/34075 (33%)]	 Batch 350 Loss: 0.550314
+Train Epoch: 0 Iteration: 355 [11360/34075 (33%)]	 Batch 355 Loss: 0.594065
+Train Epoch: 0 Iteration: 360 [11520/34075 (34%)]	 Batch 360 Loss: 0.786596
+Train Epoch: 0 Iteration: 365 [11680/34075 (34%)]	 Batch 365 Loss: 0.579420
+Train Epoch: 0 Iteration: 370 [11840/34075 (35%)]	 Batch 370 Loss: 0.603815
+Train Epoch: 0 Iteration: 375 [12000/34075 (35%)]	 Batch 375 Loss: 0.535057
+Train Epoch: 0 Iteration: 380 [12160/34075 (36%)]	 Batch 380 Loss: 0.576022
+Train Epoch: 0 Iteration: 385 [12320/34075 (36%)]	 Batch 385 Loss: 0.823337
+Train Epoch: 0 Iteration: 390 [12480/34075 (37%)]	 Batch 390 Loss: 0.498023
+Train Epoch: 0 Iteration: 395 [12640/34075 (37%)]	 Batch 395 Loss: 0.737935
+Train Epoch: 0 Iteration: 400 [12800/34075 (38%)]	 Batch 400 Loss: 0.583432
+Train Epoch: 0 Iteration: 405 [12960/34075 (38%)]	 Batch 405 Loss: 0.622824
+Train Epoch: 0 Iteration: 410 [13120/34075 (38%)]	 Batch 410 Loss: 0.488780
+Train Epoch: 0 Iteration: 415 [13280/34075 (39%)]	 Batch 415 Loss: 0.478295
+Train Epoch: 0 Iteration: 420 [13440/34075 (39%)]	 Batch 420 Loss: 0.700144
+Train Epoch: 0 Iteration: 425 [13600/34075 (40%)]	 Batch 425 Loss: 0.601891
+Train Epoch: 0 Iteration: 430 [13760/34075 (40%)]	 Batch 430 Loss: 0.336809
+Train Epoch: 0 Iteration: 435 [13920/34075 (41%)]	 Batch 435 Loss: 0.323256
+Train Epoch: 0 Iteration: 440 [14080/34075 (41%)]	 Batch 440 Loss: 0.603850
+Train Epoch: 0 Iteration: 445 [14240/34075 (42%)]	 Batch 445 Loss: 0.631022
+Train Epoch: 0 Iteration: 450 [14400/34075 (42%)]	 Batch 450 Loss: 0.432313
+Train Epoch: 0 Iteration: 455 [14560/34075 (43%)]	 Batch 455 Loss: 0.396214
+Train Epoch: 0 Iteration: 460 [14720/34075 (43%)]	 Batch 460 Loss: 0.767940
+Train Epoch: 0 Iteration: 465 [14880/34075 (44%)]	 Batch 465 Loss: 0.548213
+Train Epoch: 0 Iteration: 470 [15040/34075 (44%)]	 Batch 470 Loss: 0.607337
+Train Epoch: 0 Iteration: 475 [15200/34075 (45%)]	 Batch 475 Loss: 0.496598
+Train Epoch: 0 Iteration: 480 [15360/34075 (45%)]	 Batch 480 Loss: 0.690697
+Train Epoch: 0 Iteration: 485 [15520/34075 (46%)]	 Batch 485 Loss: 0.413380
+Train Epoch: 0 Iteration: 490 [15680/34075 (46%)]	 Batch 490 Loss: 0.548470
+Train Epoch: 0 Iteration: 495 [15840/34075 (46%)]	 Batch 495 Loss: 0.553124
+Train Epoch: 0 Iteration: 500 [16000/34075 (47%)]	 Batch 500 Loss: 0.431122
+Train Epoch: 0 Iteration: 505 [16160/34075 (47%)]	 Batch 505 Loss: 0.474635
+Train Epoch: 0 Iteration: 510 [16320/34075 (48%)]	 Batch 510 Loss: 0.590751
+Train Epoch: 0 Iteration: 515 [16480/34075 (48%)]	 Batch 515 Loss: 0.382981
+Train Epoch: 0 Iteration: 520 [16640/34075 (49%)]	 Batch 520 Loss: 0.466316
+Train Epoch: 0 Iteration: 525 [16800/34075 (49%)]	 Batch 525 Loss: 0.640258
+Train Epoch: 0 Iteration: 530 [16960/34075 (50%)]	 Batch 530 Loss: 0.688282
+Train Epoch: 0 Iteration: 535 [17120/34075 (50%)]	 Batch 535 Loss: 0.525089
+Train Epoch: 0 Iteration: 540 [17280/34075 (51%)]	 Batch 540 Loss: 0.436756
+Train Epoch: 0 Iteration: 545 [17440/34075 (51%)]	 Batch 545 Loss: 0.766768
+Train Epoch: 0 Iteration: 550 [17600/34075 (52%)]	 Batch 550 Loss: 0.583738
+Train Epoch: 0 Iteration: 555 [17760/34075 (52%)]	 Batch 555 Loss: 0.462346
+Train Epoch: 0 Iteration: 560 [17920/34075 (53%)]	 Batch 560 Loss: 0.360919
+Train Epoch: 0 Iteration: 565 [18080/34075 (53%)]	 Batch 565 Loss: 0.489601
+Train Epoch: 0 Iteration: 570 [18240/34075 (54%)]	 Batch 570 Loss: 0.617088
+Train Epoch: 0 Iteration: 575 [18400/34075 (54%)]	 Batch 575 Loss: 0.317401
+Train Epoch: 0 Iteration: 580 [18560/34075 (54%)]	 Batch 580 Loss: 0.512406
+Train Epoch: 0 Iteration: 585 [18720/34075 (55%)]	 Batch 585 Loss: 0.445986
+Train Epoch: 0 Iteration: 590 [18880/34075 (55%)]	 Batch 590 Loss: 0.456608
+Train Epoch: 0 Iteration: 595 [19040/34075 (56%)]	 Batch 595 Loss: 0.364445
+Train Epoch: 0 Iteration: 600 [19200/34075 (56%)]	 Batch 600 Loss: 0.465929
+Train Epoch: 0 Iteration: 605 [19360/34075 (57%)]	 Batch 605 Loss: 0.456385
+Train Epoch: 0 Iteration: 610 [19520/34075 (57%)]	 Batch 610 Loss: 0.391215
+Train Epoch: 0 Iteration: 615 [19680/34075 (58%)]	 Batch 615 Loss: 0.387838
+Train Epoch: 0 Iteration: 620 [19840/34075 (58%)]	 Batch 620 Loss: 0.383587
+Train Epoch: 0 Iteration: 625 [20000/34075 (59%)]	 Batch 625 Loss: 0.420014
+Train Epoch: 0 Iteration: 630 [20160/34075 (59%)]	 Batch 630 Loss: 0.280407
+Train Epoch: 0 Iteration: 635 [20320/34075 (60%)]	 Batch 635 Loss: 0.484065
+Train Epoch: 0 Iteration: 640 [20480/34075 (60%)]	 Batch 640 Loss: 0.712552
+Train Epoch: 0 Iteration: 645 [20640/34075 (61%)]	 Batch 645 Loss: 0.406268
+Train Epoch: 0 Iteration: 650 [20800/34075 (61%)]	 Batch 650 Loss: 0.422493
+Train Epoch: 0 Iteration: 655 [20960/34075 (62%)]	 Batch 655 Loss: 0.353400
+Train Epoch: 0 Iteration: 660 [21120/34075 (62%)]	 Batch 660 Loss: 0.722905
+Train Epoch: 0 Iteration: 665 [21280/34075 (62%)]	 Batch 665 Loss: 0.268056
+Train Epoch: 0 Iteration: 670 [21440/34075 (63%)]	 Batch 670 Loss: 0.423850
+Train Epoch: 0 Iteration: 675 [21600/34075 (63%)]	 Batch 675 Loss: 0.544451
+Train Epoch: 0 Iteration: 680 [21760/34075 (64%)]	 Batch 680 Loss: 0.607824
+Train Epoch: 0 Iteration: 685 [21920/34075 (64%)]	 Batch 685 Loss: 0.508869
+Train Epoch: 0 Iteration: 690 [22080/34075 (65%)]	 Batch 690 Loss: 0.406869
+Train Epoch: 0 Iteration: 695 [22240/34075 (65%)]	 Batch 695 Loss: 0.367541
+Train Epoch: 0 Iteration: 700 [22400/34075 (66%)]	 Batch 700 Loss: 0.641512
+Train Epoch: 0 Iteration: 705 [22560/34075 (66%)]	 Batch 705 Loss: 0.558767
+Train Epoch: 0 Iteration: 710 [22720/34075 (67%)]	 Batch 710 Loss: 0.512911
+Train Epoch: 0 Iteration: 715 [22880/34075 (67%)]	 Batch 715 Loss: 0.446009
+Train Epoch: 0 Iteration: 720 [23040/34075 (68%)]	 Batch 720 Loss: 0.725601
+Train Epoch: 0 Iteration: 725 [23200/34075 (68%)]	 Batch 725 Loss: 0.569184
+Train Epoch: 0 Iteration: 730 [23360/34075 (69%)]	 Batch 730 Loss: 0.478944
+Train Epoch: 0 Iteration: 735 [23520/34075 (69%)]	 Batch 735 Loss: 0.753493
+Train Epoch: 0 Iteration: 740 [23680/34075 (69%)]	 Batch 740 Loss: 0.431096
+Train Epoch: 0 Iteration: 745 [23840/34075 (70%)]	 Batch 745 Loss: 0.436546
+Train Epoch: 0 Iteration: 750 [24000/34075 (70%)]	 Batch 750 Loss: 0.394099
+Train Epoch: 0 Iteration: 755 [24160/34075 (71%)]	 Batch 755 Loss: 0.307506
+Train Epoch: 0 Iteration: 760 [24320/34075 (71%)]	 Batch 760 Loss: 0.465065
+Train Epoch: 0 Iteration: 765 [24480/34075 (72%)]	 Batch 765 Loss: 0.311811
+Train Epoch: 0 Iteration: 770 [24640/34075 (72%)]	 Batch 770 Loss: 0.595017
+Train Epoch: 0 Iteration: 775 [24800/34075 (73%)]	 Batch 775 Loss: 0.457518
+Train Epoch: 0 Iteration: 780 [24960/34075 (73%)]	 Batch 780 Loss: 0.483946
+Train Epoch: 0 Iteration: 785 [25120/34075 (74%)]	 Batch 785 Loss: 0.559554
+Train Epoch: 0 Iteration: 790 [25280/34075 (74%)]	 Batch 790 Loss: 0.656682
+Train Epoch: 0 Iteration: 795 [25440/34075 (75%)]	 Batch 795 Loss: 0.387168
+Train Epoch: 0 Iteration: 800 [25600/34075 (75%)]	 Batch 800 Loss: 0.445634
+Train Epoch: 0 Iteration: 805 [25760/34075 (76%)]	 Batch 805 Loss: 0.392964
+Train Epoch: 0 Iteration: 810 [25920/34075 (76%)]	 Batch 810 Loss: 0.334952
+Train Epoch: 0 Iteration: 815 [26080/34075 (77%)]	 Batch 815 Loss: 0.575526
+Train Epoch: 0 Iteration: 820 [26240/34075 (77%)]	 Batch 820 Loss: 0.272477
+Train Epoch: 0 Iteration: 825 [26400/34075 (77%)]	 Batch 825 Loss: 0.404510
+Train Epoch: 0 Iteration: 830 [26560/34075 (78%)]	 Batch 830 Loss: 0.499520
+Train Epoch: 0 Iteration: 835 [26720/34075 (78%)]	 Batch 835 Loss: 0.413279
+Train Epoch: 0 Iteration: 840 [26880/34075 (79%)]	 Batch 840 Loss: 0.366757
+Train Epoch: 0 Iteration: 845 [27040/34075 (79%)]	 Batch 845 Loss: 0.363816
+Train Epoch: 0 Iteration: 850 [27200/34075 (80%)]	 Batch 850 Loss: 0.397643
+Train Epoch: 0 Iteration: 855 [27360/34075 (80%)]	 Batch 855 Loss: 0.300614
+Train Epoch: 0 Iteration: 860 [27520/34075 (81%)]	 Batch 860 Loss: 0.383937
+Train Epoch: 0 Iteration: 865 [27680/34075 (81%)]	 Batch 865 Loss: 0.234798
+Train Epoch: 0 Iteration: 870 [27840/34075 (82%)]	 Batch 870 Loss: 0.285599
+Train Epoch: 0 Iteration: 875 [28000/34075 (82%)]	 Batch 875 Loss: 0.578206
+Train Epoch: 0 Iteration: 880 [28160/34075 (83%)]	 Batch 880 Loss: 0.344739
+Train Epoch: 0 Iteration: 885 [28320/34075 (83%)]	 Batch 885 Loss: 0.297332
+Train Epoch: 0 Iteration: 890 [28480/34075 (84%)]	 Batch 890 Loss: 0.381600
+Train Epoch: 0 Iteration: 895 [28640/34075 (84%)]	 Batch 895 Loss: 0.404529
+Train Epoch: 0 Iteration: 900 [28800/34075 (85%)]	 Batch 900 Loss: 0.553922
+Train Epoch: 0 Iteration: 905 [28960/34075 (85%)]	 Batch 905 Loss: 0.297230
+Train Epoch: 0 Iteration: 910 [29120/34075 (85%)]	 Batch 910 Loss: 0.326743
+Train Epoch: 0 Iteration: 915 [29280/34075 (86%)]	 Batch 915 Loss: 0.427419
+Train Epoch: 0 Iteration: 920 [29440/34075 (86%)]	 Batch 920 Loss: 0.390585
+Train Epoch: 0 Iteration: 925 [29600/34075 (87%)]	 Batch 925 Loss: 0.234352
+Train Epoch: 0 Iteration: 930 [29760/34075 (87%)]	 Batch 930 Loss: 0.363987
+Train Epoch: 0 Iteration: 935 [29920/34075 (88%)]	 Batch 935 Loss: 0.392332
+Train Epoch: 0 Iteration: 940 [30080/34075 (88%)]	 Batch 940 Loss: 0.289427
+Train Epoch: 0 Iteration: 945 [30240/34075 (89%)]	 Batch 945 Loss: 0.138387
+Train Epoch: 0 Iteration: 950 [30400/34075 (89%)]	 Batch 950 Loss: 0.383158
+Train Epoch: 0 Iteration: 955 [30560/34075 (90%)]	 Batch 955 Loss: 0.453022
+Train Epoch: 0 Iteration: 960 [30720/34075 (90%)]	 Batch 960 Loss: 0.300093
+Train Epoch: 0 Iteration: 965 [30880/34075 (91%)]	 Batch 965 Loss: 0.568462
+Train Epoch: 0 Iteration: 970 [31040/34075 (91%)]	 Batch 970 Loss: 0.326893
+Train Epoch: 0 Iteration: 975 [31200/34075 (92%)]	 Batch 975 Loss: 0.311088
+Train Epoch: 0 Iteration: 980 [31360/34075 (92%)]	 Batch 980 Loss: 0.389827
+Train Epoch: 0 Iteration: 985 [31520/34075 (92%)]	 Batch 985 Loss: 0.276493
+Train Epoch: 0 Iteration: 990 [31680/34075 (93%)]	 Batch 990 Loss: 0.275955
+Train Epoch: 0 Iteration: 995 [31840/34075 (93%)]	 Batch 995 Loss: 0.380550
+Train Epoch: 0 Iteration: 1000 [32000/34075 (94%)]	 Batch 1000 Loss: 0.270345
+Train Epoch: 0 Iteration: 1005 [32160/34075 (94%)]	 Batch 1005 Loss: 0.340980
+Train Epoch: 0 Iteration: 1010 [32320/34075 (95%)]	 Batch 1010 Loss: 0.381956
+Train Epoch: 0 Iteration: 1015 [32480/34075 (95%)]	 Batch 1015 Loss: 0.333550
+Train Epoch: 0 Iteration: 1020 [32640/34075 (96%)]	 Batch 1020 Loss: 0.541744
+Train Epoch: 0 Iteration: 1025 [32800/34075 (96%)]	 Batch 1025 Loss: 0.210674
+Train Epoch: 0 Iteration: 1030 [32960/34075 (97%)]	 Batch 1030 Loss: 0.277536
+Train Epoch: 0 Iteration: 1035 [33120/34075 (97%)]	 Batch 1035 Loss: 0.399614
+Train Epoch: 0 Iteration: 1040 [33280/34075 (98%)]	 Batch 1040 Loss: 0.225139
+Train Epoch: 0 Iteration: 1045 [33440/34075 (98%)]	 Batch 1045 Loss: 0.255836
+Train Epoch: 0 Iteration: 1050 [33600/34075 (99%)]	 Batch 1050 Loss: 0.361025
+Train Epoch: 0 Iteration: 1055 [33760/34075 (99%)]	 Batch 1055 Loss: 0.446156
+Train Epoch: 0 Iteration: 1060 [33920/34075 (100%)]	 Batch 1060 Loss: 0.234617
+
+
+----------------- Epoch 0 -----------------
+
+validation computation time: 10.0  minutes
+Confusion Matrix
+tensor([[1422,  497,  108,   95],
+        [1484,  334,  139,   37],
+        [ 267,   57,   22,   31],
+        [  78,   39,    8,    3]])
+class 0 accuracy: 43.7404%
+class 1 accuracy: 36.0302%
+class 2 accuracy: 7.9422%
+class 3 accuracy: 1.8072%
+
+Validation Loss: 1.5331, Accuracy: 1781/4621 (39%)
+Training Loss:0.5930
+Best Accuracy: 38.541441%
+Time Elapsed: 0h 23m 40s
+
+--------------------------------------------------------
+
+
+Train Epoch: 1 Iteration: 5 [160/34075 (0%)]	 Batch 5 Loss: 0.244659
+Train Epoch: 1 Iteration: 10 [320/34075 (1%)]	 Batch 10 Loss: 0.417673
+Train Epoch: 1 Iteration: 15 [480/34075 (1%)]	 Batch 15 Loss: 0.213691
+Train Epoch: 1 Iteration: 20 [640/34075 (2%)]	 Batch 20 Loss: 0.251919
+Train Epoch: 1 Iteration: 25 [800/34075 (2%)]	 Batch 25 Loss: 0.405397
+Train Epoch: 1 Iteration: 30 [960/34075 (3%)]	 Batch 30 Loss: 0.376876
+Train Epoch: 1 Iteration: 35 [1120/34075 (3%)]	 Batch 35 Loss: 0.357655
+Train Epoch: 1 Iteration: 40 [1280/34075 (4%)]	 Batch 40 Loss: 0.379986
+Train Epoch: 1 Iteration: 45 [1440/34075 (4%)]	 Batch 45 Loss: 0.242234
+Train Epoch: 1 Iteration: 50 [1600/34075 (5%)]	 Batch 50 Loss: 0.234890
+Train Epoch: 1 Iteration: 55 [1760/34075 (5%)]	 Batch 55 Loss: 0.388161
+Train Epoch: 1 Iteration: 60 [1920/34075 (6%)]	 Batch 60 Loss: 0.229602
+Train Epoch: 1 Iteration: 65 [2080/34075 (6%)]	 Batch 65 Loss: 0.166905
+Train Epoch: 1 Iteration: 70 [2240/34075 (7%)]	 Batch 70 Loss: 0.265650
+Train Epoch: 1 Iteration: 75 [2400/34075 (7%)]	 Batch 75 Loss: 0.185113
+Train Epoch: 1 Iteration: 80 [2560/34075 (8%)]	 Batch 80 Loss: 0.189919
+Train Epoch: 1 Iteration: 85 [2720/34075 (8%)]	 Batch 85 Loss: 0.178469
+Train Epoch: 1 Iteration: 90 [2880/34075 (8%)]	 Batch 90 Loss: 0.201309
+Train Epoch: 1 Iteration: 95 [3040/34075 (9%)]	 Batch 95 Loss: 0.387019
+Train Epoch: 1 Iteration: 100 [3200/34075 (9%)]	 Batch 100 Loss: 0.283774
+Train Epoch: 1 Iteration: 105 [3360/34075 (10%)]	 Batch 105 Loss: 0.269508
+Train Epoch: 1 Iteration: 110 [3520/34075 (10%)]	 Batch 110 Loss: 0.206843
+Train Epoch: 1 Iteration: 115 [3680/34075 (11%)]	 Batch 115 Loss: 0.193837
+Train Epoch: 1 Iteration: 120 [3840/34075 (11%)]	 Batch 120 Loss: 0.220295
+Train Epoch: 1 Iteration: 125 [4000/34075 (12%)]	 Batch 125 Loss: 0.386641
+Train Epoch: 1 Iteration: 130 [4160/34075 (12%)]	 Batch 130 Loss: 0.289573
+Train Epoch: 1 Iteration: 135 [4320/34075 (13%)]	 Batch 135 Loss: 0.250899
+Train Epoch: 1 Iteration: 140 [4480/34075 (13%)]	 Batch 140 Loss: 0.275424
+Train Epoch: 1 Iteration: 145 [4640/34075 (14%)]	 Batch 145 Loss: 0.249481
+Train Epoch: 1 Iteration: 150 [4800/34075 (14%)]	 Batch 150 Loss: 0.151732
+Train Epoch: 1 Iteration: 155 [4960/34075 (15%)]	 Batch 155 Loss: 0.318177
+Train Epoch: 1 Iteration: 160 [5120/34075 (15%)]	 Batch 160 Loss: 0.241244
+Train Epoch: 1 Iteration: 165 [5280/34075 (15%)]	 Batch 165 Loss: 0.344957
+Train Epoch: 1 Iteration: 170 [5440/34075 (16%)]	 Batch 170 Loss: 0.281785
+Train Epoch: 1 Iteration: 175 [5600/34075 (16%)]	 Batch 175 Loss: 0.451947
+Train Epoch: 1 Iteration: 180 [5760/34075 (17%)]	 Batch 180 Loss: 0.316435
+Train Epoch: 1 Iteration: 185 [5920/34075 (17%)]	 Batch 185 Loss: 0.251433
+Train Epoch: 1 Iteration: 190 [6080/34075 (18%)]	 Batch 190 Loss: 0.253715
+Train Epoch: 1 Iteration: 195 [6240/34075 (18%)]	 Batch 195 Loss: 0.267708
+Train Epoch: 1 Iteration: 200 [6400/34075 (19%)]	 Batch 200 Loss: 0.374559
+Train Epoch: 1 Iteration: 205 [6560/34075 (19%)]	 Batch 205 Loss: 0.381397
+Train Epoch: 1 Iteration: 210 [6720/34075 (20%)]	 Batch 210 Loss: 0.340449
+Train Epoch: 1 Iteration: 215 [6880/34075 (20%)]	 Batch 215 Loss: 0.242674
+Train Epoch: 1 Iteration: 220 [7040/34075 (21%)]	 Batch 220 Loss: 0.549705
+Train Epoch: 1 Iteration: 225 [7200/34075 (21%)]	 Batch 225 Loss: 0.257629
+Train Epoch: 1 Iteration: 230 [7360/34075 (22%)]	 Batch 230 Loss: 0.343875
+Train Epoch: 1 Iteration: 235 [7520/34075 (22%)]	 Batch 235 Loss: 0.305055
+Train Epoch: 1 Iteration: 240 [7680/34075 (23%)]	 Batch 240 Loss: 0.281432
+Train Epoch: 1 Iteration: 245 [7840/34075 (23%)]	 Batch 245 Loss: 0.193191
+Train Epoch: 1 Iteration: 250 [8000/34075 (23%)]	 Batch 250 Loss: 0.324138
+Train Epoch: 1 Iteration: 255 [8160/34075 (24%)]	 Batch 255 Loss: 0.320614
+Train Epoch: 1 Iteration: 260 [8320/34075 (24%)]	 Batch 260 Loss: 0.172182
+Train Epoch: 1 Iteration: 265 [8480/34075 (25%)]	 Batch 265 Loss: 0.416426
+Train Epoch: 1 Iteration: 270 [8640/34075 (25%)]	 Batch 270 Loss: 0.286030
+Train Epoch: 1 Iteration: 275 [8800/34075 (26%)]	 Batch 275 Loss: 0.154376
+Train Epoch: 1 Iteration: 280 [8960/34075 (26%)]	 Batch 280 Loss: 0.382192
+Train Epoch: 1 Iteration: 285 [9120/34075 (27%)]	 Batch 285 Loss: 0.302353
+Train Epoch: 1 Iteration: 290 [9280/34075 (27%)]	 Batch 290 Loss: 0.277997
+Train Epoch: 1 Iteration: 295 [9440/34075 (28%)]	 Batch 295 Loss: 0.147906
+Train Epoch: 1 Iteration: 300 [9600/34075 (28%)]	 Batch 300 Loss: 0.620261
+Train Epoch: 1 Iteration: 305 [9760/34075 (29%)]	 Batch 305 Loss: 0.151152
+Train Epoch: 1 Iteration: 310 [9920/34075 (29%)]	 Batch 310 Loss: 0.415623
+Train Epoch: 1 Iteration: 315 [10080/34075 (30%)]	 Batch 315 Loss: 0.390861
+Train Epoch: 1 Iteration: 320 [10240/34075 (30%)]	 Batch 320 Loss: 0.124527
+Train Epoch: 1 Iteration: 325 [10400/34075 (31%)]	 Batch 325 Loss: 0.428142
+Train Epoch: 1 Iteration: 330 [10560/34075 (31%)]	 Batch 330 Loss: 0.410080
+Train Epoch: 1 Iteration: 335 [10720/34075 (31%)]	 Batch 335 Loss: 0.361406
+Train Epoch: 1 Iteration: 340 [10880/34075 (32%)]	 Batch 340 Loss: 0.460965
+Train Epoch: 1 Iteration: 345 [11040/34075 (32%)]	 Batch 345 Loss: 0.498405
+Train Epoch: 1 Iteration: 350 [11200/34075 (33%)]	 Batch 350 Loss: 0.264505
+Train Epoch: 1 Iteration: 355 [11360/34075 (33%)]	 Batch 355 Loss: 0.139517
+Train Epoch: 1 Iteration: 360 [11520/34075 (34%)]	 Batch 360 Loss: 0.277888
+Train Epoch: 1 Iteration: 365 [11680/34075 (34%)]	 Batch 365 Loss: 0.524651
+Train Epoch: 1 Iteration: 370 [11840/34075 (35%)]	 Batch 370 Loss: 0.149373
+Train Epoch: 1 Iteration: 375 [12000/34075 (35%)]	 Batch 375 Loss: 0.274998
+Train Epoch: 1 Iteration: 380 [12160/34075 (36%)]	 Batch 380 Loss: 0.201444
+Train Epoch: 1 Iteration: 385 [12320/34075 (36%)]	 Batch 385 Loss: 0.283141
+Train Epoch: 1 Iteration: 390 [12480/34075 (37%)]	 Batch 390 Loss: 0.188406
+Train Epoch: 1 Iteration: 395 [12640/34075 (37%)]	 Batch 395 Loss: 0.522158
+Train Epoch: 1 Iteration: 400 [12800/34075 (38%)]	 Batch 400 Loss: 0.359695
+Train Epoch: 1 Iteration: 405 [12960/34075 (38%)]	 Batch 405 Loss: 0.278178
+Train Epoch: 1 Iteration: 410 [13120/34075 (38%)]	 Batch 410 Loss: 0.116232
+Train Epoch: 1 Iteration: 415 [13280/34075 (39%)]	 Batch 415 Loss: 0.140613
+Train Epoch: 1 Iteration: 420 [13440/34075 (39%)]	 Batch 420 Loss: 0.169038
+Train Epoch: 1 Iteration: 425 [13600/34075 (40%)]	 Batch 425 Loss: 0.391806
+Train Epoch: 1 Iteration: 430 [13760/34075 (40%)]	 Batch 430 Loss: 0.414270
+Train Epoch: 1 Iteration: 435 [13920/34075 (41%)]	 Batch 435 Loss: 0.178568
+Train Epoch: 1 Iteration: 440 [14080/34075 (41%)]	 Batch 440 Loss: 0.159698
+Train Epoch: 1 Iteration: 445 [14240/34075 (42%)]	 Batch 445 Loss: 0.122957
+Train Epoch: 1 Iteration: 450 [14400/34075 (42%)]	 Batch 450 Loss: 0.275923
+Train Epoch: 1 Iteration: 455 [14560/34075 (43%)]	 Batch 455 Loss: 0.370434
+Train Epoch: 1 Iteration: 460 [14720/34075 (43%)]	 Batch 460 Loss: 0.120895
+Train Epoch: 1 Iteration: 465 [14880/34075 (44%)]	 Batch 465 Loss: 0.415278
+Train Epoch: 1 Iteration: 470 [15040/34075 (44%)]	 Batch 470 Loss: 0.232213
+Train Epoch: 1 Iteration: 475 [15200/34075 (45%)]	 Batch 475 Loss: 0.188417
+Train Epoch: 1 Iteration: 480 [15360/34075 (45%)]	 Batch 480 Loss: 0.075966
+Train Epoch: 1 Iteration: 485 [15520/34075 (46%)]	 Batch 485 Loss: 0.234865
+Train Epoch: 1 Iteration: 490 [15680/34075 (46%)]	 Batch 490 Loss: 0.247357
+Train Epoch: 1 Iteration: 495 [15840/34075 (46%)]	 Batch 495 Loss: 0.063667
+Train Epoch: 1 Iteration: 500 [16000/34075 (47%)]	 Batch 500 Loss: 0.142625
+Train Epoch: 1 Iteration: 505 [16160/34075 (47%)]	 Batch 505 Loss: 0.100617
+Train Epoch: 1 Iteration: 510 [16320/34075 (48%)]	 Batch 510 Loss: 0.218830
+Train Epoch: 1 Iteration: 515 [16480/34075 (48%)]	 Batch 515 Loss: 0.596412
+Train Epoch: 1 Iteration: 520 [16640/34075 (49%)]	 Batch 520 Loss: 0.157769
+Train Epoch: 1 Iteration: 525 [16800/34075 (49%)]	 Batch 525 Loss: 0.113480
+Train Epoch: 1 Iteration: 530 [16960/34075 (50%)]	 Batch 530 Loss: 0.215826
+Train Epoch: 1 Iteration: 535 [17120/34075 (50%)]	 Batch 535 Loss: 0.239391
+Train Epoch: 1 Iteration: 540 [17280/34075 (51%)]	 Batch 540 Loss: 0.358704
+Train Epoch: 1 Iteration: 545 [17440/34075 (51%)]	 Batch 545 Loss: 0.110192
+Train Epoch: 1 Iteration: 550 [17600/34075 (52%)]	 Batch 550 Loss: 0.396919
+Train Epoch: 1 Iteration: 555 [17760/34075 (52%)]	 Batch 555 Loss: 0.130624
+Train Epoch: 1 Iteration: 560 [17920/34075 (53%)]	 Batch 560 Loss: 0.193121
+Train Epoch: 1 Iteration: 565 [18080/34075 (53%)]	 Batch 565 Loss: 0.128804
+Train Epoch: 1 Iteration: 570 [18240/34075 (54%)]	 Batch 570 Loss: 0.238123
+Train Epoch: 1 Iteration: 575 [18400/34075 (54%)]	 Batch 575 Loss: 0.156338
+Train Epoch: 1 Iteration: 580 [18560/34075 (54%)]	 Batch 580 Loss: 0.394556
+Train Epoch: 1 Iteration: 585 [18720/34075 (55%)]	 Batch 585 Loss: 0.327152
+Train Epoch: 1 Iteration: 590 [18880/34075 (55%)]	 Batch 590 Loss: 0.327784
+Train Epoch: 1 Iteration: 595 [19040/34075 (56%)]	 Batch 595 Loss: 0.149061
+Train Epoch: 1 Iteration: 600 [19200/34075 (56%)]	 Batch 600 Loss: 0.190982
+Train Epoch: 1 Iteration: 605 [19360/34075 (57%)]	 Batch 605 Loss: 0.094400
+Train Epoch: 1 Iteration: 610 [19520/34075 (57%)]	 Batch 610 Loss: 0.432016
+Train Epoch: 1 Iteration: 615 [19680/34075 (58%)]	 Batch 615 Loss: 0.088967
+Train Epoch: 1 Iteration: 620 [19840/34075 (58%)]	 Batch 620 Loss: 0.239896
+Train Epoch: 1 Iteration: 625 [20000/34075 (59%)]	 Batch 625 Loss: 0.227096
+Train Epoch: 1 Iteration: 630 [20160/34075 (59%)]	 Batch 630 Loss: 0.132062
+Train Epoch: 1 Iteration: 635 [20320/34075 (60%)]	 Batch 635 Loss: 0.074236
+Train Epoch: 1 Iteration: 640 [20480/34075 (60%)]	 Batch 640 Loss: 0.284433
+Train Epoch: 1 Iteration: 645 [20640/34075 (61%)]	 Batch 645 Loss: 0.275189
+Train Epoch: 1 Iteration: 650 [20800/34075 (61%)]	 Batch 650 Loss: 0.140864
+Train Epoch: 1 Iteration: 655 [20960/34075 (62%)]	 Batch 655 Loss: 0.094311
+Train Epoch: 1 Iteration: 660 [21120/34075 (62%)]	 Batch 660 Loss: 0.159603
+Train Epoch: 1 Iteration: 665 [21280/34075 (62%)]	 Batch 665 Loss: 0.111706
+Train Epoch: 1 Iteration: 670 [21440/34075 (63%)]	 Batch 670 Loss: 0.165511
+Train Epoch: 1 Iteration: 675 [21600/34075 (63%)]	 Batch 675 Loss: 0.230763
+Train Epoch: 1 Iteration: 680 [21760/34075 (64%)]	 Batch 680 Loss: 0.170762
+Train Epoch: 1 Iteration: 685 [21920/34075 (64%)]	 Batch 685 Loss: 0.206502
+Train Epoch: 1 Iteration: 690 [22080/34075 (65%)]	 Batch 690 Loss: 0.065740
+Train Epoch: 1 Iteration: 695 [22240/34075 (65%)]	 Batch 695 Loss: 0.245684
+Train Epoch: 1 Iteration: 700 [22400/34075 (66%)]	 Batch 700 Loss: 0.204485
+Train Epoch: 1 Iteration: 705 [22560/34075 (66%)]	 Batch 705 Loss: 0.101527
+Train Epoch: 1 Iteration: 710 [22720/34075 (67%)]	 Batch 710 Loss: 0.142357
+Train Epoch: 1 Iteration: 715 [22880/34075 (67%)]	 Batch 715 Loss: 0.105913
+Train Epoch: 1 Iteration: 720 [23040/34075 (68%)]	 Batch 720 Loss: 0.138792
+Train Epoch: 1 Iteration: 725 [23200/34075 (68%)]	 Batch 725 Loss: 0.186612
+Train Epoch: 1 Iteration: 730 [23360/34075 (69%)]	 Batch 730 Loss: 0.110765
+Train Epoch: 1 Iteration: 735 [23520/34075 (69%)]	 Batch 735 Loss: 0.224360
+Train Epoch: 1 Iteration: 740 [23680/34075 (69%)]	 Batch 740 Loss: 0.066203
+Train Epoch: 1 Iteration: 745 [23840/34075 (70%)]	 Batch 745 Loss: 0.222674
+Train Epoch: 1 Iteration: 750 [24000/34075 (70%)]	 Batch 750 Loss: 0.258235
+Train Epoch: 1 Iteration: 755 [24160/34075 (71%)]	 Batch 755 Loss: 0.351909
+Train Epoch: 1 Iteration: 760 [24320/34075 (71%)]	 Batch 760 Loss: 0.136958
+Train Epoch: 1 Iteration: 765 [24480/34075 (72%)]	 Batch 765 Loss: 0.137240
+Train Epoch: 1 Iteration: 770 [24640/34075 (72%)]	 Batch 770 Loss: 0.226997
+Train Epoch: 1 Iteration: 775 [24800/34075 (73%)]	 Batch 775 Loss: 0.097056
+Train Epoch: 1 Iteration: 780 [24960/34075 (73%)]	 Batch 780 Loss: 0.085430
+Train Epoch: 1 Iteration: 785 [25120/34075 (74%)]	 Batch 785 Loss: 0.196212
+Train Epoch: 1 Iteration: 790 [25280/34075 (74%)]	 Batch 790 Loss: 0.280587
+Train Epoch: 1 Iteration: 795 [25440/34075 (75%)]	 Batch 795 Loss: 0.274346
+Train Epoch: 1 Iteration: 800 [25600/34075 (75%)]	 Batch 800 Loss: 0.182098
+Train Epoch: 1 Iteration: 805 [25760/34075 (76%)]	 Batch 805 Loss: 0.152727
+Train Epoch: 1 Iteration: 810 [25920/34075 (76%)]	 Batch 810 Loss: 0.178344
+Train Epoch: 1 Iteration: 815 [26080/34075 (77%)]	 Batch 815 Loss: 0.178629
+Train Epoch: 1 Iteration: 820 [26240/34075 (77%)]	 Batch 820 Loss: 0.066074
+Train Epoch: 1 Iteration: 825 [26400/34075 (77%)]	 Batch 825 Loss: 0.074929
+Train Epoch: 1 Iteration: 830 [26560/34075 (78%)]	 Batch 830 Loss: 0.084130
+Train Epoch: 1 Iteration: 835 [26720/34075 (78%)]	 Batch 835 Loss: 0.220459
+Train Epoch: 1 Iteration: 840 [26880/34075 (79%)]	 Batch 840 Loss: 0.231009
+Train Epoch: 1 Iteration: 845 [27040/34075 (79%)]	 Batch 845 Loss: 0.549400
+Train Epoch: 1 Iteration: 850 [27200/34075 (80%)]	 Batch 850 Loss: 0.259974
+Train Epoch: 1 Iteration: 855 [27360/34075 (80%)]	 Batch 855 Loss: 0.123796
+Train Epoch: 1 Iteration: 860 [27520/34075 (81%)]	 Batch 860 Loss: 0.280989
+Train Epoch: 1 Iteration: 865 [27680/34075 (81%)]	 Batch 865 Loss: 0.163818
+Train Epoch: 1 Iteration: 870 [27840/34075 (82%)]	 Batch 870 Loss: 0.217453
+Train Epoch: 1 Iteration: 875 [28000/34075 (82%)]	 Batch 875 Loss: 0.202377
+Train Epoch: 1 Iteration: 880 [28160/34075 (83%)]	 Batch 880 Loss: 0.172759
+Train Epoch: 1 Iteration: 885 [28320/34075 (83%)]	 Batch 885 Loss: 0.150861
+Train Epoch: 1 Iteration: 890 [28480/34075 (84%)]	 Batch 890 Loss: 0.244964
+Train Epoch: 1 Iteration: 895 [28640/34075 (84%)]	 Batch 895 Loss: 0.118857
+Train Epoch: 1 Iteration: 900 [28800/34075 (85%)]	 Batch 900 Loss: 0.322834
+Train Epoch: 1 Iteration: 905 [28960/34075 (85%)]	 Batch 905 Loss: 0.331189
+Train Epoch: 1 Iteration: 910 [29120/34075 (85%)]	 Batch 910 Loss: 0.137055
+Train Epoch: 1 Iteration: 915 [29280/34075 (86%)]	 Batch 915 Loss: 0.131978
+Train Epoch: 1 Iteration: 920 [29440/34075 (86%)]	 Batch 920 Loss: 0.104180
+Train Epoch: 1 Iteration: 925 [29600/34075 (87%)]	 Batch 925 Loss: 0.130830
+Train Epoch: 1 Iteration: 930 [29760/34075 (87%)]	 Batch 930 Loss: 0.450582
+Train Epoch: 1 Iteration: 935 [29920/34075 (88%)]	 Batch 935 Loss: 0.249276
+Train Epoch: 1 Iteration: 940 [30080/34075 (88%)]	 Batch 940 Loss: 0.158138
+Train Epoch: 1 Iteration: 945 [30240/34075 (89%)]	 Batch 945 Loss: 0.297304
+Train Epoch: 1 Iteration: 950 [30400/34075 (89%)]	 Batch 950 Loss: 0.198026
+Train Epoch: 1 Iteration: 955 [30560/34075 (90%)]	 Batch 955 Loss: 0.170284
+Train Epoch: 1 Iteration: 960 [30720/34075 (90%)]	 Batch 960 Loss: 0.114678
+Train Epoch: 1 Iteration: 965 [30880/34075 (91%)]	 Batch 965 Loss: 0.139215
+Train Epoch: 1 Iteration: 970 [31040/34075 (91%)]	 Batch 970 Loss: 0.173361
+Train Epoch: 1 Iteration: 975 [31200/34075 (92%)]	 Batch 975 Loss: 0.210661
+Train Epoch: 1 Iteration: 980 [31360/34075 (92%)]	 Batch 980 Loss: 0.102168
+Train Epoch: 1 Iteration: 985 [31520/34075 (92%)]	 Batch 985 Loss: 0.072997
+Train Epoch: 1 Iteration: 990 [31680/34075 (93%)]	 Batch 990 Loss: 0.200423
+Train Epoch: 1 Iteration: 995 [31840/34075 (93%)]	 Batch 995 Loss: 0.261602
+Train Epoch: 1 Iteration: 1000 [32000/34075 (94%)]	 Batch 1000 Loss: 0.228139
+Train Epoch: 1 Iteration: 1005 [32160/34075 (94%)]	 Batch 1005 Loss: 0.060081
+Train Epoch: 1 Iteration: 1010 [32320/34075 (95%)]	 Batch 1010 Loss: 0.153776
+Train Epoch: 1 Iteration: 1015 [32480/34075 (95%)]	 Batch 1015 Loss: 0.165232
+Train Epoch: 1 Iteration: 1020 [32640/34075 (96%)]	 Batch 1020 Loss: 0.070286
+Train Epoch: 1 Iteration: 1025 [32800/34075 (96%)]	 Batch 1025 Loss: 0.155708
+Train Epoch: 1 Iteration: 1030 [32960/34075 (97%)]	 Batch 1030 Loss: 0.139594
+Train Epoch: 1 Iteration: 1035 [33120/34075 (97%)]	 Batch 1035 Loss: 0.136918
+Train Epoch: 1 Iteration: 1040 [33280/34075 (98%)]	 Batch 1040 Loss: 0.064984
+Train Epoch: 1 Iteration: 1045 [33440/34075 (98%)]	 Batch 1045 Loss: 0.153353
+Train Epoch: 1 Iteration: 1050 [33600/34075 (99%)]	 Batch 1050 Loss: 0.144350
+Train Epoch: 1 Iteration: 1055 [33760/34075 (99%)]	 Batch 1055 Loss: 0.342120
+Train Epoch: 1 Iteration: 1060 [33920/34075 (100%)]	 Batch 1060 Loss: 0.249990
+
+
+----------------- Epoch 1 -----------------
+
+validation computation time: 10.0  minutes
+Confusion Matrix
+tensor([[2179,  699,  176,  124],
+        [ 856,  166,   82,   14],
+        [ 163,   45,   15,   25],
+        [  53,   17,    4,    3]])
+class 0 accuracy: 67.0255%
+class 1 accuracy: 17.9072%
+class 2 accuracy: 5.4152%
+class 3 accuracy: 1.8072%
+
+Validation Loss: 1.7930, Accuracy: 2363/4621 (51%)
+Training Loss:0.2424
+Best Accuracy: 51.136118%
+Time Elapsed: 0h 47m 33s
+
+--------------------------------------------------------
+
+
+Train Epoch: 2 Iteration: 5 [160/34075 (0%)]	 Batch 5 Loss: 0.124506
+Train Epoch: 2 Iteration: 10 [320/34075 (1%)]	 Batch 10 Loss: 0.125864
+Train Epoch: 2 Iteration: 15 [480/34075 (1%)]	 Batch 15 Loss: 0.233858
+Train Epoch: 2 Iteration: 20 [640/34075 (2%)]	 Batch 20 Loss: 0.088539
+Train Epoch: 2 Iteration: 25 [800/34075 (2%)]	 Batch 25 Loss: 0.331250
+Train Epoch: 2 Iteration: 30 [960/34075 (3%)]	 Batch 30 Loss: 0.087164
+Train Epoch: 2 Iteration: 35 [1120/34075 (3%)]	 Batch 35 Loss: 0.106685
+Train Epoch: 2 Iteration: 40 [1280/34075 (4%)]	 Batch 40 Loss: 0.218161
+Train Epoch: 2 Iteration: 45 [1440/34075 (4%)]	 Batch 45 Loss: 0.205463
+Train Epoch: 2 Iteration: 50 [1600/34075 (5%)]	 Batch 50 Loss: 0.069403
+Train Epoch: 2 Iteration: 55 [1760/34075 (5%)]	 Batch 55 Loss: 0.288029
+Train Epoch: 2 Iteration: 60 [1920/34075 (6%)]	 Batch 60 Loss: 0.261110
+Train Epoch: 2 Iteration: 65 [2080/34075 (6%)]	 Batch 65 Loss: 0.178200
+Train Epoch: 2 Iteration: 70 [2240/34075 (7%)]	 Batch 70 Loss: 0.120064
+Train Epoch: 2 Iteration: 75 [2400/34075 (7%)]	 Batch 75 Loss: 0.080843
+Train Epoch: 2 Iteration: 80 [2560/34075 (8%)]	 Batch 80 Loss: 0.138432
+Train Epoch: 2 Iteration: 85 [2720/34075 (8%)]	 Batch 85 Loss: 0.068521
+Train Epoch: 2 Iteration: 90 [2880/34075 (8%)]	 Batch 90 Loss: 0.175122
+Train Epoch: 2 Iteration: 95 [3040/34075 (9%)]	 Batch 95 Loss: 0.188871
+Train Epoch: 2 Iteration: 100 [3200/34075 (9%)]	 Batch 100 Loss: 0.088108
+Train Epoch: 2 Iteration: 105 [3360/34075 (10%)]	 Batch 105 Loss: 0.070820
+Train Epoch: 2 Iteration: 110 [3520/34075 (10%)]	 Batch 110 Loss: 0.184130
+Train Epoch: 2 Iteration: 115 [3680/34075 (11%)]	 Batch 115 Loss: 0.147397
+Train Epoch: 2 Iteration: 120 [3840/34075 (11%)]	 Batch 120 Loss: 0.109006
+Train Epoch: 2 Iteration: 125 [4000/34075 (12%)]	 Batch 125 Loss: 0.113540
+Train Epoch: 2 Iteration: 130 [4160/34075 (12%)]	 Batch 130 Loss: 0.430282
+Train Epoch: 2 Iteration: 135 [4320/34075 (13%)]	 Batch 135 Loss: 0.115658
+Train Epoch: 2 Iteration: 140 [4480/34075 (13%)]	 Batch 140 Loss: 0.342777
+Train Epoch: 2 Iteration: 145 [4640/34075 (14%)]	 Batch 145 Loss: 0.217433
+Train Epoch: 2 Iteration: 150 [4800/34075 (14%)]	 Batch 150 Loss: 0.080192
+Train Epoch: 2 Iteration: 155 [4960/34075 (15%)]	 Batch 155 Loss: 0.110099
+Train Epoch: 2 Iteration: 160 [5120/34075 (15%)]	 Batch 160 Loss: 0.028529
+Train Epoch: 2 Iteration: 165 [5280/34075 (15%)]	 Batch 165 Loss: 0.265299
+Train Epoch: 2 Iteration: 170 [5440/34075 (16%)]	 Batch 170 Loss: 0.151000
+Train Epoch: 2 Iteration: 175 [5600/34075 (16%)]	 Batch 175 Loss: 0.103336
+Train Epoch: 2 Iteration: 180 [5760/34075 (17%)]	 Batch 180 Loss: 0.180403
+Train Epoch: 2 Iteration: 185 [5920/34075 (17%)]	 Batch 185 Loss: 0.178103
+Train Epoch: 2 Iteration: 190 [6080/34075 (18%)]	 Batch 190 Loss: 0.063711
+Train Epoch: 2 Iteration: 195 [6240/34075 (18%)]	 Batch 195 Loss: 0.253168
+Train Epoch: 2 Iteration: 200 [6400/34075 (19%)]	 Batch 200 Loss: 0.078366
+Train Epoch: 2 Iteration: 205 [6560/34075 (19%)]	 Batch 205 Loss: 0.171442
+Train Epoch: 2 Iteration: 210 [6720/34075 (20%)]	 Batch 210 Loss: 0.070184
+Train Epoch: 2 Iteration: 215 [6880/34075 (20%)]	 Batch 215 Loss: 0.243376
+Train Epoch: 2 Iteration: 220 [7040/34075 (21%)]	 Batch 220 Loss: 0.197237
+Train Epoch: 2 Iteration: 225 [7200/34075 (21%)]	 Batch 225 Loss: 0.136000
+Train Epoch: 2 Iteration: 230 [7360/34075 (22%)]	 Batch 230 Loss: 0.190557
+Train Epoch: 2 Iteration: 235 [7520/34075 (22%)]	 Batch 235 Loss: 0.053470
+Train Epoch: 2 Iteration: 240 [7680/34075 (23%)]	 Batch 240 Loss: 0.054215
+Train Epoch: 2 Iteration: 245 [7840/34075 (23%)]	 Batch 245 Loss: 0.148238
+Train Epoch: 2 Iteration: 250 [8000/34075 (23%)]	 Batch 250 Loss: 0.039094
+Train Epoch: 2 Iteration: 255 [8160/34075 (24%)]	 Batch 255 Loss: 0.161999
+Train Epoch: 2 Iteration: 260 [8320/34075 (24%)]	 Batch 260 Loss: 0.311223
+Train Epoch: 2 Iteration: 265 [8480/34075 (25%)]	 Batch 265 Loss: 0.103541
+Train Epoch: 2 Iteration: 270 [8640/34075 (25%)]	 Batch 270 Loss: 0.186865
+Train Epoch: 2 Iteration: 275 [8800/34075 (26%)]	 Batch 275 Loss: 0.111432
+Train Epoch: 2 Iteration: 280 [8960/34075 (26%)]	 Batch 280 Loss: 0.393115
+Train Epoch: 2 Iteration: 285 [9120/34075 (27%)]	 Batch 285 Loss: 0.143008
+Train Epoch: 2 Iteration: 290 [9280/34075 (27%)]	 Batch 290 Loss: 0.256297
+Train Epoch: 2 Iteration: 295 [9440/34075 (28%)]	 Batch 295 Loss: 0.241851
+Train Epoch: 2 Iteration: 300 [9600/34075 (28%)]	 Batch 300 Loss: 0.154466
+Train Epoch: 2 Iteration: 305 [9760/34075 (29%)]	 Batch 305 Loss: 0.071447
+Train Epoch: 2 Iteration: 310 [9920/34075 (29%)]	 Batch 310 Loss: 0.065711
+Train Epoch: 2 Iteration: 315 [10080/34075 (30%)]	 Batch 315 Loss: 0.065042
+Train Epoch: 2 Iteration: 320 [10240/34075 (30%)]	 Batch 320 Loss: 0.325316
+Train Epoch: 2 Iteration: 325 [10400/34075 (31%)]	 Batch 325 Loss: 0.101349
+Train Epoch: 2 Iteration: 330 [10560/34075 (31%)]	 Batch 330 Loss: 0.092100
+Train Epoch: 2 Iteration: 335 [10720/34075 (31%)]	 Batch 335 Loss: 0.123440
+Train Epoch: 2 Iteration: 340 [10880/34075 (32%)]	 Batch 340 Loss: 0.145928
+Train Epoch: 2 Iteration: 345 [11040/34075 (32%)]	 Batch 345 Loss: 0.187822
+Train Epoch: 2 Iteration: 350 [11200/34075 (33%)]	 Batch 350 Loss: 0.049236
+Train Epoch: 2 Iteration: 355 [11360/34075 (33%)]	 Batch 355 Loss: 0.437600
+Train Epoch: 2 Iteration: 360 [11520/34075 (34%)]	 Batch 360 Loss: 0.052359
+Train Epoch: 2 Iteration: 365 [11680/34075 (34%)]	 Batch 365 Loss: 0.079553
+Train Epoch: 2 Iteration: 370 [11840/34075 (35%)]	 Batch 370 Loss: 0.088705
+Train Epoch: 2 Iteration: 375 [12000/34075 (35%)]	 Batch 375 Loss: 0.069155
+Train Epoch: 2 Iteration: 380 [12160/34075 (36%)]	 Batch 380 Loss: 0.077046
+Train Epoch: 2 Iteration: 385 [12320/34075 (36%)]	 Batch 385 Loss: 0.221609
+Train Epoch: 2 Iteration: 390 [12480/34075 (37%)]	 Batch 390 Loss: 0.111381
+Train Epoch: 2 Iteration: 395 [12640/34075 (37%)]	 Batch 395 Loss: 0.070813
+Train Epoch: 2 Iteration: 400 [12800/34075 (38%)]	 Batch 400 Loss: 0.159429
+Train Epoch: 2 Iteration: 405 [12960/34075 (38%)]	 Batch 405 Loss: 0.246237
+Train Epoch: 2 Iteration: 410 [13120/34075 (38%)]	 Batch 410 Loss: 0.073003
+Train Epoch: 2 Iteration: 415 [13280/34075 (39%)]	 Batch 415 Loss: 0.256010
+Train Epoch: 2 Iteration: 420 [13440/34075 (39%)]	 Batch 420 Loss: 0.038497
+Train Epoch: 2 Iteration: 425 [13600/34075 (40%)]	 Batch 425 Loss: 0.104807
+Train Epoch: 2 Iteration: 430 [13760/34075 (40%)]	 Batch 430 Loss: 0.197417
+Train Epoch: 2 Iteration: 435 [13920/34075 (41%)]	 Batch 435 Loss: 0.105371
+Train Epoch: 2 Iteration: 440 [14080/34075 (41%)]	 Batch 440 Loss: 0.141912
+Train Epoch: 2 Iteration: 445 [14240/34075 (42%)]	 Batch 445 Loss: 0.117567
+Train Epoch: 2 Iteration: 450 [14400/34075 (42%)]	 Batch 450 Loss: 0.111082
+Train Epoch: 2 Iteration: 455 [14560/34075 (43%)]	 Batch 455 Loss: 0.058440
+Train Epoch: 2 Iteration: 460 [14720/34075 (43%)]	 Batch 460 Loss: 0.128568
+Train Epoch: 2 Iteration: 465 [14880/34075 (44%)]	 Batch 465 Loss: 0.050964
+Train Epoch: 2 Iteration: 470 [15040/34075 (44%)]	 Batch 470 Loss: 0.060737
+Train Epoch: 2 Iteration: 475 [15200/34075 (45%)]	 Batch 475 Loss: 0.087122
+Train Epoch: 2 Iteration: 480 [15360/34075 (45%)]	 Batch 480 Loss: 0.160075
+Train Epoch: 2 Iteration: 485 [15520/34075 (46%)]	 Batch 485 Loss: 0.065366
+Train Epoch: 2 Iteration: 490 [15680/34075 (46%)]	 Batch 490 Loss: 0.350842
+Train Epoch: 2 Iteration: 495 [15840/34075 (46%)]	 Batch 495 Loss: 0.170581
+Train Epoch: 2 Iteration: 500 [16000/34075 (47%)]	 Batch 500 Loss: 0.076409
+Train Epoch: 2 Iteration: 505 [16160/34075 (47%)]	 Batch 505 Loss: 0.152351
+Train Epoch: 2 Iteration: 510 [16320/34075 (48%)]	 Batch 510 Loss: 0.081830
+Train Epoch: 2 Iteration: 515 [16480/34075 (48%)]	 Batch 515 Loss: 0.249640
+Train Epoch: 2 Iteration: 520 [16640/34075 (49%)]	 Batch 520 Loss: 0.116104
+Train Epoch: 2 Iteration: 525 [16800/34075 (49%)]	 Batch 525 Loss: 0.228957
+Train Epoch: 2 Iteration: 530 [16960/34075 (50%)]	 Batch 530 Loss: 0.033604
+Train Epoch: 2 Iteration: 535 [17120/34075 (50%)]	 Batch 535 Loss: 0.113804
+Train Epoch: 2 Iteration: 540 [17280/34075 (51%)]	 Batch 540 Loss: 0.131710
+Train Epoch: 2 Iteration: 545 [17440/34075 (51%)]	 Batch 545 Loss: 0.128022
+Train Epoch: 2 Iteration: 550 [17600/34075 (52%)]	 Batch 550 Loss: 0.062880
+Train Epoch: 2 Iteration: 555 [17760/34075 (52%)]	 Batch 555 Loss: 0.372153
+Train Epoch: 2 Iteration: 560 [17920/34075 (53%)]	 Batch 560 Loss: 0.231945
+Train Epoch: 2 Iteration: 565 [18080/34075 (53%)]	 Batch 565 Loss: 0.072262
+Train Epoch: 2 Iteration: 570 [18240/34075 (54%)]	 Batch 570 Loss: 0.165300
+Train Epoch: 2 Iteration: 575 [18400/34075 (54%)]	 Batch 575 Loss: 0.046579
+Train Epoch: 2 Iteration: 580 [18560/34075 (54%)]	 Batch 580 Loss: 0.182553
+Train Epoch: 2 Iteration: 585 [18720/34075 (55%)]	 Batch 585 Loss: 0.014960
+Train Epoch: 2 Iteration: 590 [18880/34075 (55%)]	 Batch 590 Loss: 0.162248
+Train Epoch: 2 Iteration: 595 [19040/34075 (56%)]	 Batch 595 Loss: 0.169727
+Train Epoch: 2 Iteration: 600 [19200/34075 (56%)]	 Batch 600 Loss: 0.172158
+Train Epoch: 2 Iteration: 605 [19360/34075 (57%)]	 Batch 605 Loss: 0.072229
+Train Epoch: 2 Iteration: 610 [19520/34075 (57%)]	 Batch 610 Loss: 0.085886
+Train Epoch: 2 Iteration: 615 [19680/34075 (58%)]	 Batch 615 Loss: 0.150456
+Train Epoch: 2 Iteration: 620 [19840/34075 (58%)]	 Batch 620 Loss: 0.079156
+Train Epoch: 2 Iteration: 625 [20000/34075 (59%)]	 Batch 625 Loss: 0.153472
+Train Epoch: 2 Iteration: 630 [20160/34075 (59%)]	 Batch 630 Loss: 0.162719
+Train Epoch: 2 Iteration: 635 [20320/34075 (60%)]	 Batch 635 Loss: 0.127547
+Train Epoch: 2 Iteration: 640 [20480/34075 (60%)]	 Batch 640 Loss: 0.034702
+Train Epoch: 2 Iteration: 645 [20640/34075 (61%)]	 Batch 645 Loss: 0.116430
+Train Epoch: 2 Iteration: 650 [20800/34075 (61%)]	 Batch 650 Loss: 0.236564
+Train Epoch: 2 Iteration: 655 [20960/34075 (62%)]	 Batch 655 Loss: 0.092938
+Train Epoch: 2 Iteration: 660 [21120/34075 (62%)]	 Batch 660 Loss: 0.066046
+Train Epoch: 2 Iteration: 665 [21280/34075 (62%)]	 Batch 665 Loss: 0.100854
+Train Epoch: 2 Iteration: 670 [21440/34075 (63%)]	 Batch 670 Loss: 0.050237
+Train Epoch: 2 Iteration: 675 [21600/34075 (63%)]	 Batch 675 Loss: 0.216003
+Train Epoch: 2 Iteration: 680 [21760/34075 (64%)]	 Batch 680 Loss: 0.074051
+Train Epoch: 2 Iteration: 685 [21920/34075 (64%)]	 Batch 685 Loss: 0.210738
+Train Epoch: 2 Iteration: 690 [22080/34075 (65%)]	 Batch 690 Loss: 0.123572
+Train Epoch: 2 Iteration: 695 [22240/34075 (65%)]	 Batch 695 Loss: 0.088605
+Train Epoch: 2 Iteration: 700 [22400/34075 (66%)]	 Batch 700 Loss: 0.143620
+Train Epoch: 2 Iteration: 705 [22560/34075 (66%)]	 Batch 705 Loss: 0.046295
+Train Epoch: 2 Iteration: 710 [22720/34075 (67%)]	 Batch 710 Loss: 0.129052
+Train Epoch: 2 Iteration: 715 [22880/34075 (67%)]	 Batch 715 Loss: 0.161782
+Train Epoch: 2 Iteration: 720 [23040/34075 (68%)]	 Batch 720 Loss: 0.147936
+Train Epoch: 2 Iteration: 725 [23200/34075 (68%)]	 Batch 725 Loss: 0.108197
+Train Epoch: 2 Iteration: 730 [23360/34075 (69%)]	 Batch 730 Loss: 0.173735
+Train Epoch: 2 Iteration: 735 [23520/34075 (69%)]	 Batch 735 Loss: 0.167592
+Train Epoch: 2 Iteration: 740 [23680/34075 (69%)]	 Batch 740 Loss: 0.139915
+Train Epoch: 2 Iteration: 745 [23840/34075 (70%)]	 Batch 745 Loss: 0.142919
+Train Epoch: 2 Iteration: 750 [24000/34075 (70%)]	 Batch 750 Loss: 0.103584
+Train Epoch: 2 Iteration: 755 [24160/34075 (71%)]	 Batch 755 Loss: 0.038361
+Train Epoch: 2 Iteration: 760 [24320/34075 (71%)]	 Batch 760 Loss: 0.115559
+Train Epoch: 2 Iteration: 765 [24480/34075 (72%)]	 Batch 765 Loss: 0.179389
+Train Epoch: 2 Iteration: 770 [24640/34075 (72%)]	 Batch 770 Loss: 0.323157
+Train Epoch: 2 Iteration: 775 [24800/34075 (73%)]	 Batch 775 Loss: 0.143403
+Train Epoch: 2 Iteration: 780 [24960/34075 (73%)]	 Batch 780 Loss: 0.120641
+Train Epoch: 2 Iteration: 785 [25120/34075 (74%)]	 Batch 785 Loss: 0.057952
+Train Epoch: 2 Iteration: 790 [25280/34075 (74%)]	 Batch 790 Loss: 0.067321
+Train Epoch: 2 Iteration: 795 [25440/34075 (75%)]	 Batch 795 Loss: 0.077512
+Train Epoch: 2 Iteration: 800 [25600/34075 (75%)]	 Batch 800 Loss: 0.064978
+Train Epoch: 2 Iteration: 805 [25760/34075 (76%)]	 Batch 805 Loss: 0.192215
+Train Epoch: 2 Iteration: 810 [25920/34075 (76%)]	 Batch 810 Loss: 0.048352
+Train Epoch: 2 Iteration: 815 [26080/34075 (77%)]	 Batch 815 Loss: 0.160081
+Train Epoch: 2 Iteration: 820 [26240/34075 (77%)]	 Batch 820 Loss: 0.177049
+Train Epoch: 2 Iteration: 825 [26400/34075 (77%)]	 Batch 825 Loss: 0.104390
+Train Epoch: 2 Iteration: 830 [26560/34075 (78%)]	 Batch 830 Loss: 0.132140
+Train Epoch: 2 Iteration: 835 [26720/34075 (78%)]	 Batch 835 Loss: 0.203441
+Train Epoch: 2 Iteration: 840 [26880/34075 (79%)]	 Batch 840 Loss: 0.055975
+Train Epoch: 2 Iteration: 845 [27040/34075 (79%)]	 Batch 845 Loss: 0.037047
+Train Epoch: 2 Iteration: 850 [27200/34075 (80%)]	 Batch 850 Loss: 0.102108
+Train Epoch: 2 Iteration: 855 [27360/34075 (80%)]	 Batch 855 Loss: 0.206202
+Train Epoch: 2 Iteration: 860 [27520/34075 (81%)]	 Batch 860 Loss: 0.122414
+Train Epoch: 2 Iteration: 865 [27680/34075 (81%)]	 Batch 865 Loss: 0.187729
+Train Epoch: 2 Iteration: 870 [27840/34075 (82%)]	 Batch 870 Loss: 0.062794
+Train Epoch: 2 Iteration: 875 [28000/34075 (82%)]	 Batch 875 Loss: 0.087704
+Train Epoch: 2 Iteration: 880 [28160/34075 (83%)]	 Batch 880 Loss: 0.091626
+Train Epoch: 2 Iteration: 885 [28320/34075 (83%)]	 Batch 885 Loss: 0.075510
+Train Epoch: 2 Iteration: 890 [28480/34075 (84%)]	 Batch 890 Loss: 0.090045
+Train Epoch: 2 Iteration: 895 [28640/34075 (84%)]	 Batch 895 Loss: 0.050597
+Train Epoch: 2 Iteration: 900 [28800/34075 (85%)]	 Batch 900 Loss: 0.148899
+Train Epoch: 2 Iteration: 905 [28960/34075 (85%)]	 Batch 905 Loss: 0.215087
+Train Epoch: 2 Iteration: 910 [29120/34075 (85%)]	 Batch 910 Loss: 0.104213
+Train Epoch: 2 Iteration: 915 [29280/34075 (86%)]	 Batch 915 Loss: 0.073251
+Train Epoch: 2 Iteration: 920 [29440/34075 (86%)]	 Batch 920 Loss: 0.204365
+Train Epoch: 2 Iteration: 925 [29600/34075 (87%)]	 Batch 925 Loss: 0.162337
+Train Epoch: 2 Iteration: 930 [29760/34075 (87%)]	 Batch 930 Loss: 0.179266
+Train Epoch: 2 Iteration: 935 [29920/34075 (88%)]	 Batch 935 Loss: 0.127739
+Train Epoch: 2 Iteration: 940 [30080/34075 (88%)]	 Batch 940 Loss: 0.037818
+Train Epoch: 2 Iteration: 945 [30240/34075 (89%)]	 Batch 945 Loss: 0.237842
+Train Epoch: 2 Iteration: 950 [30400/34075 (89%)]	 Batch 950 Loss: 0.083539
+Train Epoch: 2 Iteration: 955 [30560/34075 (90%)]	 Batch 955 Loss: 0.164891
+Train Epoch: 2 Iteration: 960 [30720/34075 (90%)]	 Batch 960 Loss: 0.146818
+Train Epoch: 2 Iteration: 965 [30880/34075 (91%)]	 Batch 965 Loss: 0.135858
+Train Epoch: 2 Iteration: 970 [31040/34075 (91%)]	 Batch 970 Loss: 0.440586
+Train Epoch: 2 Iteration: 975 [31200/34075 (92%)]	 Batch 975 Loss: 0.071862
+Train Epoch: 2 Iteration: 980 [31360/34075 (92%)]	 Batch 980 Loss: 0.059956
+Train Epoch: 2 Iteration: 985 [31520/34075 (92%)]	 Batch 985 Loss: 0.321109
+Train Epoch: 2 Iteration: 990 [31680/34075 (93%)]	 Batch 990 Loss: 0.082868
+Train Epoch: 2 Iteration: 995 [31840/34075 (93%)]	 Batch 995 Loss: 0.122215
+Train Epoch: 2 Iteration: 1000 [32000/34075 (94%)]	 Batch 1000 Loss: 0.073525
+Train Epoch: 2 Iteration: 1005 [32160/34075 (94%)]	 Batch 1005 Loss: 0.159259
+Train Epoch: 2 Iteration: 1010 [32320/34075 (95%)]	 Batch 1010 Loss: 0.109679
+Train Epoch: 2 Iteration: 1015 [32480/34075 (95%)]	 Batch 1015 Loss: 0.080255
+Train Epoch: 2 Iteration: 1020 [32640/34075 (96%)]	 Batch 1020 Loss: 0.271872
+Train Epoch: 2 Iteration: 1025 [32800/34075 (96%)]	 Batch 1025 Loss: 0.340072
+Train Epoch: 2 Iteration: 1030 [32960/34075 (97%)]	 Batch 1030 Loss: 0.101074
+Train Epoch: 2 Iteration: 1035 [33120/34075 (97%)]	 Batch 1035 Loss: 0.155253
+Train Epoch: 2 Iteration: 1040 [33280/34075 (98%)]	 Batch 1040 Loss: 0.014363
+Train Epoch: 2 Iteration: 1045 [33440/34075 (98%)]	 Batch 1045 Loss: 0.120664
+Train Epoch: 2 Iteration: 1050 [33600/34075 (99%)]	 Batch 1050 Loss: 0.055767
+Train Epoch: 2 Iteration: 1055 [33760/34075 (99%)]	 Batch 1055 Loss: 0.104442
+Train Epoch: 2 Iteration: 1060 [33920/34075 (100%)]	 Batch 1060 Loss: 0.072804
+
+
+----------------- Epoch 2 -----------------
+
+validation computation time: 10.0  minutes
+Confusion Matrix
+tensor([[2326,  714,  184,  120],
+        [ 832,  192,   84,   34],
+        [  89,   19,    9,   11],
+        [   4,    2,    0,    1]])
+class 0 accuracy: 71.5472%
+class 1 accuracy: 20.7120%
+class 2 accuracy: 3.2491%
+class 3 accuracy: 0.6024%
+
+Validation Loss: 2.0430, Accuracy: 2528/4621 (55%)
+Training Loss:0.1404
+Best Accuracy: 54.706773%
+Time Elapsed: 1h 20m 21s
+
+--------------------------------------------------------
+
+
+Train Epoch: 3 Iteration: 5 [160/34075 (0%)]	 Batch 5 Loss: 0.069538
+Train Epoch: 3 Iteration: 10 [320/34075 (1%)]	 Batch 10 Loss: 0.111149
+Train Epoch: 3 Iteration: 15 [480/34075 (1%)]	 Batch 15 Loss: 0.043464
+Train Epoch: 3 Iteration: 20 [640/34075 (2%)]	 Batch 20 Loss: 0.122526
+Train Epoch: 3 Iteration: 25 [800/34075 (2%)]	 Batch 25 Loss: 0.091589
+Train Epoch: 3 Iteration: 30 [960/34075 (3%)]	 Batch 30 Loss: 0.135487
+Train Epoch: 3 Iteration: 35 [1120/34075 (3%)]	 Batch 35 Loss: 0.118184
+Train Epoch: 3 Iteration: 40 [1280/34075 (4%)]	 Batch 40 Loss: 0.035878
+Train Epoch: 3 Iteration: 45 [1440/34075 (4%)]	 Batch 45 Loss: 0.058632
+Train Epoch: 3 Iteration: 50 [1600/34075 (5%)]	 Batch 50 Loss: 0.119966
+Train Epoch: 3 Iteration: 55 [1760/34075 (5%)]	 Batch 55 Loss: 0.179223
+Train Epoch: 3 Iteration: 60 [1920/34075 (6%)]	 Batch 60 Loss: 0.109791
+Train Epoch: 3 Iteration: 65 [2080/34075 (6%)]	 Batch 65 Loss: 0.118805
+Train Epoch: 3 Iteration: 70 [2240/34075 (7%)]	 Batch 70 Loss: 0.112979
+Train Epoch: 3 Iteration: 75 [2400/34075 (7%)]	 Batch 75 Loss: 0.104833
+Train Epoch: 3 Iteration: 80 [2560/34075 (8%)]	 Batch 80 Loss: 0.114076
+Train Epoch: 3 Iteration: 85 [2720/34075 (8%)]	 Batch 85 Loss: 0.057986
+Train Epoch: 3 Iteration: 90 [2880/34075 (8%)]	 Batch 90 Loss: 0.133269
+Train Epoch: 3 Iteration: 95 [3040/34075 (9%)]	 Batch 95 Loss: 0.059626
+Train Epoch: 3 Iteration: 100 [3200/34075 (9%)]	 Batch 100 Loss: 0.074570
+Train Epoch: 3 Iteration: 105 [3360/34075 (10%)]	 Batch 105 Loss: 0.097220
+Train Epoch: 3 Iteration: 110 [3520/34075 (10%)]	 Batch 110 Loss: 0.089108
+Train Epoch: 3 Iteration: 115 [3680/34075 (11%)]	 Batch 115 Loss: 0.075027
+Train Epoch: 3 Iteration: 120 [3840/34075 (11%)]	 Batch 120 Loss: 0.045278
+Train Epoch: 3 Iteration: 125 [4000/34075 (12%)]	 Batch 125 Loss: 0.234581
+Train Epoch: 3 Iteration: 130 [4160/34075 (12%)]	 Batch 130 Loss: 0.080210
+Train Epoch: 3 Iteration: 135 [4320/34075 (13%)]	 Batch 135 Loss: 0.183252
+Train Epoch: 3 Iteration: 140 [4480/34075 (13%)]	 Batch 140 Loss: 0.016644
+Train Epoch: 3 Iteration: 145 [4640/34075 (14%)]	 Batch 145 Loss: 0.029160
+Train Epoch: 3 Iteration: 150 [4800/34075 (14%)]	 Batch 150 Loss: 0.036182
+Train Epoch: 3 Iteration: 155 [4960/34075 (15%)]	 Batch 155 Loss: 0.050131
+Train Epoch: 3 Iteration: 160 [5120/34075 (15%)]	 Batch 160 Loss: 0.130241
+Train Epoch: 3 Iteration: 165 [5280/34075 (15%)]	 Batch 165 Loss: 0.086214
+Train Epoch: 3 Iteration: 170 [5440/34075 (16%)]	 Batch 170 Loss: 0.186441
+Train Epoch: 3 Iteration: 175 [5600/34075 (16%)]	 Batch 175 Loss: 0.154830
+Train Epoch: 3 Iteration: 180 [5760/34075 (17%)]	 Batch 180 Loss: 0.041434
+Train Epoch: 3 Iteration: 185 [5920/34075 (17%)]	 Batch 185 Loss: 0.095141
+Train Epoch: 3 Iteration: 190 [6080/34075 (18%)]	 Batch 190 Loss: 0.047026
+Train Epoch: 3 Iteration: 195 [6240/34075 (18%)]	 Batch 195 Loss: 0.459564
+Train Epoch: 3 Iteration: 200 [6400/34075 (19%)]	 Batch 200 Loss: 0.065800
+Train Epoch: 3 Iteration: 205 [6560/34075 (19%)]	 Batch 205 Loss: 0.078022
+Train Epoch: 3 Iteration: 210 [6720/34075 (20%)]	 Batch 210 Loss: 0.078299
+Train Epoch: 3 Iteration: 215 [6880/34075 (20%)]	 Batch 215 Loss: 0.300193
+Train Epoch: 3 Iteration: 220 [7040/34075 (21%)]	 Batch 220 Loss: 0.063814
+Train Epoch: 3 Iteration: 225 [7200/34075 (21%)]	 Batch 225 Loss: 0.153972
+Train Epoch: 3 Iteration: 230 [7360/34075 (22%)]	 Batch 230 Loss: 0.207977
+Train Epoch: 3 Iteration: 235 [7520/34075 (22%)]	 Batch 235 Loss: 0.053521
+Train Epoch: 3 Iteration: 240 [7680/34075 (23%)]	 Batch 240 Loss: 0.054634
+Train Epoch: 3 Iteration: 245 [7840/34075 (23%)]	 Batch 245 Loss: 0.105102
+Train Epoch: 3 Iteration: 250 [8000/34075 (23%)]	 Batch 250 Loss: 0.150482
+Train Epoch: 3 Iteration: 255 [8160/34075 (24%)]	 Batch 255 Loss: 0.058590
+Train Epoch: 3 Iteration: 260 [8320/34075 (24%)]	 Batch 260 Loss: 0.045958
+Train Epoch: 3 Iteration: 265 [8480/34075 (25%)]	 Batch 265 Loss: 0.199799
+Train Epoch: 3 Iteration: 270 [8640/34075 (25%)]	 Batch 270 Loss: 0.113803
+Train Epoch: 3 Iteration: 275 [8800/34075 (26%)]	 Batch 275 Loss: 0.188587
+Train Epoch: 3 Iteration: 280 [8960/34075 (26%)]	 Batch 280 Loss: 0.081418
+Train Epoch: 3 Iteration: 285 [9120/34075 (27%)]	 Batch 285 Loss: 0.057794
+Train Epoch: 3 Iteration: 290 [9280/34075 (27%)]	 Batch 290 Loss: 0.149669
+Train Epoch: 3 Iteration: 295 [9440/34075 (28%)]	 Batch 295 Loss: 0.080207
+Train Epoch: 3 Iteration: 300 [9600/34075 (28%)]	 Batch 300 Loss: 0.036910
+Train Epoch: 3 Iteration: 305 [9760/34075 (29%)]	 Batch 305 Loss: 0.413753
+Train Epoch: 3 Iteration: 310 [9920/34075 (29%)]	 Batch 310 Loss: 0.027320
+Train Epoch: 3 Iteration: 315 [10080/34075 (30%)]	 Batch 315 Loss: 0.072676
+Train Epoch: 3 Iteration: 320 [10240/34075 (30%)]	 Batch 320 Loss: 0.030783
+Train Epoch: 3 Iteration: 325 [10400/34075 (31%)]	 Batch 325 Loss: 0.057883
+Train Epoch: 3 Iteration: 330 [10560/34075 (31%)]	 Batch 330 Loss: 0.062711
+Train Epoch: 3 Iteration: 335 [10720/34075 (31%)]	 Batch 335 Loss: 0.019859
+Train Epoch: 3 Iteration: 340 [10880/34075 (32%)]	 Batch 340 Loss: 0.017666
+Train Epoch: 3 Iteration: 345 [11040/34075 (32%)]	 Batch 345 Loss: 0.019124
+Train Epoch: 3 Iteration: 350 [11200/34075 (33%)]	 Batch 350 Loss: 0.065637
+Train Epoch: 3 Iteration: 355 [11360/34075 (33%)]	 Batch 355 Loss: 0.047631
+Train Epoch: 3 Iteration: 360 [11520/34075 (34%)]	 Batch 360 Loss: 0.096107
+Train Epoch: 3 Iteration: 365 [11680/34075 (34%)]	 Batch 365 Loss: 0.138643
+Train Epoch: 3 Iteration: 370 [11840/34075 (35%)]	 Batch 370 Loss: 0.009039
+Train Epoch: 3 Iteration: 375 [12000/34075 (35%)]	 Batch 375 Loss: 0.210550
+Train Epoch: 3 Iteration: 380 [12160/34075 (36%)]	 Batch 380 Loss: 0.138299
+Train Epoch: 3 Iteration: 385 [12320/34075 (36%)]	 Batch 385 Loss: 0.171745
+Train Epoch: 3 Iteration: 390 [12480/34075 (37%)]	 Batch 390 Loss: 0.133164
+Train Epoch: 3 Iteration: 395 [12640/34075 (37%)]	 Batch 395 Loss: 0.026131
+Train Epoch: 3 Iteration: 400 [12800/34075 (38%)]	 Batch 400 Loss: 0.208105
+Train Epoch: 3 Iteration: 405 [12960/34075 (38%)]	 Batch 405 Loss: 0.286057
+Train Epoch: 3 Iteration: 410 [13120/34075 (38%)]	 Batch 410 Loss: 0.069536
+Train Epoch: 3 Iteration: 415 [13280/34075 (39%)]	 Batch 415 Loss: 0.114330
+Train Epoch: 3 Iteration: 420 [13440/34075 (39%)]	 Batch 420 Loss: 0.082054
+Train Epoch: 3 Iteration: 425 [13600/34075 (40%)]	 Batch 425 Loss: 0.042782
+Train Epoch: 3 Iteration: 430 [13760/34075 (40%)]	 Batch 430 Loss: 0.075353
+Train Epoch: 3 Iteration: 435 [13920/34075 (41%)]	 Batch 435 Loss: 0.342000
+Train Epoch: 3 Iteration: 440 [14080/34075 (41%)]	 Batch 440 Loss: 0.105255
+Train Epoch: 3 Iteration: 445 [14240/34075 (42%)]	 Batch 445 Loss: 0.127589
+Train Epoch: 3 Iteration: 450 [14400/34075 (42%)]	 Batch 450 Loss: 0.091077
+Train Epoch: 3 Iteration: 455 [14560/34075 (43%)]	 Batch 455 Loss: 0.035602
+Train Epoch: 3 Iteration: 460 [14720/34075 (43%)]	 Batch 460 Loss: 0.020841
+================================ QUIT ================================
+ Saving Model ...
+validation computation time: 10.0  minutes
+Confusion Matrix
+tensor([[2709,  792,  223,  125],
+        [ 393,   99,   42,   17],
+        [ 111,   27,    9,   22],
+        [  38,    9,    3,    2]])
+class 0 accuracy: 83.3282%
+class 1 accuracy: 10.6796%
+class 2 accuracy: 3.2491%
+class 3 accuracy: 1.2048%
+
+Validation Loss: 2.1305, Accuracy: 2819/4621 (61%)
+Best Accuracy: 61.004112%
+Time Elapsed: 1h 39m 7s
+Iterations: []
+Val_Accuracies: [38.541441246483444, 51.136117723436485, 54.70677342566544]
+Val_Losses: [1.5330636977321572, 1.7930091838869784, 2.0429900251328945]
+Train_Losses: [0.592986447442519, 0.24242548170828618, 0.14038865814769738]
