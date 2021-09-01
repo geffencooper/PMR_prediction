@@ -24,7 +24,7 @@ if __name__ =="__main__":
     val_loader = create_loader(val_dataset,args)
 
     pmr = PMRfusionNN(args)
-    pmr.load_state_dict(torch.load("../models/fusion_NORM_smote_regression-2021-08-31_17-35-31/BEST_model.pth"))
+    pmr.load_state_dict(torch.load("../models/PMR_detection_0-3_one_to_one-2021-09-01_11-19-18/BEST_model.pth"))
 
     pmr.eval()
     pmr.to(device)
