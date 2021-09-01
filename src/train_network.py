@@ -453,10 +453,12 @@ def eval_model(model,data_loader,device,criterion,args,print_idxs=False):
         if args.classification == "y":
             gen_conf_mat(all_preds,all_labels,all_idxs,args.num_classes,print_idxs)
         eval_loss /= num_batches
+
         if args.classification == "y":
             print("\nValidation Loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)".format(eval_loss,correct,len(data_loader.dataset),100.*correct/len(data_loader.dataset)))
         else:
             print("\nValidation Loss: {:.4f}".format(eval_loss))
+
     model.train()
     return 100.*correct/len(data_loader.dataset),eval_loss
 
