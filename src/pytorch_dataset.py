@@ -107,8 +107,8 @@ class FusedDataset(Dataset):
                 exit()
 
             # merge 1,2,3 into a class
-            # if label > 0:
-            #     label = 1
+            if label > 0:
+                label = 1
             label = torch.tensor(label)
 
             return audio_features,visual_features,label,idx
