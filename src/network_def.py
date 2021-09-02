@@ -111,7 +111,7 @@ class PMRfusionNN(torch.nn.Module):
         
 
         # Layer 1: GRU for visual features
-        self.gru_vis = torch.nn.GRU(args.input_size,args.hidden_size,args.num_layers,batch_first=True)
+        self.gru_vis = torch.nn.LSTM(args.input_size,args.hidden_size,args.num_layers,batch_first=True)
 
         # Layer 2: FC for classification/regression after fusion
         if args.regression == "y":
