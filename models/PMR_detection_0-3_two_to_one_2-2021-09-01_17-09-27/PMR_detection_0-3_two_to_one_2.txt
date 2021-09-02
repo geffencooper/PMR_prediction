@@ -1,0 +1,75 @@
+============================ Raw Args ============================
+Namespace(batch_size=32, classification='y', dropout='y', droput_prob=0.25, gpu_i=0, hidden_init_rand='n', hidden_size=64, imbalanced_sampler='y', input_size=23, l2_reg='n', load_trained='n', log_dest='../models/PMR_detection_0-3_two_to_one_2-2021-09-01_17-09-27', loss_freq=10, lr=0.002, model_name='PMRfusionNN', normalize='y', num_classes=2, num_epochs=5, num_layers=1, optim='RMS', regression='n', root_dir='/data/perception-working/Geffen/avec_data/', session_name='PMR_detection_0-3_two_to_one_2', train_data_dir='none', train_labels_csv='binary_train_metadata_two_to_one.csv', trained_path='none', val_data_dir='none', val_freq=0, val_labels_csv='binary_val_metadata_two_to_one.csv', weight_decay_amnt=1e-05, weighted_loss='n')
+
+
+
+================================ Start Training ================================
+
+Session Name: PMR_detection_0-3_two_to_one_2
+
+Model Name: PMRfusionNN
+
+Device: 0  ---->  GeForce GTX 1080 Ti
+
+Hyperparameters:
+Batch Size: 32
+Learning Rate: 0.002
+Hidden Size: 64
+Number of Layer: 1
+Number of Epochs: 5
+Normalization:y
+
+Train Epoch: 0 Iteration: 10 [320/1447 (22%)]	 Batch 10 Loss: 0.586724
+Train Epoch: 0 Iteration: 20 [640/1447 (43%)]	 Batch 20 Loss: 0.409373
+Train Epoch: 0 Iteration: 30 [960/1447 (65%)]	 Batch 30 Loss: 0.515167
+Train Epoch: 0 Iteration: 40 [1280/1447 (87%)]	 Batch 40 Loss: 0.178128
+
+
+----------------- Epoch 0 -----------------
+
+validation computation time: 1.0  minutes
+Confusion Matrix
+tensor([[133,   4],
+        [110, 252]])
+class 0 accuracy: 54.7325%
+class 1 accuracy: 98.4375%
+
+Validation Loss: 0.5815, Accuracy: 385/499 (77%)
+Training Loss:0.5215
+Best Accuracy: 77.154309%
+Time Elapsed: 0h 3m 52s
+
+--------------------------------------------------------
+
+
+Train Epoch: 1 Iteration: 10 [320/1447 (22%)]	 Batch 10 Loss: 0.353034
+Train Epoch: 1 Iteration: 20 [640/1447 (43%)]	 Batch 20 Loss: 0.448807
+Train Epoch: 1 Iteration: 30 [960/1447 (65%)]	 Batch 30 Loss: 0.157395
+Train Epoch: 1 Iteration: 40 [1280/1447 (87%)]	 Batch 40 Loss: 0.173402
+
+
+----------------- Epoch 1 -----------------
+
+validation computation time: 1.0  minutes
+Confusion Matrix
+tensor([[193,  58],
+        [ 62, 186]])
+class 0 accuracy: 75.6863%
+class 1 accuracy: 76.2295%
+
+Validation Loss: 0.5995, Accuracy: 379/499 (76%)
+Training Loss:0.2565
+Best Accuracy: 77.154309%
+Time Elapsed: 0h 8m 25s
+
+--------------------------------------------------------
+
+
+Train Epoch: 2 Iteration: 10 [320/1447 (22%)]	 Batch 10 Loss: 0.049052
+Train Epoch: 2 Iteration: 20 [640/1447 (43%)]	 Batch 20 Loss: 0.086868
+Train Epoch: 2 Iteration: 30 [960/1447 (65%)]	 Batch 30 Loss: 0.053084
+Train Epoch: 2 Iteration: 40 [1280/1447 (87%)]	 Batch 40 Loss: 0.029799
+
+
+----------------- Epoch 2 -----------------
+

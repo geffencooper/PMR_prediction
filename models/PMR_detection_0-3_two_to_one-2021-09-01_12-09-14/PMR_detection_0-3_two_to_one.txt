@@ -1,0 +1,152 @@
+============================ Raw Args ============================
+Namespace(batch_size=32, classification='y', dropout='n', droput_prob=0.0, gpu_i=0, hidden_init_rand='n', hidden_size=64, imbalanced_sampler='y', input_size=23, l2_reg='n', load_trained='n', log_dest='../models/PMR_detection_0-3_two_to_one-2021-09-01_12-09-14', loss_freq=10, lr=0.002, model_name='PMRfusionNN', normalize='y', num_classes=2, num_epochs=5, num_layers=1, optim='RMS', regression='n', root_dir='/data/perception-working/Geffen/avec_data/', session_name='PMR_detection_0-3_two_to_one', train_data_dir='none', train_labels_csv='binary_train_metadata_two_to_one.csv', trained_path='none', val_data_dir='none', val_freq=0, val_labels_csv='binary_val_metadata_two_to_one.csv', weight_decay_amnt=0.0, weighted_loss='n')
+
+
+
+================================ Start Training ================================
+
+Session Name: PMR_detection_0-3_two_to_one
+
+Model Name: PMRfusionNN
+
+Device: 0  ---->  GeForce GTX 1080 Ti
+
+Hyperparameters:
+Batch Size: 32
+Learning Rate: 0.002
+Hidden Size: 64
+Number of Layer: 1
+Number of Epochs: 5
+Normalization:y
+
+Train Epoch: 0 Iteration: 10 [320/1447 (22%)]	 Batch 10 Loss: 0.567211
+Train Epoch: 0 Iteration: 20 [640/1447 (43%)]	 Batch 20 Loss: 0.377009
+Train Epoch: 0 Iteration: 30 [960/1447 (65%)]	 Batch 30 Loss: 0.343988
+Train Epoch: 0 Iteration: 40 [1280/1447 (87%)]	 Batch 40 Loss: 0.263467
+
+
+----------------- Epoch 0 -----------------
+
+validation computation time: 0.0  minutes
+Confusion Matrix
+tensor([[223, 124],
+        [ 30, 122]])
+class 0 accuracy: 88.1423%
+class 1 accuracy: 49.5935%
+
+Validation Loss: 0.6786, Accuracy: 345/499 (69%)
+Training Loss:0.4942
+Best Accuracy: 69.138277%
+Time Elapsed: 0h 3m 57s
+
+--------------------------------------------------------
+
+
+Train Epoch: 1 Iteration: 10 [320/1447 (22%)]	 Batch 10 Loss: 0.370700
+Train Epoch: 1 Iteration: 20 [640/1447 (43%)]	 Batch 20 Loss: 0.213230
+Train Epoch: 1 Iteration: 30 [960/1447 (65%)]	 Batch 30 Loss: 0.252656
+Train Epoch: 1 Iteration: 40 [1280/1447 (87%)]	 Batch 40 Loss: 0.427211
+
+
+----------------- Epoch 1 -----------------
+
+validation computation time: 1.0  minutes
+Confusion Matrix
+tensor([[182,  68],
+        [ 57, 192]])
+class 0 accuracy: 76.1506%
+class 1 accuracy: 73.8462%
+
+Validation Loss: 0.6205, Accuracy: 374/499 (75%)
+Training Loss:0.2648
+Best Accuracy: 74.949900%
+Time Elapsed: 0h 8m 8s
+
+--------------------------------------------------------
+
+
+Train Epoch: 2 Iteration: 10 [320/1447 (22%)]	 Batch 10 Loss: 0.044073
+Train Epoch: 2 Iteration: 20 [640/1447 (43%)]	 Batch 20 Loss: 0.129940
+Train Epoch: 2 Iteration: 30 [960/1447 (65%)]	 Batch 30 Loss: 0.146114
+Train Epoch: 2 Iteration: 40 [1280/1447 (87%)]	 Batch 40 Loss: 0.123525
+
+
+----------------- Epoch 2 -----------------
+
+validation computation time: 1.0  minutes
+Confusion Matrix
+tensor([[160,  30],
+        [ 72, 237]])
+class 0 accuracy: 68.9655%
+class 1 accuracy: 88.7640%
+
+Validation Loss: 0.6173, Accuracy: 397/499 (80%)
+Training Loss:0.1474
+Best Accuracy: 79.559118%
+Time Elapsed: 0h 12m 6s
+
+--------------------------------------------------------
+
+
+Train Epoch: 3 Iteration: 10 [320/1447 (22%)]	 Batch 10 Loss: 0.080727
+Train Epoch: 3 Iteration: 20 [640/1447 (43%)]	 Batch 20 Loss: 0.120491
+Train Epoch: 3 Iteration: 30 [960/1447 (65%)]	 Batch 30 Loss: 0.285544
+Train Epoch: 3 Iteration: 40 [1280/1447 (87%)]	 Batch 40 Loss: 0.119419
+
+
+----------------- Epoch 3 -----------------
+
+validation computation time: 0.0  minutes
+Confusion Matrix
+tensor([[196,  76],
+        [ 57, 170]])
+class 0 accuracy: 77.4704%
+class 1 accuracy: 69.1057%
+
+Validation Loss: 0.8757, Accuracy: 366/499 (73%)
+Training Loss:0.1134
+Best Accuracy: 79.559118%
+Time Elapsed: 0h 16m 2s
+
+--------------------------------------------------------
+
+
+Train Epoch: 4 Iteration: 10 [320/1447 (22%)]	 Batch 10 Loss: 0.014684
+Train Epoch: 4 Iteration: 20 [640/1447 (43%)]	 Batch 20 Loss: 0.092035
+Train Epoch: 4 Iteration: 30 [960/1447 (65%)]	 Batch 30 Loss: 0.047049
+Train Epoch: 4 Iteration: 40 [1280/1447 (87%)]	 Batch 40 Loss: 0.061588
+
+
+----------------- Epoch 4 -----------------
+
+validation computation time: 0.0  minutes
+Confusion Matrix
+tensor([[197, 106],
+        [ 58, 138]])
+class 0 accuracy: 77.2549%
+class 1 accuracy: 56.5574%
+
+Validation Loss: 1.0262, Accuracy: 335/499 (67%)
+Training Loss:0.0967
+Best Accuracy: 79.559118%
+Time Elapsed: 0h 19m 50s
+
+--------------------------------------------------------
+
+
+================================ Finished Training ================================
+validation computation time: 1.0  minutes
+Incorrect Samples: [(282, 'P:1 GT:0'), (54, 'P:0 GT:1'), (49, 'P:1 GT:0'), (46, 'P:0 GT:1'), (478, 'P:0 GT:1'), (98, 'P:0 GT:1'), (485, 'P:0 GT:1'), (402, 'P:0 GT:1'), (252, 'P:0 GT:1'), (391, 'P:0 GT:1'), (251, 'P:0 GT:1'), (375, 'P:0 GT:1'), (399, 'P:0 GT:1'), (387, 'P:1 GT:0'), (324, 'P:1 GT:0'), (458, 'P:1 GT:0'), (257, 'P:0 GT:1'), (57, 'P:0 GT:1'), (236, 'P:0 GT:1'), (125, 'P:1 GT:0'), (152, 'P:0 GT:1'), (49, 'P:1 GT:0'), (139, 'P:0 GT:1'), (402, 'P:0 GT:1'), (39, 'P:0 GT:1'), (251, 'P:0 GT:1'), (371, 'P:0 GT:1'), (314, 'P:1 GT:0'), (324, 'P:1 GT:0'), (420, 'P:0 GT:1'), (453, 'P:0 GT:1'), (139, 'P:0 GT:1'), (236, 'P:0 GT:1'), (170, 'P:0 GT:1'), (102, 'P:1 GT:0'), (56, 'P:0 GT:1'), (6, 'P:0 GT:1'), (67, 'P:0 GT:1'), (88, 'P:0 GT:1'), (399, 'P:0 GT:1'), (253, 'P:0 GT:1'), (126, 'P:1 GT:0'), (129, 'P:1 GT:0'), (485, 'P:0 GT:1'), (399, 'P:0 GT:1'), (78, 'P:0 GT:1'), (78, 'P:0 GT:1'), (131, 'P:1 GT:0'), (468, 'P:0 GT:1'), (93, 'P:0 GT:1'), (215, 'P:0 GT:1'), (130, 'P:1 GT:0'), (46, 'P:0 GT:1'), (119, 'P:0 GT:1'), (491, 'P:1 GT:0'), (368, 'P:0 GT:1'), (296, 'P:1 GT:0'), (310, 'P:0 GT:1'), (85, 'P:1 GT:0'), (85, 'P:1 GT:0'), (473, 'P:0 GT:1'), (473, 'P:0 GT:1'), (473, 'P:0 GT:1'), (355, 'P:1 GT:0'), (125, 'P:1 GT:0'), (397, 'P:1 GT:0'), (49, 'P:1 GT:0'), (111, 'P:0 GT:1'), (347, 'P:1 GT:0'), (412, 'P:0 GT:1'), (453, 'P:0 GT:1'), (251, 'P:0 GT:1'), (385, 'P:1 GT:0'), (402, 'P:0 GT:1'), (397, 'P:1 GT:0'), (254, 'P:0 GT:1'), (457, 'P:0 GT:1'), (54, 'P:0 GT:1'), (242, 'P:0 GT:1'), (276, 'P:0 GT:1'), (310, 'P:0 GT:1'), (263, 'P:1 GT:0'), (453, 'P:0 GT:1'), (215, 'P:0 GT:1'), (439, 'P:0 GT:1'), (202, 'P:0 GT:1'), (174, 'P:1 GT:0'), (39, 'P:0 GT:1'), (456, 'P:0 GT:1'), (368, 'P:0 GT:1'), (207, 'P:1 GT:0'), (88, 'P:0 GT:1'), (468, 'P:0 GT:1'), (15, 'P:1 GT:0'), (254, 'P:0 GT:1'), (410, 'P:0 GT:1'), (11, 'P:1 GT:0'), (321, 'P:1 GT:0'), (252, 'P:0 GT:1'), (321, 'P:1 GT:0'), (329, 'P:1 GT:0'), (88, 'P:0 GT:1'), (213, 'P:1 GT:0'), (420, 'P:0 GT:1'), (397, 'P:1 GT:0'), (57, 'P:0 GT:1'), (478, 'P:0 GT:1'), (149, 'P:0 GT:1'), (187, 'P:1 GT:0'), (410, 'P:0 GT:1'), (39, 'P:0 GT:1'), (56, 'P:0 GT:1'), (202, 'P:0 GT:1'), (442, 'P:1 GT:0'), (420, 'P:0 GT:1'), (276, 'P:0 GT:1'), (35, 'P:1 GT:0'), (496, 'P:0 GT:1'), (276, 'P:0 GT:1'), (35, 'P:1 GT:0'), (202, 'P:0 GT:1'), (412, 'P:0 GT:1'), (202, 'P:0 GT:1'), (263, 'P:1 GT:0'), (254, 'P:0 GT:1'), (484, 'P:1 GT:0'), (484, 'P:1 GT:0'), (312, 'P:0 GT:1'), (399, 'P:0 GT:1'), (310, 'P:0 GT:1'), (126, 'P:1 GT:0'), (257, 'P:0 GT:1'), (50, 'P:1 GT:0'), (7, 'P:0 GT:1'), (410, 'P:0 GT:1'), (244, 'P:1 GT:0'), (473, 'P:0 GT:1'), (263, 'P:1 GT:0'), (215, 'P:0 GT:1'), (223, 'P:0 GT:1'), (28, 'P:1 GT:0'), (437, 'P:0 GT:1'), (397, 'P:1 GT:0'), (139, 'P:0 GT:1'), (310, 'P:0 GT:1'), (473, 'P:0 GT:1'), (462, 'P:1 GT:0'), (478, 'P:0 GT:1'), (368, 'P:0 GT:1'), (410, 'P:0 GT:1'), (321, 'P:1 GT:0'), (257, 'P:0 GT:1'), (457, 'P:0 GT:1'), (11, 'P:1 GT:0'), (254, 'P:0 GT:1'), (410, 'P:0 GT:1'), (159, 'P:0 GT:1'), (253, 'P:0 GT:1'), (442, 'P:1 GT:0'), (126, 'P:1 GT:0'), (7, 'P:0 GT:1'), (251, 'P:0 GT:1'), (312, 'P:0 GT:1'), (95, 'P:0 GT:1'), (397, 'P:1 GT:0'), (61, 'P:0 GT:1')]
+Confusion Matrix
+tensor([[197, 112],
+        [ 54, 136]])
+class 0 accuracy: 78.4861%
+class 1 accuracy: 54.8387%
+
+Validation Loss: 1.1065, Accuracy: 333/499 (67%)
+Best Accuracy: 79.559118%
+Time Elapsed: 0h 20m 58s
+Epochs: [0, 1, 2, 3, 4]
+Val_Accuracies: [69.13827655310621, 74.9498997995992, 79.55911823647294, 73.34669338677355, 67.13426853707415]
+Val_Losses: [0.6785760223865509, 0.6205085575580597, 0.6172927300135295, 0.8756875991821289, 1.0262159218390783]
+Train_Losses: [0.49419816633065544, 0.2648080198301209, 0.14744532857504156, 0.11341613245507082, 0.09667903108315336]
