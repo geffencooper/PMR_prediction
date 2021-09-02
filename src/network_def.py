@@ -98,6 +98,7 @@ class PMRfusionNN(torch.nn.Module):
         args_copy = copy.deepcopy(args)
         args_copy.input_size = 26
         args_copy.num_classes = 3
+        args_copy.num_layers=1
         self.pace_net = SpeechPaceNN(args_copy)
         if args.normalize == "n":
             self.pace_net.load_state_dict(torch.load('../models/speech_pace_RMS_x-2021-08-19_12-29-08/BEST_model.pth',map_location=self.device))
