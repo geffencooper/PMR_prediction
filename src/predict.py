@@ -20,7 +20,7 @@ if __name__ =="__main__":
 
     device = torch.device("cuda:"+str(args.gpu_i) if torch.cuda.is_available() else "cpu")
 
-    val_dataset = create_dataset(args,"binary_val_metadata_two_to_one.csv","none")
+    val_dataset = create_dataset(args,"binary_sampled_val_metadata.csv","none")
     val_loader = create_loader(val_dataset,args)
 
     pmr = PMRfusionNN(args)
