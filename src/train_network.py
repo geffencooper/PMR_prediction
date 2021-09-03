@@ -540,7 +540,7 @@ def parse_args():
     parser.add_argument("l2_reg",help="do l2 regularization (y/n)",type=str)
     parser.add_argument("weight_decay_amnt",help="weight decay constant for l2 regularization (float)",type=float)
     parser.add_argument("dropout",help="use dropout before fully connected layer (y/n)",type=str)
-    parser.add_argument("droput_prob",help="droput probability (float)",type=float)
+    parser.add_argument("dropout_prob",help="dropout probability (float)",type=float)
 
     # extra optional
     parser.add_argument("--load_trained",help="load a pretrained model (y/n)",type=str)
