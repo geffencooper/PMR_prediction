@@ -1,0 +1,25 @@
+============================ Raw Args ============================
+Namespace(batch_size=64, classification='y', dropout='n', dropout_prob=0.0, gpu_i=1, hidden_init_rand='n', hidden_size=64, imbalanced_sampler='n', input_size=26, l2_reg='n', load_trained='n', log_dest='../models/speech_pace_RMS_NORM2-2021-09-03_12-17-54', loss_freq=50, lr=0.002, model_name='SpeechPaceNN', normalize='y', num_classes=3, num_epochs=3, num_layers=1, optim='RMS', regression='n', root_dir='/data/perception-working/Geffen/SpeechPaceData/', session_name='speech_pace_RMS_NORM2', train_data_dir='training_data_aug', train_labels_csv='train_labels2.csv', trained_path='none', val_data_dir='validation_data', val_freq=300, val_labels_csv='val_labels2.csv', weight_decay_amnt=0.0, weighted_loss='n')
+
+
+
+================================ Start Training ================================
+
+Session Name: speech_pace_RMS_NORM2
+
+Model Name: SpeechPaceNN
+
+Device: 1  ---->  GeForce GTX 1080 Ti
+
+Hyperparameters:
+Batch Size: 64
+Learning Rate: 0.002
+Hidden Size: 64
+Number of Layer: 1
+Number of Epochs: 3
+Normalization:y
+
+Train Epoch: 0 Iteration: 50 [3200/195766 (2%)]	 Batch 50 Loss: 1.137748
+Train Epoch: 0 Iteration: 100 [6400/195766 (3%)]	 Batch 100 Loss: 1.058167
+Train Epoch: 0 Iteration: 150 [9600/195766 (5%)]	 Batch 150 Loss: 1.046753
+Train Epoch: 0 Iteration: 200 [12800/195766 (7%)]	 Batch 200 Loss: 1.071493
