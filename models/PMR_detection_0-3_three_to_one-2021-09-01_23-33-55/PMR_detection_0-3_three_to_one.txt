@@ -1,0 +1,162 @@
+============================ Raw Args ============================
+Namespace(batch_size=32, classification='y', dropout='n', droput_prob=0.0, gpu_i=0, hidden_init_rand='n', hidden_size=64, imbalanced_sampler='y', input_size=23, l2_reg='n', load_trained='n', log_dest='../models/PMR_detection_0-3_three_to_one-2021-09-01_23-33-55', loss_freq=10, lr=0.002, model_name='PMRfusionNN', normalize='y', num_classes=2, num_epochs=5, num_layers=1, optim='RMS', regression='n', root_dir='/data/perception-working/Geffen/avec_data/', session_name='PMR_detection_0-3_three_to_one', train_data_dir='none', train_labels_csv='binary_train_metadata_three_to_one.csv', trained_path='../models/PMR_detection_0-3_two_to_one-2021-09-01_12-09-14/BEST_model.pth', val_data_dir='none', val_freq=0, val_labels_csv='binary_val_metadata_three_to_one.csv', weight_decay_amnt=0.0, weighted_loss='n')
+
+
+
+================================ Start Training ================================
+
+Session Name: PMR_detection_0-3_three_to_one
+
+Model Name: PMRfusionNN
+
+Device: 0  ---->  GeForce GTX 1080 Ti
+
+Hyperparameters:
+Batch Size: 32
+Learning Rate: 0.002
+Hidden Size: 64
+Number of Layer: 1
+Number of Epochs: 5
+Normalization:y
+
+Train Epoch: 0 Iteration: 10 [320/1929 (16%)]	 Batch 10 Loss: 0.562293
+Train Epoch: 0 Iteration: 20 [640/1929 (33%)]	 Batch 20 Loss: 0.496373
+Train Epoch: 0 Iteration: 30 [960/1929 (49%)]	 Batch 30 Loss: 0.538485
+Train Epoch: 0 Iteration: 40 [1280/1929 (66%)]	 Batch 40 Loss: 0.414912
+Train Epoch: 0 Iteration: 50 [1600/1929 (82%)]	 Batch 50 Loss: 0.226940
+Train Epoch: 0 Iteration: 60 [1920/1929 (98%)]	 Batch 60 Loss: 0.491783
+
+
+----------------- Epoch 0 -----------------
+
+validation computation time: 1.0  minutes
+Confusion Matrix
+tensor([[257, 185],
+        [ 83, 140]])
+class 0 accuracy: 75.5882%
+class 1 accuracy: 43.0769%
+
+Validation Loss: 0.7670, Accuracy: 397/665 (60%)
+Training Loss:0.5317
+Best Accuracy: 59.699248%
+Time Elapsed: 0h 5m 50s
+
+--------------------------------------------------------
+
+
+Train Epoch: 1 Iteration: 10 [320/1929 (16%)]	 Batch 10 Loss: 0.289776
+Train Epoch: 1 Iteration: 20 [640/1929 (33%)]	 Batch 20 Loss: 0.117550
+Train Epoch: 1 Iteration: 30 [960/1929 (49%)]	 Batch 30 Loss: 0.529497
+Train Epoch: 1 Iteration: 40 [1280/1929 (66%)]	 Batch 40 Loss: 0.233388
+Train Epoch: 1 Iteration: 50 [1600/1929 (82%)]	 Batch 50 Loss: 0.229539
+Train Epoch: 1 Iteration: 60 [1920/1929 (98%)]	 Batch 60 Loss: 0.343246
+
+
+----------------- Epoch 1 -----------------
+
+validation computation time: 1.0  minutes
+Confusion Matrix
+tensor([[241, 153],
+        [117, 154]])
+class 0 accuracy: 67.3184%
+class 1 accuracy: 50.1629%
+
+Validation Loss: 1.0670, Accuracy: 395/665 (59%)
+Training Loss:0.2382
+Best Accuracy: 59.699248%
+Time Elapsed: 0h 11m 4s
+
+--------------------------------------------------------
+
+
+Train Epoch: 2 Iteration: 10 [320/1929 (16%)]	 Batch 10 Loss: 0.112199
+Train Epoch: 2 Iteration: 20 [640/1929 (33%)]	 Batch 20 Loss: 0.086499
+Train Epoch: 2 Iteration: 30 [960/1929 (49%)]	 Batch 30 Loss: 0.137125
+Train Epoch: 2 Iteration: 40 [1280/1929 (66%)]	 Batch 40 Loss: 0.203337
+Train Epoch: 2 Iteration: 50 [1600/1929 (82%)]	 Batch 50 Loss: 0.034489
+Train Epoch: 2 Iteration: 60 [1920/1929 (98%)]	 Batch 60 Loss: 0.100411
+
+
+----------------- Epoch 2 -----------------
+
+validation computation time: 1.0  minutes
+Confusion Matrix
+tensor([[250, 143],
+        [108, 164]])
+class 0 accuracy: 69.8324%
+class 1 accuracy: 53.4202%
+
+Validation Loss: 0.8446, Accuracy: 414/665 (62%)
+Training Loss:0.1678
+Best Accuracy: 62.255639%
+Time Elapsed: 0h 16m 9s
+
+--------------------------------------------------------
+
+
+Train Epoch: 3 Iteration: 10 [320/1929 (16%)]	 Batch 10 Loss: 0.164819
+Train Epoch: 3 Iteration: 20 [640/1929 (33%)]	 Batch 20 Loss: 0.103518
+Train Epoch: 3 Iteration: 30 [960/1929 (49%)]	 Batch 30 Loss: 0.039048
+Train Epoch: 3 Iteration: 40 [1280/1929 (66%)]	 Batch 40 Loss: 0.130486
+Train Epoch: 3 Iteration: 50 [1600/1929 (82%)]	 Batch 50 Loss: 0.021323
+Train Epoch: 3 Iteration: 60 [1920/1929 (98%)]	 Batch 60 Loss: 0.033181
+
+
+----------------- Epoch 3 -----------------
+
+validation computation time: 1.0  minutes
+Confusion Matrix
+tensor([[275, 246],
+        [ 64,  80]])
+class 0 accuracy: 81.1209%
+class 1 accuracy: 24.5399%
+
+Validation Loss: 1.5037, Accuracy: 355/665 (53%)
+Training Loss:0.0917
+Best Accuracy: 62.255639%
+Time Elapsed: 0h 21m 59s
+
+--------------------------------------------------------
+
+
+Train Epoch: 4 Iteration: 10 [320/1929 (16%)]	 Batch 10 Loss: 0.061847
+Train Epoch: 4 Iteration: 20 [640/1929 (33%)]	 Batch 20 Loss: 0.023113
+Train Epoch: 4 Iteration: 30 [960/1929 (49%)]	 Batch 30 Loss: 0.065111
+Train Epoch: 4 Iteration: 40 [1280/1929 (66%)]	 Batch 40 Loss: 0.047472
+Train Epoch: 4 Iteration: 50 [1600/1929 (82%)]	 Batch 50 Loss: 0.017757
+Train Epoch: 4 Iteration: 60 [1920/1929 (98%)]	 Batch 60 Loss: 0.007725
+
+
+----------------- Epoch 4 -----------------
+
+validation computation time: 1.0  minutes
+Confusion Matrix
+tensor([[270, 247],
+        [ 60,  88]])
+class 0 accuracy: 81.8182%
+class 1 accuracy: 26.2687%
+
+Validation Loss: 2.0333, Accuracy: 358/665 (54%)
+Training Loss:0.0461
+Best Accuracy: 62.255639%
+Time Elapsed: 0h 27m 27s
+
+--------------------------------------------------------
+
+
+================================ Finished Training ================================
+validation computation time: 1.0  minutes
+Incorrect Samples: [(604, 'P:0 GT:1'), (604, 'P:0 GT:1'), (305, 'P:1 GT:0'), (623, 'P:0 GT:1'), (518, 'P:0 GT:1'), (570, 'P:0 GT:1'), (538, 'P:0 GT:1'), (586, 'P:0 GT:1'), (563, 'P:0 GT:1'), (537, 'P:0 GT:1'), (487, 'P:1 GT:0'), (623, 'P:0 GT:1'), (566, 'P:0 GT:1'), (545, 'P:0 GT:1'), (514, 'P:0 GT:1'), (539, 'P:0 GT:1'), (468, 'P:1 GT:0'), (519, 'P:0 GT:1'), (31, 'P:1 GT:0'), (579, 'P:0 GT:1'), (584, 'P:0 GT:1'), (257, 'P:1 GT:0'), (535, 'P:0 GT:1'), (511, 'P:0 GT:1'), (513, 'P:0 GT:1'), (656, 'P:0 GT:1'), (327, 'P:1 GT:0'), (615, 'P:0 GT:1'), (517, 'P:0 GT:1'), (511, 'P:0 GT:1'), (573, 'P:0 GT:1'), (280, 'P:1 GT:0'), (635, 'P:0 GT:1'), (561, 'P:0 GT:1'), (616, 'P:0 GT:1'), (539, 'P:0 GT:1'), (663, 'P:0 GT:1'), (249, 'P:1 GT:0'), (536, 'P:0 GT:1'), (250, 'P:1 GT:0'), (478, 'P:1 GT:0'), (530, 'P:0 GT:1'), (14, 'P:1 GT:0'), (296, 'P:1 GT:0'), (397, 'P:1 GT:0'), (266, 'P:1 GT:0'), (388, 'P:1 GT:0'), (653, 'P:0 GT:1'), (522, 'P:0 GT:1'), (604, 'P:0 GT:1'), (523, 'P:0 GT:1'), (555, 'P:0 GT:1'), (555, 'P:0 GT:1'), (628, 'P:0 GT:1'), (651, 'P:0 GT:1'), (563, 'P:0 GT:1'), (596, 'P:0 GT:1'), (524, 'P:0 GT:1'), (540, 'P:0 GT:1'), (550, 'P:0 GT:1'), (576, 'P:0 GT:1'), (339, 'P:1 GT:0'), (635, 'P:0 GT:1'), (594, 'P:0 GT:1'), (319, 'P:1 GT:0'), (664, 'P:0 GT:1'), (287, 'P:1 GT:0'), (653, 'P:0 GT:1'), (629, 'P:0 GT:1'), (561, 'P:0 GT:1'), (586, 'P:0 GT:1'), (546, 'P:0 GT:1'), (244, 'P:1 GT:0'), (537, 'P:0 GT:1'), (337, 'P:1 GT:0'), (609, 'P:0 GT:1'), (579, 'P:0 GT:1'), (593, 'P:0 GT:1'), (619, 'P:0 GT:1'), (626, 'P:0 GT:1'), (512, 'P:0 GT:1'), (504, 'P:0 GT:1'), (570, 'P:0 GT:1'), (535, 'P:0 GT:1'), (654, 'P:0 GT:1'), (511, 'P:0 GT:1'), (609, 'P:0 GT:1'), (250, 'P:1 GT:0'), (501, 'P:0 GT:1'), (530, 'P:0 GT:1'), (550, 'P:0 GT:1'), (553, 'P:0 GT:1'), (610, 'P:0 GT:1'), (614, 'P:0 GT:1'), (103, 'P:1 GT:0'), (577, 'P:0 GT:1'), (526, 'P:0 GT:1'), (529, 'P:0 GT:1'), (589, 'P:0 GT:1'), (523, 'P:0 GT:1'), (589, 'P:0 GT:1'), (561, 'P:0 GT:1'), (532, 'P:0 GT:1'), (598, 'P:0 GT:1'), (630, 'P:0 GT:1'), (586, 'P:0 GT:1'), (546, 'P:0 GT:1'), (481, 'P:1 GT:0'), (659, 'P:0 GT:1'), (253, 'P:1 GT:0'), (617, 'P:0 GT:1'), (505, 'P:0 GT:1'), (319, 'P:1 GT:0'), (593, 'P:0 GT:1'), (598, 'P:0 GT:1'), (520, 'P:0 GT:1'), (532, 'P:0 GT:1'), (522, 'P:0 GT:1'), (573, 'P:0 GT:1'), (652, 'P:0 GT:1'), (652, 'P:0 GT:1'), (537, 'P:0 GT:1'), (543, 'P:0 GT:1'), (502, 'P:0 GT:1'), (591, 'P:0 GT:1'), (627, 'P:0 GT:1'), (548, 'P:0 GT:1'), (579, 'P:0 GT:1'), (629, 'P:0 GT:1'), (548, 'P:0 GT:1'), (661, 'P:0 GT:1'), (515, 'P:0 GT:1'), (628, 'P:0 GT:1'), (619, 'P:0 GT:1'), (517, 'P:0 GT:1'), (618, 'P:0 GT:1'), (17, 'P:1 GT:0'), (502, 'P:0 GT:1'), (519, 'P:0 GT:1'), (575, 'P:0 GT:1'), (637, 'P:0 GT:1'), (504, 'P:0 GT:1'), (570, 'P:0 GT:1'), (568, 'P:0 GT:1'), (551, 'P:0 GT:1'), (577, 'P:0 GT:1'), (629, 'P:0 GT:1'), (619, 'P:0 GT:1'), (544, 'P:0 GT:1'), (551, 'P:0 GT:1'), (579, 'P:0 GT:1'), (609, 'P:0 GT:1'), (550, 'P:0 GT:1'), (545, 'P:0 GT:1'), (534, 'P:0 GT:1'), (619, 'P:0 GT:1'), (654, 'P:0 GT:1'), (555, 'P:0 GT:1'), (518, 'P:0 GT:1'), (539, 'P:0 GT:1'), (520, 'P:0 GT:1'), (652, 'P:0 GT:1'), (492, 'P:1 GT:0'), (656, 'P:0 GT:1'), (604, 'P:0 GT:1'), (584, 'P:0 GT:1'), (551, 'P:0 GT:1'), (568, 'P:0 GT:1'), (570, 'P:0 GT:1'), (511, 'P:0 GT:1'), (595, 'P:0 GT:1'), (653, 'P:0 GT:1'), (598, 'P:0 GT:1'), (254, 'P:1 GT:0'), (256, 'P:1 GT:0'), (560, 'P:0 GT:1'), (509, 'P:0 GT:1'), (509, 'P:0 GT:1'), (510, 'P:0 GT:1'), (609, 'P:0 GT:1'), (522, 'P:0 GT:1'), (519, 'P:0 GT:1'), (519, 'P:0 GT:1'), (502, 'P:0 GT:1'), (535, 'P:0 GT:1'), (90, 'P:1 GT:0'), (653, 'P:0 GT:1'), (549, 'P:0 GT:1'), (568, 'P:0 GT:1'), (103, 'P:1 GT:0'), (579, 'P:0 GT:1'), (651, 'P:0 GT:1'), (586, 'P:0 GT:1'), (546, 'P:0 GT:1'), (499, 'P:0 GT:1'), (17, 'P:1 GT:0'), (540, 'P:0 GT:1'), (550, 'P:0 GT:1'), (527, 'P:0 GT:1'), (580, 'P:0 GT:1'), (325, 'P:1 GT:0'), (598, 'P:0 GT:1'), (630, 'P:0 GT:1'), (526, 'P:0 GT:1'), (511, 'P:0 GT:1'), (558, 'P:0 GT:1'), (501, 'P:0 GT:1'), (595, 'P:0 GT:1'), (555, 'P:0 GT:1'), (570, 'P:0 GT:1'), (340, 'P:1 GT:0'), (561, 'P:0 GT:1'), (660, 'P:0 GT:1'), (661, 'P:0 GT:1'), (507, 'P:0 GT:1'), (502, 'P:0 GT:1'), (552, 'P:0 GT:1'), (581, 'P:0 GT:1'), (618, 'P:0 GT:1'), (499, 'P:0 GT:1'), (598, 'P:0 GT:1'), (504, 'P:0 GT:1'), (544, 'P:0 GT:1'), (511, 'P:0 GT:1'), (663, 'P:0 GT:1'), (519, 'P:0 GT:1'), (551, 'P:0 GT:1'), (287, 'P:1 GT:0'), (609, 'P:0 GT:1'), (598, 'P:0 GT:1'), (17, 'P:1 GT:0'), (612, 'P:0 GT:1'), (623, 'P:0 GT:1'), (553, 'P:0 GT:1'), (555, 'P:0 GT:1'), (553, 'P:0 GT:1'), (616, 'P:0 GT:1'), (566, 'P:0 GT:1'), (657, 'P:0 GT:1'), (574, 'P:0 GT:1'), (560, 'P:0 GT:1'), (537, 'P:0 GT:1'), (581, 'P:0 GT:1'), (605, 'P:0 GT:1'), (570, 'P:0 GT:1'), (555, 'P:0 GT:1'), (551, 'P:0 GT:1'), (576, 'P:0 GT:1'), (517, 'P:0 GT:1'), (617, 'P:0 GT:1'), (628, 'P:0 GT:1'), (652, 'P:0 GT:1'), (657, 'P:0 GT:1'), (541, 'P:0 GT:1'), (659, 'P:0 GT:1'), (241, 'P:1 GT:0'), (515, 'P:0 GT:1'), (567, 'P:0 GT:1'), (543, 'P:0 GT:1'), (628, 'P:0 GT:1'), (594, 'P:0 GT:1'), (544, 'P:0 GT:1'), (485, 'P:1 GT:0'), (630, 'P:0 GT:1'), (663, 'P:0 GT:1'), (518, 'P:0 GT:1'), (324, 'P:1 GT:0'), (513, 'P:0 GT:1'), (524, 'P:0 GT:1'), (296, 'P:1 GT:0'), (661, 'P:0 GT:1'), (585, 'P:0 GT:1'), (576, 'P:0 GT:1'), (517, 'P:0 GT:1'), (570, 'P:0 GT:1'), (529, 'P:0 GT:1'), (664, 'P:0 GT:1'), (575, 'P:0 GT:1'), (629, 'P:0 GT:1'), (388, 'P:1 GT:0'), (580, 'P:0 GT:1'), (516, 'P:0 GT:1'), (503, 'P:0 GT:1'), (652, 'P:0 GT:1'), (659, 'P:0 GT:1'), (103, 'P:1 GT:0'), (609, 'P:0 GT:1'), (589, 'P:0 GT:1'), (619, 'P:0 GT:1'), (619, 'P:0 GT:1'), (619, 'P:0 GT:1'), (542, 'P:0 GT:1'), (659, 'P:0 GT:1')]
+Confusion Matrix
+tensor([[286, 251],
+        [ 42,  86]])
+class 0 accuracy: 87.1951%
+class 1 accuracy: 25.5193%
+
+Validation Loss: 1.8929, Accuracy: 372/665 (56%)
+Best Accuracy: 62.255639%
+Time Elapsed: 0h 28m 51s
+Epochs: [0, 1, 2, 3, 4]
+Val_Accuracies: [59.69924812030075, 59.3984962406015, 62.255639097744364, 53.38345864661654, 53.83458646616541]
+Val_Losses: [0.7669510871171952, 1.0669563591480256, 0.8445653811097145, 1.5037010729312896, 2.033260089159012]
+Train_Losses: [0.5316753149032593, 0.23819443595906098, 0.16784082635616263, 0.0916892466445764, 0.04606656024698168]
