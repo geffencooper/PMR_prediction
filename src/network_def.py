@@ -30,7 +30,7 @@ class SpeechPaceNN(torch.nn.Module):
         self.fc = torch.nn.Linear(args.hidden_size,args.num_classes)
         torch.nn.init.xavier_uniform_(self.fc.weight)
 
-        self.dropout = torch.nn.Dropout(args.droput_prob)
+        self.dropout = torch.nn.Dropout(args.dropout_prob)
 
         self.init = args.hidden_init_rand
         self.num_classes = args.num_classes
@@ -66,7 +66,7 @@ class SpeechPaceNN(torch.nn.Module):
         for i,val in enumerate(lengths):
             y[i,:] = out[i,val-1,:]
 
-        if self.args.droput == "y":
+        if self.args.dropout == "y":
             y = self.dropout(y)
 
         y = self.fc(y)
@@ -119,7 +119,7 @@ class PMRfusionNN(torch.nn.Module):
         self.fc_fusion = torch.nn.Linear(2*args.hidden_size,args.num_classes)
         #self.fc_fusion = torch.nn.Linear(args.hidden_size,args.num_classes)
 
-        self.dropout = torch.nn.Dropout(args.droput_prob)
+        self.dropout = torch.nn.Dropout(args.dropout_prob)
 
         self.init = args.hidden_init_rand
         self.num_classes = args.num_classes
