@@ -2,6 +2,9 @@
 
 This repo contains all the code, configuration files, and trained models for the PMR prediction project
 
+## Setup
+first run the setup file to install the requirements after creating a conda environment. ```./setup.sh```
+
 ## Important Files
 **train_network.py**
 * this contains the code for training models

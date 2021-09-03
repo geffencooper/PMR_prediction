@@ -1,4 +1,0 @@
-numpy
-pandas
-imbalanced-learn
-https://github.com/ufoym/imbalanced-dataset-sampler/archive/master.zip
