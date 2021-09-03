@@ -13,3 +13,8 @@ This repo contains all the code, configuration files, and trained models for the
 
 **pytorch_dataset.py**
 * custom datasets and collate_fn get defined here
+
+## Training a Model
+1. First create a configuration file (name.conf) in the config_files directory and copy the contents of skeleton.conf
+2. Fill out all the entries with the model class name, training data directory locations, desired hyperparameters, etc
+3. run the training script as follows from the src directory: ``` ./run_train.sh ../config_files/[CONFIG FILE NAME]```
